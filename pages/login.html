@@ -1,0 +1,148 @@
+<!-- =================================================================== -->
+<!-- LOGIN PAGE MODULE (pages/login.html)                                -->
+<!-- =================================================================== -->
+<div class="split-auth-container">
+    <div class="split-auth-card">
+        
+        <!-- LEFT SIDE: Branding & Role Selection -->
+        <div class="auth-left-pane">
+            <div class="brand-section">
+                <div class="brand-logo-glow">
+                    <i class="bi bi-bullseye"></i>
+                </div>
+                <h1 class="brand-title">ARCHERY ACADEMY</h1>
+                <p class="brand-tagline">Intelligent Training, Performance & Event Portal</p>
+                <div class="brand-badge">
+                    <i class="bi bi-shield-check"></i> Official Academy Management
+                </div>
+            </div>
+
+            <div class="archery-visual-feature">
+                <div class="visual-pill">
+                    <i class="bi bi-award-fill text-warning"></i>
+                    <span>Precision Tracking & Analytics</span>
+                </div>
+            </div>
+
+            <!-- Role Selection Radio Cards -->
+            <div class="role-selection-section">
+                <label class="role-section-title">
+                    <i class="bi bi-person-gear me-1"></i> Choose Login Type
+                </label>
+                
+                <div class="role-radio-group">
+                    <!-- Student Card -->
+                    <label class="custom-role-card active" id="card-role-student" onclick="selectRole('student')">
+                        <input type="radio" name="login_role" id="role_student" value="student" checked>
+                        <div class="role-radio-indicator">
+                            <span class="radio-dot"></span>
+                        </div>
+                        <div class="role-card-text">
+                            <i class="bi bi-person-badge-fill role-icon"></i>
+                            <span class="role-name">Student</span>
+                        </div>
+                    </label>
+
+                    <!-- Coach Card -->
+                    <label class="custom-role-card" id="card-role-coach" onclick="selectRole('coach')">
+                        <input type="radio" name="login_role" id="role_coach" value="coach">
+                        <div class="role-radio-indicator">
+                            <span class="radio-dot"></span>
+                        </div>
+                        <div class="role-card-text">
+                            <i class="bi bi-whistle-fill role-icon"></i>
+                            <span class="role-name">Coach</span>
+                        </div>
+                    </label>
+
+                    <!-- Admin Card -->
+                    <label class="custom-role-card" id="card-role-admin" onclick="selectRole('admin')">
+                        <input type="radio" name="login_role" id="role_admin" value="admin">
+                        <div class="role-radio-indicator">
+                            <span class="radio-dot"></span>
+                        </div>
+                        <div class="role-card-text">
+                            <i class="bi bi-shield-lock-fill role-icon"></i>
+                            <span class="role-name">Admin</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="left-pane-footer">
+                <span>&copy; 2026 Archery Academy System</span>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Login Form -->
+        <div class="auth-right-pane">
+            <div class="form-header-box">
+                <h2 class="welcome-heading">Welcome Back</h2>
+                <p class="welcome-subheading">Login to your account</p>
+            </div>
+
+            <!-- Login Alert Messages -->
+            <div id="login-alert" class="alert alert-danger custom-auth-alert d-none" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-octagon-fill me-2 fs-6"></i>
+                    <span id="login-alert-msg" class="small fw-medium">Invalid credentials</span>
+                </div>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="needs-validation" novalidate>
+                <div class="form-group-custom mb-3">
+                    <label for="email" class="custom-input-label">
+                        <i class="bi bi-envelope-fill me-1"></i> Email / Username
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control custom-input" id="email" placeholder="Enter your email or username" required autocomplete="email">
+                    </div>
+                    <div class="invalid-feedback small">Please enter your email or username.</div>
+                </div>
+
+                <div class="form-group-custom mb-3">
+                    <label for="password" class="custom-input-label">
+                        <i class="bi bi-lock-fill me-1"></i> Password
+                    </label>
+                    <div class="input-wrapper position-relative">
+                        <input type="password" class="form-control custom-input pe-5" id="password" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle-btn" data-target="password" title="Show/Hide Password" aria-label="Toggle password visibility">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback small">Please enter your password.</div>
+                </div>
+
+                <button type="submit" class="btn btn-login-submit w-100 mb-3">
+                    <span>Sign In</span>
+                    <i class="bi bi-arrow-right-short ms-1 fs-5"></i>
+                </button>
+
+                <!-- Demo Quick Login Shortcuts -->
+                <div class="quick-demo-box">
+                    <div class="demo-title"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Demo Fill:</div>
+                    <div class="demo-buttons-grid">
+                        <button type="button" class="demo-pill-btn student" onclick="selectRole('student')">
+                            <i class="bi bi-person-fill"></i> Student
+                        </button>
+                        <button type="button" class="demo-pill-btn coach" onclick="selectRole('coach')">
+                            <i class="bi bi-whistle-fill"></i> Coach
+                        </button>
+                        <button type="button" class="demo-pill-btn admin" onclick="selectRole('admin')">
+                            <i class="bi bi-shield-lock-fill"></i> Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Student Registration Link (VISIBLE ONLY FOR STUDENT ROLE) -->
+                <div id="register-link-container" class="register-footer-link">
+                    <span class="text-muted small">Don't have an account?</span>
+                    <a href="#" class="register-link-btn" onclick="showRegisterView(event)">
+                        Register Here <i class="bi bi-arrow-right-short"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -65,91 +65,48 @@
     <!-- MAIN VIEW CONTAINERS -->
     <main class="flex-grow-1">
 
-        <!-- =================================================================== -->
-        <!-- 1. LOGIN VIEW (Two-Section Split-Screen Auth Layout)               -->
-        <!-- =================================================================== -->
+        <!-- 1. LOGIN VIEW -->
         <section id="login-view" class="view-section">
             <div class="split-auth-container">
                 <div class="split-auth-card">
-                    
-                    <!-- LEFT SIDE: Branding & Role Selection -->
                     <div class="auth-left-pane">
                         <div class="brand-section">
-                            <div class="brand-logo-glow">
-                                <i class="bi bi-bullseye"></i>
-                            </div>
+                            <div class="brand-logo-glow"><i class="bi bi-bullseye"></i></div>
                             <h1 class="brand-title">ARCHERY ACADEMY</h1>
                             <p class="brand-tagline">Intelligent Training, Performance & Event Portal</p>
-                            <div class="brand-badge">
-                                <i class="bi bi-shield-check"></i> Official Academy Management
-                            </div>
+                            <div class="brand-badge"><i class="bi bi-shield-check"></i> Official Academy Management</div>
                         </div>
-
                         <div class="archery-visual-feature">
-                            <div class="visual-pill">
-                                <i class="bi bi-award-fill text-warning"></i>
-                                <span>Precision Tracking & Analytics</span>
-                            </div>
+                            <div class="visual-pill"><i class="bi bi-award-fill text-warning"></i><span>Precision Tracking & Analytics</span></div>
                         </div>
-
-                        <!-- Role Selection Radio Cards -->
                         <div class="role-selection-section">
-                            <label class="role-section-title">
-                                <i class="bi bi-person-gear me-1"></i> Choose Login Type
-                            </label>
-                            
+                            <label class="role-section-title"><i class="bi bi-person-gear me-1"></i> Choose Login Type</label>
                             <div class="role-radio-group">
-                                <!-- Student Card -->
                                 <label class="custom-role-card active" id="card-role-student" onclick="selectRole('student')">
                                     <input type="radio" name="login_role" id="role_student" value="student" checked>
-                                    <div class="role-radio-indicator">
-                                        <span class="radio-dot"></span>
-                                    </div>
-                                    <div class="role-card-text">
-                                        <i class="bi bi-person-badge-fill role-icon"></i>
-                                        <span class="role-name">Student</span>
-                                    </div>
+                                    <div class="role-radio-indicator"><span class="radio-dot"></span></div>
+                                    <div class="role-card-text"><i class="bi bi-person-badge-fill role-icon"></i><span class="role-name">Student</span></div>
                                 </label>
-
-                                <!-- Coach Card -->
                                 <label class="custom-role-card" id="card-role-coach" onclick="selectRole('coach')">
                                     <input type="radio" name="login_role" id="role_coach" value="coach">
-                                    <div class="role-radio-indicator">
-                                        <span class="radio-dot"></span>
-                                    </div>
-                                    <div class="role-card-text">
-                                        <i class="bi bi-whistle-fill role-icon"></i>
-                                        <span class="role-name">Coach</span>
-                                    </div>
+                                    <div class="role-radio-indicator"><span class="radio-dot"></span></div>
+                                    <div class="role-card-text"><i class="bi bi-whistle-fill role-icon"></i><span class="role-name">Coach</span></div>
                                 </label>
-
-                                <!-- Admin Card -->
                                 <label class="custom-role-card" id="card-role-admin" onclick="selectRole('admin')">
                                     <input type="radio" name="login_role" id="role_admin" value="admin">
-                                    <div class="role-radio-indicator">
-                                        <span class="radio-dot"></span>
-                                    </div>
-                                    <div class="role-card-text">
-                                        <i class="bi bi-shield-lock-fill role-icon"></i>
-                                        <span class="role-name">Admin</span>
-                                    </div>
+                                    <div class="role-radio-indicator"><span class="radio-dot"></span></div>
+                                    <div class="role-card-text"><i class="bi bi-shield-lock-fill role-icon"></i><span class="role-name">Admin</span></div>
                                 </label>
                             </div>
                         </div>
-
-                        <div class="left-pane-footer">
-                            <span>&copy; 2026 Archery Academy System</span>
-                        </div>
+                        <div class="left-pane-footer"><span>&copy; 2026 Archery Academy System</span></div>
                     </div>
 
-                    <!-- RIGHT SIDE: Login Form -->
                     <div class="auth-right-pane">
                         <div class="form-header-box">
                             <h2 class="welcome-heading">Welcome Back</h2>
                             <p class="welcome-subheading">Login to your account</p>
                         </div>
-
-                        <!-- Login Alert Messages -->
                         <div id="login-alert" class="alert alert-danger custom-auth-alert d-none" role="alert">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-exclamation-octagon-fill me-2 fs-6"></i>
@@ -159,70 +116,45 @@
 
                         <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="needs-validation" novalidate>
                             <div class="form-group-custom mb-3">
-                                <label for="email" class="custom-input-label">
-                                    <i class="bi bi-envelope-fill me-1"></i> Email / Username
-                                </label>
+                                <label for="email" class="custom-input-label"><i class="bi bi-envelope-fill me-1"></i> Email / Username</label>
                                 <div class="input-wrapper">
                                     <input type="text" class="form-control custom-input" id="email" placeholder="Enter your email or username" required autocomplete="email">
                                 </div>
                                 <div class="invalid-feedback small">Please enter your email or username.</div>
                             </div>
-
                             <div class="form-group-custom mb-3">
-                                <label for="password" class="custom-input-label">
-                                    <i class="bi bi-lock-fill me-1"></i> Password
-                                </label>
+                                <label for="password" class="custom-input-label"><i class="bi bi-lock-fill me-1"></i> Password</label>
                                 <div class="input-wrapper position-relative">
                                     <input type="password" class="form-control custom-input pe-5" id="password" placeholder="Enter your password" required autocomplete="current-password">
-                                    <button type="button" class="password-toggle-btn" data-target="password" title="Show/Hide Password" aria-label="Toggle password visibility">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
+                                    <button type="button" class="password-toggle-btn" data-target="password" title="Show/Hide Password" aria-label="Toggle password visibility"><i class="bi bi-eye"></i></button>
                                 </div>
                                 <div class="invalid-feedback small">Please enter your password.</div>
                             </div>
-
                             <button type="submit" class="btn btn-login-submit w-100 mb-3">
-                                <span>Sign In</span>
-                                <i class="bi bi-arrow-right-short ms-1 fs-5"></i>
+                                <span>Sign In</span><i class="bi bi-arrow-right-short ms-1 fs-5"></i>
                             </button>
-
-                            <!-- Demo Quick Login Shortcuts -->
                             <div class="quick-demo-box">
                                 <div class="demo-title"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Demo Fill:</div>
                                 <div class="demo-buttons-grid">
-                                    <button type="button" class="demo-pill-btn student" onclick="fillDemoCredentials('student', 'arjun@gmail.com', 'Arjun@4321')">
-                                        <i class="bi bi-person-fill"></i> Arjun (Student)
-                                    </button>
-                                    <button type="button" class="demo-pill-btn coach" onclick="fillDemoCredentials('coach', 'coach@gmail.com', 'Coach@4321')">
-                                        <i class="bi bi-whistle-fill"></i> Coach
-                                    </button>
-                                    <button type="button" class="demo-pill-btn admin" onclick="fillDemoCredentials('admin', 'admin@gmail.com', 'Admin@4321')">
-                                        <i class="bi bi-shield-lock-fill"></i> Admin
-                                    </button>
+                                    <button type="button" class="demo-pill-btn student" onclick="selectRole('student')"><i class="bi bi-person-fill"></i> Student</button>
+                                    <button type="button" class="demo-pill-btn coach" onclick="selectRole('coach')"><i class="bi bi-whistle-fill"></i> Coach</button>
+                                    <button type="button" class="demo-pill-btn admin" onclick="selectRole('admin')"><i class="bi bi-shield-lock-fill"></i> Admin</button>
                                 </div>
                             </div>
-
-                            <!-- Student Registration Link (VISIBLE ONLY FOR STUDENT ROLE) -->
                             <div id="register-link-container" class="register-footer-link">
                                 <span class="text-muted small">Don't have an account?</span>
-                                <a href="#" class="register-link-btn" onclick="showRegisterView(event)">
-                                    Register Here <i class="bi bi-arrow-right-short"></i>
-                                </a>
+                                <a href="#" class="register-link-btn" onclick="showRegisterView(event)">Register Here <i class="bi bi-arrow-right-short"></i></a>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- =================================================================== -->
-        <!-- 2. STUDENT REGISTRATION VIEW                                        -->
-        <!-- =================================================================== -->
+        <!-- 2. STUDENT REGISTRATION VIEW -->
         <section id="register-view" class="view-section d-none bg-dark py-5 min-vh-100">
             <div class="auth-wrapper">
                 <div class="auth-card mx-auto" style="max-width: 720px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                    
                     <div class="auth-header text-white p-4" style="background: linear-gradient(135deg, #064e3b, #0f766e);">
                         <div class="d-flex align-items-center gap-3">
                             <div class="fs-1 text-warning"><i class="bi bi-person-plus-fill"></i></div>
@@ -232,62 +164,28 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="auth-body p-4">
-                        <div id="register-alert" class="alert alert-danger d-none" role="alert">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i><span id="register-alert-msg"></span>
-                        </div>
-
+                        <div id="register-alert" class="alert alert-danger d-none" role="alert"><i class="bi bi-exclamation-triangle-fill me-2"></i><span id="register-alert-msg"></span></div>
                         <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="needs-validation" novalidate>
-                            
-                            <!-- Personal & Academic Details Section -->
-                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2">
-                                <i class="bi bi-person-lines-fill me-2"></i>1. Personal & Academic Details
-                            </h6>
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2"><i class="bi bi-person-lines-fill me-2"></i>1. Personal & Academic Details</h6>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="reg_student_id" placeholder="Student ID" required>
-                                        <label for="reg_student_id">Student ID (e.g. STU004)</label>
-                                        <div class="invalid-feedback">Required field.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_student_id" placeholder="Student ID" required><label for="reg_student_id">Student ID (e.g. STU004)</label><div class="invalid-feedback">Required field.</div></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="reg_first_name" placeholder="First Name" required>
-                                        <label for="reg_first_name">First Name</label>
-                                        <div class="invalid-feedback">Required field.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_first_name" placeholder="First Name" required><label for="reg_first_name">First Name</label><div class="invalid-feedback">Required field.</div></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="reg_last_name" placeholder="Last Name" required>
-                                        <label for="reg_last_name">Last Name</label>
-                                        <div class="invalid-feedback">Required field.</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="reg_email" placeholder="Email Address" required>
-                                        <label for="reg_email">Email Address</label>
-                                        <div class="invalid-feedback">Enter a valid email.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_last_name" placeholder="Last Name" required><label for="reg_last_name">Last Name</label><div class="invalid-feedback">Required field.</div></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="tel" class="form-control" id="reg_phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
-                                        <label for="reg_phone">Phone Number (10 digits)</label>
-                                        <div class="invalid-feedback">Enter 10 digit phone.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="email" class="form-control" id="reg_email" placeholder="Email Address" required><label for="reg_email">Email Address</label><div class="invalid-feedback">Enter a valid email.</div></div>
                                 </div>
-
                                 <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control" id="reg_dob" placeholder="Date of Birth" required>
-                                        <label for="reg_dob">Date of Birth</label>
-                                        <div class="invalid-feedback">Required field.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="tel" class="form-control" id="reg_phone" placeholder="Phone Number" pattern="[0-9]{10}" required><label for="reg_phone">Phone Number (10 digits)</label><div class="invalid-feedback">Enter 10 digit phone.</div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating"><input type="date" class="form-control" id="reg_dob" placeholder="Date of Birth" required><label for="reg_dob">Date of Birth</label><div class="invalid-feedback">Required field.</div></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -297,31 +195,17 @@
                                             <option value="Female">Female</option>
                                             <option value="Other">Other</option>
                                         </select>
-                                        <label for="reg_gender">Gender</label>
-                                        <div class="invalid-feedback">Required field.</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="reg_course" placeholder="Course / Department" required>
-                                        <label for="reg_course">Course / Department</label>
-                                        <div class="invalid-feedback">Required field.</div>
+                                        <label for="reg_gender">Gender</label><div class="invalid-feedback">Required field.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="reg_year_sem" placeholder="Year / Semester" required>
-                                        <label for="reg_year_sem">Year / Semester (e.g. Year 2 / Sem 4)</label>
-                                        <div class="invalid-feedback">Required field.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_course" placeholder="Course / Department" required><label for="reg_course">Course / Department</label><div class="invalid-feedback">Required field.</div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_year_sem" placeholder="Year / Semester" required><label for="reg_year_sem">Year / Semester (e.g. Year 2 / Sem 4)</label><div class="invalid-feedback">Required field.</div></div>
                                 </div>
                             </div>
-
-                            <!-- Archery Details Section -->
-                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4">
-                                <i class="bi bi-bullseye me-2"></i>2. Archery Category & Experience
-                            </h6>
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4"><i class="bi bi-bullseye me-2"></i>2. Archery Category & Experience</h6>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -331,8 +215,7 @@
                                             <option value="Recurve Bow">Recurve Bow</option>
                                             <option value="Compound Bow">Compound Bow</option>
                                         </select>
-                                        <label for="reg_bow_category">Bow Category</label>
-                                        <div class="invalid-feedback">Select bow category.</div>
+                                        <label for="reg_bow_category">Bow Category</label><div class="invalid-feedback">Select bow category.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -342,222 +225,95 @@
                                             <option value="Own Bow">Own Bow</option>
                                             <option value="Academy Bow">Academy Bow</option>
                                         </select>
-                                        <label for="reg_bow_type">Bow Ownership</label>
-                                        <div class="invalid-feedback">Select ownership.</div>
+                                        <label for="reg_bow_type">Bow Ownership</label><div class="invalid-feedback">Select ownership.</div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Account Password Setup -->
-                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4">
-                                <i class="bi bi-shield-lock me-2"></i>3. Account Password Setup
-                            </h6>
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4"><i class="bi bi-shield-lock me-2"></i>3. Account Password Setup</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="password" class="form-control" id="reg_password" placeholder="Password" minlength="6" required>
-                                        <label for="reg_password">Password (min 6 chars)</label>
-                                        <div class="invalid-feedback">Min 6 characters.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="password" class="form-control" id="reg_password" placeholder="Password" minlength="6" required><label for="reg_password">Password (min 6 chars)</label><div class="invalid-feedback">Min 6 characters.</div></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="password" class="form-control" id="reg_confirm_password" placeholder="Confirm Password" minlength="6" required>
-                                        <label for="reg_confirm_password">Confirm Password</label>
-                                        <div class="invalid-feedback">Confirm password required.</div>
-                                    </div>
+                                    <div class="form-floating"><input type="password" class="form-control" id="reg_confirm_password" placeholder="Confirm Password" minlength="6" required><label for="reg_confirm_password">Confirm Password</label><div class="invalid-feedback">Confirm password required.</div></div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary-custom w-100 py-3 fs-6 fw-bold shadow-sm">
-                                <i class="bi bi-check-circle-fill me-2"></i> REGISTER STUDENT ACCOUNT
-                            </button>
-
-                            <div class="text-center mt-3">
-                                <span class="text-muted small">Already registered?</span>
-                                <a href="#" class="fw-bold text-decoration-none ms-1 text-primary" onclick="showLoginView(event)">
-                                    Back to Login
-                                </a>
-                            </div>
+                            <button type="submit" class="btn btn-primary-custom w-100 py-3 fs-6 fw-bold shadow-sm"><i class="bi bi-check-circle-fill me-2"></i> REGISTER STUDENT ACCOUNT</button>
+                            <div class="text-center mt-3"><span class="text-muted small">Already registered?</span> <a href="#" class="fw-bold text-decoration-none ms-1 text-primary" onclick="showLoginView(event)">Back to Login</a></div>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- =================================================================== -->
-        <!-- 3. STUDENT HOME PAGE & PERFORMANCE DASHBOARD                        -->
-        <!-- =================================================================== -->
+        <!-- 3. STUDENT HOME PAGE & DASHBOARD VIEW -->
         <section id="student-view" class="view-section d-none py-4">
             <div class="container">
-                <!-- Notice Banner -->
                 <div class="prototype-notice d-flex align-items-center justify-content-between">
-                    <div>
-                        <i class="bi bi-info-circle-fill me-2"></i>
-                        <strong>Student Portal:</strong> Personal performance, subject-wise analytics, attendance, and academy events.
-                    </div>
+                    <div><i class="bi bi-info-circle-fill me-2"></i><strong>Student Portal:</strong> Personal performance, subject-wise analytics, attendance, and academy events.</div>
                     <span class="badge bg-primary">Student Portal</span>
                 </div>
-
-                <!-- Student Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h1 class="h3 fw-bold mb-1 text-dark" id="stu-welcome-name">Welcome, Student!</h1>
-                        <p class="text-muted mb-0">
-                            Student ID: <span class="badge bg-dark fs-6" id="stu-header-id">STU000</span> | 
-                            Course/Dept: <span class="text-primary fw-semibold" id="stu-header-dept">Department</span>
-                        </p>
+                        <p class="text-muted mb-0">Student ID: <span class="badge bg-dark fs-6" id="stu-header-id">STU000</span> | Course/Dept: <span class="text-primary fw-semibold" id="stu-header-dept">Department</span></p>
                     </div>
                     <div class="d-flex gap-2">
-                        <a href="#student-performance-section" class="btn btn-primary rounded-pill px-3 shadow-sm">
-                            <i class="bi bi-graph-up-arrow me-1"></i> View Performance & Charts
-                        </a>
-                        <button type="button" class="btn btn-outline-danger rounded-pill px-3" onclick="handleLogout()">
-                            <i class="bi bi-box-arrow-right me-1"></i> Sign Out
-                        </button>
+                        <a href="#student-performance-section" class="btn btn-primary rounded-pill px-3 shadow-sm"><i class="bi bi-graph-up-arrow me-1"></i> View Performance & Charts</a>
+                        <button type="button" class="btn btn-outline-danger rounded-pill px-3" onclick="handleLogout()"><i class="bi bi-box-arrow-right me-1"></i> Sign Out</button>
                     </div>
                 </div>
 
-                <!-- Quick Overview Stat Cards -->
                 <div class="row g-3 mb-4">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="stat-card border-start border-4 border-primary">
-                            <div class="stat-label">Student ID</div>
-                            <div class="stat-value text-primary" id="stu-card-id">STU001</div>
-                            <i class="bi bi-person-badge stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="stat-card border-start border-4 border-success">
-                            <div class="stat-label">Attendance Rate</div>
-                            <div class="stat-value text-success" id="stu-card-attendance">94%</div>
-                            <i class="bi bi-calendar-check stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="stat-card border-start border-4 border-info">
-                            <div class="stat-label">Overall Score</div>
-                            <div class="stat-value text-info" id="stu-card-overall">92%</div>
-                            <i class="bi bi-award stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="stat-card border-start border-4 border-warning">
-                            <div class="stat-label">Exam Score / Rank</div>
-                            <div class="stat-value text-warning" id="stu-card-exam">338 (Rank 1)</div>
-                            <i class="bi bi-trophy stat-icon"></i>
-                        </div>
-                    </div>
+                    <div class="col-md-3 col-sm-6"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Student ID</div><div class="stat-value text-primary" id="stu-card-id">STU001</div><i class="bi bi-person-badge stat-icon"></i></div></div>
+                    <div class="col-md-3 col-sm-6"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Attendance Rate</div><div class="stat-value text-success" id="stu-card-attendance">94%</div><i class="bi bi-calendar-check stat-icon"></i></div></div>
+                    <div class="col-md-3 col-sm-6"><div class="stat-card border-start border-4 border-info"><div class="stat-label">Overall Score</div><div class="stat-value text-info" id="stu-card-overall">92%</div><i class="bi bi-award stat-icon"></i></div></div>
+                    <div class="col-md-3 col-sm-6"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Exam Score / Rank</div><div class="stat-value text-warning" id="stu-card-exam">338 (Rank 1)</div><i class="bi bi-trophy stat-icon"></i></div></div>
                 </div>
 
-                <!-- Student Profile Info Card -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-profile-section">
                     <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-person-vcard-fill text-primary fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">My Profile Information</h5>
-                        </div>
-                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1">Active Student</span>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-person-vcard-fill text-primary fs-5"></i><h5 class="mb-0 fw-bold text-dark">My Profile Information</h5></div>
+                        <span class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1">Active Student</span>
                     </div>
                     <div class="card-body p-4 bg-light bg-opacity-50">
                         <div class="row g-3">
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Student ID</span>
-                                    <span class="fw-bold text-dark fs-6" id="stu-prof-id">STU001</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Full Name</span>
-                                    <span class="fw-bold text-dark fs-6" id="stu-prof-name">Arjun Singh</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Email Address</span>
-                                    <span class="fw-semibold text-dark small" id="stu-prof-email">arjun@gmail.com</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Phone Number</span>
-                                    <span class="fw-semibold text-dark small" id="stu-prof-phone">9876543211</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Course / Dept</span>
-                                    <span class="fw-semibold text-dark small" id="stu-prof-course">Computer Science</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Year / Semester</span>
-                                    <span class="fw-semibold text-dark small" id="stu-prof-yearsem">Year 3 / Sem 5</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Bow Category</span>
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6" id="stu-prof-bowcat">Recurve Bow</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                                    <span class="text-muted small d-block mb-1">Experience</span>
-                                    <span class="badge bg-success-subtle text-success border border-success-subtle fs-6" id="stu-prof-exp">Intermediate</span>
-                                </div>
-                            </div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Student ID</span><span class="fw-bold text-dark fs-6" id="stu-prof-id">STU001</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Full Name</span><span class="fw-bold text-dark fs-6" id="stu-prof-name">Arjun Singh</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Email Address</span><span class="fw-semibold text-dark small" id="stu-prof-email">arjun@gmail.com</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Phone Number</span><span class="fw-semibold text-dark small" id="stu-prof-phone">9876543211</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Course / Dept</span><span class="fw-semibold text-dark small" id="stu-prof-course">Computer Science</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Year / Semester</span><span class="fw-semibold text-dark small" id="stu-prof-yearsem">Year 3 / Sem 5</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Bow Category</span><span class="badge bg-primary-subtle text-primary border fs-6" id="stu-prof-bowcat">Recurve Bow</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Experience</span><span class="badge bg-success-subtle text-success border fs-6" id="stu-prof-exp">Intermediate</span></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- STUDENT PERFORMANCE & CHARTS SECTION -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-performance-section">
                     <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-graph-up-arrow text-warning fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">Performance Analytics & Visual Charts</h5>
-                        </div>
-                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-1">Fixed Student Demo Metrics</span>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-graph-up-arrow text-warning fs-5"></i><h5 class="mb-0 fw-bold text-dark">Performance Analytics & Visual Charts</h5></div>
+                        <span class="badge bg-warning-subtle text-warning border rounded-pill px-3 py-1">Fixed Student Demo Metrics</span>
                     </div>
                     <div class="card-body p-4">
-                        
-                        <!-- Progress Bars: Subject & Skill-wise Performance -->
                         <div class="mb-4">
                             <h6 class="fw-bold text-dark mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Subject / Archery Skill Performance Breakdown</h6>
-                            <div id="stu-skill-progress-bars">
-                                <!-- Generated by JS -->
-                            </div>
+                            <div id="stu-skill-progress-bars"></div>
                         </div>
-
-                        <!-- Performance Visual Charts (Bar & Pie) -->
                         <div class="row g-4 mb-4">
                             <div class="col-lg-6">
                                 <div class="card border-0 shadow-sm rounded-3 h-100">
-                                    <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom">
-                                        <i class="bi bi-bar-chart-fill text-primary me-2"></i>Scores by Evaluation (Bar Chart)
-                                    </div>
-                                    <div class="card-body p-3">
-                                        <canvas id="stuBarChart" height="220"></canvas>
-                                    </div>
+                                    <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom"><i class="bi bi-bar-chart-fill text-primary me-2"></i>Scores by Evaluation (Bar Chart)</div>
+                                    <div class="card-body p-3"><canvas id="stuBarChart" height="220"></canvas></div>
                                 </div>
                             </div>
-
                             <div class="col-lg-6">
                                 <div class="card border-0 shadow-sm rounded-3 h-100">
-                                    <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom">
-                                        <i class="bi bi-pie-chart-fill text-success me-2"></i>Skill Proficiency Breakdown (Pie Chart)
-                                    </div>
-                                    <div class="card-body p-3 d-flex justify-content-center align-items-center">
-                                        <canvas id="stuPieChart" style="max-height: 220px; max-width: 320px;"></canvas>
-                                    </div>
+                                    <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom"><i class="bi bi-pie-chart-fill text-success me-2"></i>Skill Proficiency Breakdown (Pie Chart)</div>
+                                    <div class="card-body p-3 d-flex justify-content-center align-items-center"><canvas id="stuPieChart" style="max-height: 220px; max-width: 320px;"></canvas></div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Progress Summary -->
                         <div class="p-3 bg-light rounded-3 border-start border-4 border-primary">
                             <h6 class="fw-bold text-dark mb-1"><i class="bi bi-journal-text me-1 text-primary"></i>Coach Progress Summary & Notes:</h6>
                             <p id="stu-progress-notes" class="text-secondary small mb-0">Demonstrating consistent form stability and steady progress across all distance rounds.</p>
@@ -565,112 +321,58 @@
                     </div>
                 </div>
 
-                <!-- STUDENT ATTENDANCE SECTION -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
                     <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-calendar-check-fill text-success fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">Attendance Record</h5>
-                        </div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-check-fill text-success fs-5"></i><h5 class="mb-0 fw-bold text-dark">Attendance Record</h5></div>
                         <span id="stu-att-badge" class="badge bg-success rounded-pill px-3 py-1">Rate: 94%</span>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="ps-4">Date</th>
-                                        <th>Status</th>
-                                        <th>Session Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="stu-att-tbody">
-                                    <!-- Populated by JS -->
-                                </tbody>
+                                <thead class="table-light"><tr><th class="ps-4">Date</th><th>Status</th><th>Session Remarks</th></tr></thead>
+                                <tbody id="stu-att-tbody"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- PUBLISHED EVENTS VIEWING FOR STUDENT -->
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="student-events-section">
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-megaphone-fill text-primary fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">Published Academy Events</h5>
-                        </div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-megaphone-fill text-primary fs-5"></i><h5 class="mb-0 fw-bold text-dark">Published Academy Events</h5></div>
                         <span id="stu-events-count" class="badge bg-primary-subtle text-primary border px-3 py-1 rounded-pill">0 Events</span>
                     </div>
                     <div class="card-body p-4 bg-light bg-opacity-50">
-                        <div class="row g-3" id="stu-events-grid">
-                            <!-- Populated dynamically -->
-                        </div>
+                        <div class="row g-3" id="stu-events-grid"></div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- =================================================================== -->
-        <!-- 4. COACH HOME PAGE & STUDENT SEARCH                                 -->
-        <!-- =================================================================== -->
+        <!-- 4. COACH HOME PAGE & SEARCH VIEW -->
         <section id="coach-view" class="view-section d-none py-4">
             <div class="container">
-                <!-- Notice Banner -->
                 <div class="prototype-notice d-flex align-items-center justify-content-between">
-                    <div>
-                        <i class="bi bi-info-circle-fill me-2"></i>
-                        <strong>Coach Portal:</strong> Student search, performance monitoring, roster management, and published events.
-                    </div>
+                    <div><i class="bi bi-info-circle-fill me-2"></i><strong>Coach Portal:</strong> Student search, performance monitoring, roster management, and published events.</div>
                     <span class="badge bg-warning text-dark">Coach Portal</span>
                 </div>
-
-                <!-- Coach Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h1 class="h3 fw-bold mb-1 text-dark">Welcome, Head Coach!</h1>
                         <p class="text-muted mb-0">Academy Training & Student Performance Monitoring Portal</p>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="handleLogout()">
-                            <i class="bi bi-box-arrow-right me-1"></i> Sign Out
-                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="handleLogout()"><i class="bi bi-box-arrow-right me-1"></i> Sign Out</button>
                     </div>
                 </div>
 
-                <!-- Overview Stats -->
                 <div class="row g-3 mb-4">
-                    <div class="col-md-4">
-                        <div class="stat-card border-start border-4 border-primary">
-                            <div class="stat-label">Enrolled Students</div>
-                            <div class="stat-value text-primary" id="coach-total-students-count">3</div>
-                            <i class="bi bi-people-fill stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-card border-start border-4 border-success">
-                            <div class="stat-label">Active Academy Events</div>
-                            <div class="stat-value text-success" id="coach-events-count">3</div>
-                            <i class="bi bi-calendar-event stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-card border-start border-4 border-warning">
-                            <div class="stat-label">Coach Specialization</div>
-                            <div class="stat-value fs-5 mt-2 text-dark">Recurve & Compound</div>
-                            <i class="bi bi-whistle stat-icon"></i>
-                        </div>
-                    </div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Enrolled Students</div><div class="stat-value text-primary" id="coach-total-students-count">3</div><i class="bi bi-people-fill stat-icon"></i></div></div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Active Academy Events</div><div class="stat-value text-success" id="coach-events-count">3</div><i class="bi bi-calendar-event stat-icon"></i></div></div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Coach Specialization</div><div class="stat-value fs-5 mt-2 text-dark">Recurve & Compound</div><i class="bi bi-whistle stat-icon"></i></div></div>
                 </div>
 
-                <!-- COACH STUDENT SEARCH CARD -->
                 <div class="card shadow-sm border-0 rounded-4 mb-4 overflow-hidden" id="coach-search-section">
-                    <div class="card-header bg-white py-3 border-bottom">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-search text-warning fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">Coach Student Search & Performance Inspection</h5>
-                        </div>
-                    </div>
+                    <div class="card-header bg-white py-3 border-bottom"><div class="d-flex align-items-center gap-2"><i class="bi bi-search text-warning fs-5"></i><h5 class="mb-0 fw-bold text-dark">Coach Student Search & Performance Inspection</h5></div></div>
                     <div class="card-body p-4">
                         <form onsubmit="handleCoachSearchSubmit(event)" class="row g-2 mb-3">
                             <div class="col-md-9 col-8">
@@ -680,202 +382,86 @@
                                 </div>
                             </div>
                             <div class="col-md-3 col-4">
-                                <button type="submit" class="btn btn-warning w-100 btn-lg fw-bold text-dark">
-                                    <i class="bi bi-search me-1"></i> Search
-                                </button>
+                                <button type="submit" class="btn btn-warning w-100 btn-lg fw-bold text-dark"><i class="bi bi-search me-1"></i> Search</button>
                             </div>
                         </form>
-
-                        <!-- Student Results Table -->
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0 border">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="ps-3">Student ID</th>
-                                        <th>Name</th>
-                                        <th>Course / Dept</th>
-                                        <th>Bow Category</th>
-                                        <th>Attendance</th>
-                                        <th>Exam Score</th>
-                                        <th class="text-end pe-3">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="coach-student-results-tbody">
-                                    <!-- Populated by JS -->
-                                </tbody>
+                                <thead class="table-light"><tr><th class="ps-3">Student ID</th><th>Name</th><th>Course / Dept</th><th>Bow Category</th><th>Attendance</th><th>Exam Score</th><th class="text-end pe-3">Action</th></tr></thead>
+                                <tbody id="coach-student-results-tbody"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- SELECTED STUDENT PERFORMANCE DISPLAY MODAL / CONTAINER FOR COACH -->
                 <div id="coach-performance-display" class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden d-none">
                     <div class="card-header bg-gradient-teal text-white py-3 d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-graph-up-arrow fs-5 text-warning"></i>
-                            <h5 class="mb-0 fw-bold" id="coach-viewed-stu-title">Student Performance Dashboard</h5>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="hideCoachPerformanceDisplay()">
-                            <i class="bi bi-x-lg me-1"></i> Close Dashboard
-                        </button>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-graph-up-arrow fs-5 text-warning"></i><h5 class="mb-0 fw-bold" id="coach-viewed-stu-title">Student Performance Dashboard</h5></div>
+                        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="hideCoachPerformanceDisplay()"><i class="bi bi-x-lg me-1"></i> Close Dashboard</button>
                     </div>
                     <div class="card-body p-4 bg-light bg-opacity-50">
                         <div class="row g-3 mb-4">
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm">
-                                    <span class="text-muted small d-block">Student ID & Name</span>
-                                    <span class="fw-bold text-dark" id="coach-viewed-stu-name">STU001 - Arjun</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm">
-                                    <span class="text-muted small d-block">Course & Dept</span>
-                                    <span class="fw-bold text-dark" id="coach-viewed-stu-dept">Computer Science</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm">
-                                    <span class="text-muted small d-block">Attendance %</span>
-                                    <span class="fw-bold text-success" id="coach-viewed-stu-att">94%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="p-3 bg-white rounded-3 shadow-sm">
-                                    <span class="text-muted small d-block">Exam Score / Rank</span>
-                                    <span class="fw-bold text-warning" id="coach-viewed-stu-exam">338 (Rank 1)</span>
-                                </div>
-                            </div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Student ID & Name</span><span class="fw-bold text-dark" id="coach-viewed-stu-name">STU001 - Arjun</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Course & Dept</span><span class="fw-bold text-dark" id="coach-viewed-stu-dept">Computer Science</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Attendance %</span><span class="fw-bold text-success" id="coach-viewed-stu-att">94%</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Exam Score / Rank</span><span class="fw-bold text-warning" id="coach-viewed-stu-exam">338 (Rank 1)</span></div></div>
                         </div>
-
-                        <!-- Progress Bars & Charts for Coach Inspection -->
                         <div class="row g-4 mb-3">
-                            <div class="col-lg-6">
-                                <div class="card border-0 shadow-sm rounded-3">
-                                    <div class="card-header bg-white py-2 fw-bold text-dark small">
-                                        <i class="bi bi-bar-chart-fill text-primary me-2"></i>Scores by Evaluation (Bar Chart)
-                                    </div>
-                                    <div class="card-body p-3">
-                                        <canvas id="coachBarChart" height="220"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="card border-0 shadow-sm rounded-3">
-                                    <div class="card-header bg-white py-2 fw-bold text-dark small">
-                                        <i class="bi bi-pie-chart-fill text-success me-2"></i>Skill Proficiency Breakdown (Pie Chart)
-                                    </div>
-                                    <div class="card-body p-3 d-flex justify-content-center align-items-center">
-                                        <canvas id="coachPieChart" style="max-height: 220px; max-width: 320px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-lg-6"><div class="card border-0 shadow-sm rounded-3"><div class="card-header bg-white py-2 fw-bold text-dark small"><i class="bi bi-bar-chart-fill text-primary me-2"></i>Scores by Evaluation (Bar Chart)</div><div class="card-body p-3"><canvas id="coachBarChart" height="220"></canvas></div></div></div>
+                            <div class="col-lg-6"><div class="card border-0 shadow-sm rounded-3"><div class="card-header bg-white py-2 fw-bold text-dark small"><i class="bi bi-pie-chart-fill text-success me-2"></i>Skill Proficiency Breakdown (Pie Chart)</div><div class="card-body p-3 d-flex justify-content-center align-items-center"><canvas id="coachPieChart" style="max-height: 220px; max-width: 320px;"></canvas></div></div></div>
                         </div>
-
-                        <div class="p-3 bg-white rounded-3 shadow-sm border-start border-4 border-warning">
-                            <span class="fw-bold text-dark d-block mb-1">Subject / Skill Progress Bars:</span>
-                            <div id="coach-viewed-stu-skills"></div>
-                        </div>
+                        <div class="p-3 bg-white rounded-3 shadow-sm border-start border-4 border-warning"><span class="fw-bold text-dark d-block mb-1">Subject / Skill Progress Bars:</span><div id="coach-viewed-stu-skills"></div></div>
                     </div>
                 </div>
 
-                <!-- PUBLISHED EVENTS VIEWING FOR COACH -->
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="coach-events-section">
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-megaphone-fill text-warning fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">Published Academy Events</h5>
-                        </div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-megaphone-fill text-warning fs-5"></i><h5 class="mb-0 fw-bold text-dark">Published Academy Events</h5></div>
                         <span id="coach-events-count-badge" class="badge bg-warning-subtle text-dark border px-3 py-1 rounded-pill">0 Events</span>
                     </div>
                     <div class="card-body p-4 bg-light bg-opacity-50">
-                        <div class="row g-3" id="coach-events-grid">
-                            <!-- Populated dynamically -->
-                        </div>
+                        <div class="row g-3" id="coach-events-grid"></div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- =================================================================== -->
-        <!-- 5. ADMIN HOME PAGE & EVENT PUBLISHING                               -->
-        <!-- =================================================================== -->
+        <!-- 5. ADMIN HOME PAGE & PUBLISH VIEW -->
         <section id="admin-view" class="view-section d-none py-4">
             <div class="container">
-                <!-- Notice Banner -->
                 <div class="prototype-notice d-flex align-items-center justify-content-between">
-                    <div>
-                        <i class="bi bi-info-circle-fill me-2"></i>
-                        <strong>Administrative Portal:</strong> Publish and broadcast academy events to all students and coaches.
-                    </div>
+                    <div><i class="bi bi-info-circle-fill me-2"></i><strong>Administrative Portal:</strong> Publish and broadcast academy events to all students and coaches.</div>
                     <span class="badge bg-danger">Admin Portal</span>
                 </div>
-
-                <!-- Admin Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h1 class="h3 fw-bold mb-1 text-dark">Welcome, Administrator!</h1>
                         <p class="text-muted mb-0">Academy Administration & Event Broadcasting Portal</p>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="handleLogout()">
-                            <i class="bi bi-box-arrow-right me-1"></i> Sign Out
-                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="handleLogout()"><i class="bi bi-box-arrow-right me-1"></i> Sign Out</button>
                     </div>
                 </div>
 
-                <!-- Overview Stats -->
                 <div class="row g-3 mb-4">
-                    <div class="col-md-4">
-                        <div class="stat-card border-start border-4 border-primary">
-                            <div class="stat-label">Total Published Events</div>
-                            <div class="stat-value text-primary" id="admin-stat-events-count">3</div>
-                            <i class="bi bi-calendar-check stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-card border-start border-4 border-success">
-                            <div class="stat-label">Registered Students</div>
-                            <div class="stat-value text-success" id="admin-stat-students-count">3</div>
-                            <i class="bi bi-people-fill stat-icon"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-card border-start border-4 border-danger">
-                            <div class="stat-label">Admin Control Mode</div>
-                            <div class="stat-value fs-5 mt-2 text-danger">Event Publishing Only</div>
-                            <i class="bi bi-shield-lock stat-icon"></i>
-                        </div>
-                    </div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Total Published Events</div><div class="stat-value text-primary" id="admin-stat-events-count">3</div><i class="bi bi-calendar-check stat-icon"></i></div></div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Registered Students</div><div class="stat-value text-success" id="admin-stat-students-count">3</div><i class="bi bi-people-fill stat-icon"></i></div></div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-danger"><div class="stat-label">Admin Control Mode</div><div class="stat-value fs-5 mt-2 text-danger">Event Publishing Only</div><i class="bi bi-shield-lock stat-icon"></i></div></div>
                 </div>
 
-                <!-- ADMIN EVENT PUBLISHING FORM -->
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-publish-section">
-                    <div class="card-header bg-gradient-teal text-white py-3 px-4">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-megaphone-fill fs-5 text-warning"></i>
-                            <h5 class="mb-0 fw-bold">Publish New Academy Event / Announcement</h5>
-                        </div>
-                    </div>
+                    <div class="card-header bg-gradient-teal text-white py-3 px-4"><div class="d-flex align-items-center gap-2"><i class="bi bi-megaphone-fill fs-5 text-warning"></i><h5 class="mb-0 fw-bold">Publish New Academy Event / Announcement</h5></div></div>
                     <div class="card-body p-4 p-md-5">
-                        <p class="text-muted small mb-4">
-                            <i class="bi bi-info-circle me-1 text-primary"></i> 
-                            Events published here will automatically appear on both the <strong>Student Home Page</strong> and <strong>Coach Home Page</strong>.
-                        </p>
-
+                        <p class="text-muted small mb-4"><i class="bi bi-info-circle me-1 text-primary"></i> Events published here will automatically appear on both the <strong>Student Home Page</strong> and <strong>Coach Home Page</strong>.</p>
                         <form id="adminCreateEventForm" onsubmit="handleAdminPublishEvent(event)" class="needs-validation" novalidate>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6">
-                                    <label for="adm_event_name" class="form-label fw-bold text-secondary small text-uppercase">
-                                        Event Title / Name <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="adm_event_name" class="form-label fw-bold text-secondary small text-uppercase">Event Title / Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg" id="adm_event_name" placeholder="e.g. Annual Sports Meet & Archery Championship" required>
                                     <div class="invalid-feedback">Please enter the event name.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="adm_event_type" class="form-label fw-bold text-secondary small text-uppercase">
-                                        Event Type <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="adm_event_type" class="form-label fw-bold text-secondary small text-uppercase">Event Type <span class="text-danger">*</span></label>
                                     <select class="form-select form-select-lg" id="adm_event_type" required>
                                         <option value="" selected disabled>-- Select Event Type --</option>
                                         <option value="Tournament">🏆 Tournament</option>
@@ -887,75 +473,47 @@
                                     <div class="invalid-feedback">Please select event type.</div>
                                 </div>
                             </div>
-
                             <div class="row g-3 mb-3">
                                 <div class="col-md-4">
-                                    <label for="adm_start_date" class="form-label fw-bold text-secondary small text-uppercase">
-                                        Event Date <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="adm_start_date" class="form-label fw-bold text-secondary small text-uppercase">Event Date <span class="text-danger">*</span></label>
                                     <input type="date" class="form-control form-control-lg" id="adm_start_date" required>
                                     <div class="invalid-feedback">Required field.</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="adm_event_time" class="form-label fw-bold text-secondary small text-uppercase">
-                                        Event Time <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="adm_event_time" class="form-label fw-bold text-secondary small text-uppercase">Event Time <span class="text-danger">*</span></label>
                                     <input type="time" class="form-control form-control-lg" id="adm_event_time" value="10:00" required>
                                     <div class="invalid-feedback">Required field.</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="adm_venue" class="form-label fw-bold text-secondary small text-uppercase">
-                                        Event Venue / Location <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="adm_venue" class="form-label fw-bold text-secondary small text-uppercase">Event Venue / Location <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg" id="adm_venue" placeholder="e.g. College Auditorium" required>
                                     <div class="invalid-feedback">Required field.</div>
                                 </div>
                             </div>
-
                             <div class="mb-4">
-                                <label for="adm_description" class="form-label fw-bold text-secondary small text-uppercase">
-                                    Event Description & Instructions <span class="text-danger">*</span>
-                                </label>
+                                <label for="adm_description" class="form-label fw-bold text-secondary small text-uppercase">Event Description & Instructions <span class="text-danger">*</span></label>
                                 <textarea class="form-control" id="adm_description" rows="3" placeholder="e.g. Annual sports meet for all students. Qualification round starts at 10:00 AM sharp." required></textarea>
                                 <div class="invalid-feedback">Please enter event description.</div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary-custom px-5 py-3 fw-bold shadow-sm">
-                                <i class="bi bi-check-circle-fill me-2"></i> Publish Event
-                            </button>
+                            <button type="submit" class="btn btn-primary-custom px-5 py-3 fw-bold shadow-sm"><i class="bi bi-check-circle-fill me-2"></i> Publish Event</button>
                         </form>
                     </div>
                 </div>
 
-                <!-- PUBLISHED EVENTS ROSTER TABLE FOR ADMIN -->
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-events-list-section">
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-calendar-event-fill text-danger fs-5"></i>
-                            <h5 class="mb-0 fw-bold text-dark">Published Events Roster</h5>
-                        </div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-event-fill text-danger fs-5"></i><h5 class="mb-0 fw-bold text-dark">Published Events Roster</h5></div>
                         <span id="admin-events-badge" class="badge bg-danger rounded-pill px-3 py-1">0 Events</span>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="ps-4">Event Name</th>
-                                        <th>Type</th>
-                                        <th>Date & Time</th>
-                                        <th>Venue</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="admin-events-tbody">
-                                    <!-- Populated dynamically -->
-                                </tbody>
+                                <thead class="table-light"><tr><th class="ps-4">Event Name</th><th>Type</th><th>Date & Time</th><th>Venue</th><th>Status</th></tr></thead>
+                                <tbody id="admin-events-tbody"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -966,9 +524,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
                 <div class="modal-header bg-gradient-teal text-white py-3">
-                    <h6 class="modal-title fw-bold" id="modal-event-title-header">
-                        <i class="bi bi-calendar-check me-2"></i>Event Announcement
-                    </h6>
+                    <h6 class="modal-title fw-bold" id="modal-event-title-header"><i class="bi bi-calendar-check me-2"></i>Event Announcement</h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -977,24 +533,13 @@
                         <span class="badge bg-success rounded-pill" id="modal-event-status">Upcoming</span>
                     </div>
                     <h5 class="fw-bold text-dark mb-3" id="modal-event-name">Event Name</h5>
-
                     <div class="p-3 bg-light rounded-3 mb-3">
                         <div class="row g-2 small">
-                            <div class="col-6">
-                                <span class="text-muted d-block">Date:</span>
-                                <strong class="text-dark" id="modal-event-date">2026-09-15</strong>
-                            </div>
-                            <div class="col-6">
-                                <span class="text-muted d-block">Time:</span>
-                                <strong class="text-dark" id="modal-event-time">10:00 AM</strong>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <span class="text-muted d-block">Venue:</span>
-                                <strong class="text-dark" id="modal-event-venue"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Auditorium</strong>
-                            </div>
+                            <div class="col-6"><span class="text-muted d-block">Date:</span><strong class="text-dark" id="modal-event-date">2026-09-15</strong></div>
+                            <div class="col-6"><span class="text-muted d-block">Time:</span><strong class="text-dark" id="modal-event-time">10:00 AM</strong></div>
+                            <div class="col-12 mt-2"><span class="text-muted d-block">Venue:</span><strong class="text-dark" id="modal-event-venue"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Auditorium</strong></div>
                         </div>
                     </div>
-
                     <h6 class="fw-bold text-dark small text-uppercase mb-2">Instructions & Description:</h6>
                     <p class="text-secondary small mb-0" id="modal-event-desc" style="white-space: pre-line;">Event description</p>
                 </div>
@@ -1007,7 +552,7 @@
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Main Application JavaScript -->
-    <script src="static/js/script.js"></script>
+    <!-- Modular Application JS Entry Point -->
+    <script type="module" src="static/js/app.js"></script>
 </body>
 </html>

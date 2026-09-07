@@ -1,0 +1,159 @@
+<!-- =================================================================== -->
+<!-- ADMIN DASHBOARD PAGE MODULE (pages/admin/dashboard.html)            -->
+<!-- =================================================================== -->
+<div class="container py-4">
+    <!-- Notice Banner -->
+    <div class="prototype-notice d-flex align-items-center justify-content-between">
+        <div>
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <strong>Administrative Portal:</strong> Publish and broadcast academy events to all students and coaches.
+        </div>
+        <span class="badge bg-danger">Admin Portal</span>
+    </div>
+
+    <!-- Admin Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <div>
+            <h1 class="h3 fw-bold mb-1 text-dark">Welcome, Administrator!</h1>
+            <p class="text-muted mb-0">Academy Administration & Event Broadcasting Portal</p>
+        </div>
+        <div>
+            <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="handleLogout()">
+                <i class="bi bi-box-arrow-right me-1"></i> Sign Out
+            </button>
+        </div>
+    </div>
+
+    <!-- Overview Stats -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="stat-card border-start border-4 border-primary">
+                <div class="stat-label">Total Published Events</div>
+                <div class="stat-value text-primary" id="admin-stat-events-count">3</div>
+                <i class="bi bi-calendar-check stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card border-start border-4 border-success">
+                <div class="stat-label">Registered Students</div>
+                <div class="stat-value text-success" id="admin-stat-students-count">3</div>
+                <i class="bi bi-people-fill stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card border-start border-4 border-danger">
+                <div class="stat-label">Admin Control Mode</div>
+                <div class="stat-value fs-5 mt-2 text-danger">Event Publishing Only</div>
+                <i class="bi bi-shield-lock stat-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN EVENT PUBLISHING FORM -->
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-publish-section">
+        <div class="card-header bg-gradient-teal text-white py-3 px-4">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-megaphone-fill fs-5 text-warning"></i>
+                <h5 class="mb-0 fw-bold">Publish New Academy Event / Announcement</h5>
+            </div>
+        </div>
+        <div class="card-body p-4 p-md-5">
+            <p class="text-muted small mb-4">
+                <i class="bi bi-info-circle me-1 text-primary"></i> 
+                Events published here will automatically appear on both the <strong>Student Home Page</strong> and <strong>Coach Home Page</strong>.
+            </p>
+
+            <form id="adminCreateEventForm" onsubmit="handleAdminPublishEvent(event)" class="needs-validation" novalidate>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="adm_event_name" class="form-label fw-bold text-secondary small text-uppercase">
+                            Event Title / Name <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control form-control-lg" id="adm_event_name" placeholder="e.g. Annual Sports Meet & Archery Championship" required>
+                        <div class="invalid-feedback">Please enter the event name.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adm_event_type" class="form-label fw-bold text-secondary small text-uppercase">
+                            Event Type <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select form-select-lg" id="adm_event_type" required>
+                            <option value="" selected disabled>-- Select Event Type --</option>
+                            <option value="Tournament">🏆 Tournament</option>
+                            <option value="Training Camp">🏹 Training Camp</option>
+                            <option value="Archery Competition">🎯 Archery Competition</option>
+                            <option value="Meeting">👥 Meeting</option>
+                            <option value="Announcement">📢 Announcement</option>
+                        </select>
+                        <div class="invalid-feedback">Please select event type.</div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label for="adm_start_date" class="form-label fw-bold text-secondary small text-uppercase">
+                            Event Date <span class="text-danger">*</span>
+                        </label>
+                        <input type="date" class="form-control form-control-lg" id="adm_start_date" required>
+                        <div class="invalid-feedback">Required field.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="adm_event_time" class="form-label fw-bold text-secondary small text-uppercase">
+                            Event Time <span class="text-danger">*</span>
+                        </label>
+                        <input type="time" class="form-control form-control-lg" id="adm_event_time" value="10:00" required>
+                        <div class="invalid-feedback">Required field.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="adm_venue" class="form-label fw-bold text-secondary small text-uppercase">
+                            Event Venue / Location <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control form-control-lg" id="adm_venue" placeholder="e.g. College Auditorium" required>
+                        <div class="invalid-feedback">Required field.</div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="adm_description" class="form-label fw-bold text-secondary small text-uppercase">
+                        Event Description & Instructions <span class="text-danger">*</span>
+                    </label>
+                    <textarea class="form-control" id="adm_description" rows="3" placeholder="e.g. Annual sports meet for all students. Qualification round starts at 10:00 AM sharp." required></textarea>
+                    <div class="invalid-feedback">Please enter event description.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary-custom px-5 py-3 fw-bold shadow-sm">
+                    <i class="bi bi-check-circle-fill me-2"></i> Publish Event
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PUBLISHED EVENTS ROSTER TABLE FOR ADMIN -->
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-events-list-section">
+        <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-calendar-event-fill text-danger fs-5"></i>
+                <h5 class="mb-0 fw-bold text-dark">Published Events Roster</h5>
+            </div>
+            <span id="admin-events-badge" class="badge bg-danger rounded-pill px-3 py-1">0 Events</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">Event Name</th>
+                            <th>Type</th>
+                            <th>Date & Time</th>
+                            <th>Venue</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-events-tbody">
+                        <!-- Populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
