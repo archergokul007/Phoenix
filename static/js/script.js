@@ -8,143 +8,7 @@
 // FIXED DEMO DATA & STORAGE INITIALIZATION
 // =============================================================================
 
-const INITIAL_STUDENTS = [
-    {
-        id: "STU001",
-        firstName: "Arjun",
-        lastName: "Singh",
-        name: "Arjun Singh",
-        email: "arjun@gmail.com",
-        password: "Arjun@4321",
-        phone: "9876543211",
-        dob: "2002-05-15",
-        gender: "Male",
-        course: "Computer Science & Engineering",
-        yearSem: "Year 3 / Sem 5",
-        bowCategory: "Recurve Bow",
-        bowType: "Own Bow",
-        experience: "Intermediate (2 Years)",
-        place: "North Campus",
-        address: "12 Park Street, North Wing",
-        attendanceRate: 94,
-        attendanceStats: { present: 47, absent: 3, late: 2 },
-        overallScore: 92,
-        grade: "A+",
-        practiceAvg: "9.2 / 10",
-        examScore: "338 / 360",
-        rank: 1,
-        progressSummary: "Exceptional form stability and high release accuracy over recent ends.",
-        skills: {
-            "Form & Posture": 95,
-            "Aim & Anchor": 90,
-            "Release Technique": 92,
-            "Mental Focus": 88,
-            "Physical Stamina": 94
-        },
-        scoresByEvaluation: [
-            { date: "Aug 10", score: 285, avg: 8.5 },
-            { date: "Aug 18", score: 312, avg: 8.7 },
-            { date: "Aug 25", score: 338, avg: 9.4 },
-            { date: "Sep 02", score: 330, avg: 9.2 }
-        ],
-        attendanceRecords: [
-            { date: "2026-09-05", status: "Present", remarks: "Full session - Recurve 50m practice" },
-            { date: "2026-09-03", status: "Present", remarks: "Indoor 18m scoring round" },
-            { date: "2026-09-01", status: "Late", remarks: "Arrived 10 mins late - Equipment setup" },
-            { date: "2026-08-28", status: "Present", remarks: "Mock tournament round" },
-            { date: "2026-08-25", status: "Absent", remarks: "Medical leave approved" }
-        ]
-    },
-    {
-        id: "STU002",
-        firstName: "Joseph",
-        lastName: "Thomas",
-        name: "Joseph Thomas",
-        email: "joseph@gmail.com",
-        password: "Joseph@4321",
-        phone: "9876543222",
-        dob: "2003-08-12",
-        gender: "Male",
-        course: "Physical Education",
-        yearSem: "Year 2 / Sem 3",
-        bowCategory: "Compound Bow",
-        bowType: "Academy Bow",
-        experience: "Beginner (1 Year)",
-        place: "South Wing",
-        address: "88 Lake View Road",
-        attendanceRate: 88,
-        attendanceStats: { present: 44, absent: 6, late: 3 },
-        overallScore: 85,
-        grade: "B+",
-        practiceAvg: "8.4 / 10",
-        examScore: "310 / 360",
-        rank: 3,
-        progressSummary: "Steady draw posture; working on anchor point consistency under pressure.",
-        skills: {
-            "Form & Posture": 86,
-            "Aim & Anchor": 84,
-            "Release Technique": 88,
-            "Mental Focus": 82,
-            "Physical Stamina": 86
-        },
-        scoresByEvaluation: [
-            { date: "Aug 12", score: 260, avg: 8.2 },
-            { date: "Aug 20", score: 295, avg: 8.4 },
-            { date: "Aug 28", score: 310, avg: 8.6 },
-            { date: "Sep 01", score: 305, avg: 8.5 }
-        ],
-        attendanceRecords: [
-            { date: "2026-09-05", status: "Present", remarks: "Compound bow alignment drill" },
-            { date: "2026-09-03", status: "Present", remarks: "Stance & breathing practice" },
-            { date: "2026-08-30", status: "Absent", remarks: "Unexcused absence" },
-            { date: "2026-08-27", status: "Present", remarks: "30m range target practice" }
-        ]
-    },
-    {
-        id: "STU003",
-        firstName: "Siva",
-        lastName: "Kumar",
-        name: "Siva Kumar",
-        email: "siva@gmail.com",
-        password: "Siva@4321",
-        phone: "9876543233",
-        dob: "2001-11-30",
-        gender: "Male",
-        course: "Mechanical Engineering",
-        yearSem: "Year 4 / Sem 7",
-        bowCategory: "Indian Bow",
-        bowType: "Own Bow",
-        experience: "Advanced (3 Years)",
-        place: "East Campus",
-        address: "54 High Street, East Zone",
-        attendanceRate: 91,
-        attendanceStats: { present: 45, absent: 4, late: 1 },
-        overallScore: 89,
-        grade: "A",
-        practiceAvg: "8.8 / 10",
-        examScore: "324 / 360",
-        rank: 2,
-        progressSummary: "High grouping accuracy in 50m outdoor rounds; strong bow grip control.",
-        skills: {
-            "Form & Posture": 90,
-            "Aim & Anchor": 92,
-            "Release Technique": 87,
-            "Mental Focus": 91,
-            "Physical Stamina": 85
-        },
-        scoresByEvaluation: [
-            { date: "Aug 15", score: 280, avg: 8.6 },
-            { date: "Aug 22", score: 315, avg: 8.8 },
-            { date: "Aug 30", score: 324, avg: 9.0 },
-            { date: "Sep 03", score: 320, avg: 8.9 }
-        ],
-        attendanceRecords: [
-            { date: "2026-09-05", status: "Present", remarks: "50m distance round practice" },
-            { date: "2026-09-02", status: "Present", remarks: "Wind compensation techniques" },
-            { date: "2026-08-29", status: "Present", remarks: "Equipment tuning & maintenance" }
-        ]
-    }
-];
+const INITIAL_STUDENTS = [];
 
 const INITIAL_EVENTS = [
     {
@@ -179,23 +43,51 @@ const INITIAL_EVENTS = [
     }
 ];
 
-const COACH_CREDENTIALS = {
-    email: "coach@gmail.com",
-    password: "Coach@4321",
-    name: "Head Coach",
-    id: "COA001",
-    specialization: "Recurve & Compound Bow Master Coach"
-};
+const INITIAL_COACHES = [];
+const COACH_CREDENTIALS = null;
 
-const ADMIN_CREDENTIALS = {
-    email: "admin@gmail.com",
-    password: "Admin@4321",
-    name: "Academy Administrator",
-    id: "ADM001"
-};
+// Three Hardcoded Administrator Logins
+const ADMIN_USERS = [
+    {
+        id: "ADM001",
+        name: "Academy Director",
+        username: "admin1",
+        aliasUsername: "admin",
+        email: "admin1@gmail.com",
+        aliasEmail: "admin@gmail.com",
+        password: "Admin@4321",
+        role: "admin",
+        title: "Academy Director & Master Admin"
+    },
+    {
+        id: "ADM002",
+        name: "Operations Admin",
+        username: "admin2",
+        aliasUsername: "admin2",
+        email: "admin2@gmail.com",
+        aliasEmail: "admin2@phoenix.com",
+        password: "Admin@4321",
+        role: "admin",
+        title: "Range Operations & Equipment Manager"
+    },
+    {
+        id: "ADM003",
+        name: "Finance & Events Admin",
+        username: "admin3",
+        aliasUsername: "admin3",
+        email: "admin3@gmail.com",
+        aliasEmail: "admin3@phoenix.com",
+        password: "Admin@4321",
+        role: "admin",
+        title: "Tournament Coordinator & Accounts Head"
+    }
+];
+
+const ADMIN_CREDENTIALS = ADMIN_USERS[0];
 
 // Global State
 let studentsState = [];
+let coachesState = [];
 let eventsState = [];
 let currentUser = null;
 let currentRole = "student";
@@ -215,26 +107,34 @@ function initApp() {
     const storedStudents = localStorage.getItem("archery_students");
     if (storedStudents) {
         try {
-            studentsState = JSON.parse(storedStudents);
+            studentsState = JSON.parse(storedStudents).filter(s =>
+                !['STU001', 'STU002', 'STU003'].includes(s.id) &&
+                !['arjun@gmail.com', 'joseph@gmail.com', 'siva@gmail.com'].includes((s.email || '').toLowerCase())
+            );
         } catch (e) {
-            studentsState = [...INITIAL_STUDENTS];
+            studentsState = [];
         }
     } else {
-        studentsState = [...INITIAL_STUDENTS];
-        saveStudentsState();
+        studentsState = [];
     }
-
-    // Ensure initial demo students (Arjun, Joseph, Siva) exist with updated passwords
-    INITIAL_STUDENTS.forEach(defStu => {
-        const index = studentsState.findIndex(s => s.id === defStu.id || s.email.toLowerCase() === defStu.email.toLowerCase());
-        if (index !== -1) {
-            studentsState[index].password = defStu.password;
-            studentsState[index].email = defStu.email;
-        } else {
-            studentsState.push(defStu);
-        }
-    });
     saveStudentsState();
+
+    // Load coaches from localStorage
+    const storedCoaches = localStorage.getItem("archery_coaches");
+    if (storedCoaches) {
+        try {
+            coachesState = JSON.parse(storedCoaches).filter(c =>
+                !['COA001'].includes(c.id) &&
+                !['coach@gmail.com'].includes((c.email || '').toLowerCase()) &&
+                !['headcoach'].includes((c.username || '').toLowerCase())
+            );
+        } catch (e) {
+            coachesState = [];
+        }
+    } else {
+        coachesState = [];
+    }
+    localStorage.setItem("archery_coaches", JSON.stringify(coachesState));
 
     // Load events from localStorage or set defaults
     const storedEvents = localStorage.getItem("archery_events");
@@ -332,6 +232,17 @@ function fillDemoCredentials(role, email, password) {
     hideLoginAlert();
 }
 
+function fillAdminCredentials(adminIndex) {
+    selectRole('admin');
+    const idx = (adminIndex >= 1 && adminIndex <= ADMIN_USERS.length) ? adminIndex - 1 : 0;
+    const admin = ADMIN_USERS[idx];
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    if (emailInput) emailInput.value = admin.email;
+    if (passwordInput) passwordInput.value = admin.password;
+    hideLoginAlert();
+}
+
 function handleLoginSubmit(e) {
     e.preventDefault();
     hideLoginAlert();
@@ -349,23 +260,43 @@ function handleLoginSubmit(e) {
 
     const emailLower = emailVal.toLowerCase();
 
+    // Cross-role verification
+    const isAdminAccount = ADMIN_USERS.some(a =>
+        (a.email && a.email.toLowerCase() === emailLower) ||
+        (a.aliasEmail && a.aliasEmail.toLowerCase() === emailLower) ||
+        (a.username && a.username.toLowerCase() === emailLower) ||
+        (a.aliasUsername && a.aliasUsername.toLowerCase() === emailLower) ||
+        (a.id && a.id.toLowerCase() === emailLower)
+    );
+
+    const isCoachAccount = coachesState.some(c =>
+        (c.email && c.email.toLowerCase() === emailLower) ||
+        (c.username && c.username.toLowerCase() === emailLower) ||
+        (c.id && c.id.toLowerCase() === emailLower)
+    );
+
+    const isStudentAccount = studentsState.some(s =>
+        (s.email && s.email.toLowerCase() === emailLower) ||
+        (s.username && s.username.toLowerCase() === emailLower) ||
+        (s.id && s.id.toLowerCase() === emailLower)
+    );
+
     // 2. Validate Credentials against Selected Role
     if (currentRole === 'student') {
-        // Check if student exists
-        const matchedStu = studentsState.find(s => 
-            s.email.toLowerCase() === emailLower || 
-            s.id.toLowerCase() === emailLower || 
-            s.firstName.toLowerCase() === emailLower
-        );
-
-        // Check if user entered coach or admin credentials under student role
-        if (emailLower === COACH_CREDENTIALS.email.toLowerCase() || emailLower === ADMIN_CREDENTIALS.email.toLowerCase()) {
+        if (isAdminAccount || isCoachAccount) {
             showLoginAlert("Selected login type does not match these credentials.");
             return;
         }
 
+        const matchedStu = studentsState.find(s => 
+            (s.email && s.email.toLowerCase() === emailLower) || 
+            (s.id && s.id.toLowerCase() === emailLower) || 
+            (s.username && s.username.toLowerCase() === emailLower) ||
+            (s.firstName && s.firstName.toLowerCase() === emailLower)
+        );
+
         if (!matchedStu || matchedStu.password !== passwordVal) {
-            showLoginAlert("Invalid student email/username or password.");
+            showLoginAlert("Invalid student credentials. Please register first if you do not have an account.");
             return;
         }
 
@@ -374,38 +305,48 @@ function handleLoginSubmit(e) {
         initStudentPortal(matchedStu);
 
     } else if (currentRole === 'coach') {
-        // Check if user entered student or admin credentials under coach role
-        const isStudentCred = studentsState.some(s => s.email.toLowerCase() === emailLower || s.id.toLowerCase() === emailLower);
-        if (isStudentCred || emailLower === ADMIN_CREDENTIALS.email.toLowerCase()) {
+        if (isAdminAccount || isStudentAccount) {
             showLoginAlert("Selected login type does not match these credentials.");
             return;
         }
 
-        if (emailLower !== COACH_CREDENTIALS.email.toLowerCase() || passwordVal !== COACH_CREDENTIALS.password) {
-            showLoginAlert("Invalid coach email/username or password.");
+        const matchedCoach = coachesState.find(c =>
+            (c.email && c.email.toLowerCase() === emailLower) ||
+            (c.id && c.id.toLowerCase() === emailLower) ||
+            (c.username && c.username.toLowerCase() === emailLower)
+        );
+
+        if (!matchedCoach || matchedCoach.password !== passwordVal) {
+            showLoginAlert("Invalid coach credentials. Please register first if you are a new coach.");
             return;
         }
 
         // Login Success
-        currentUser = COACH_CREDENTIALS;
-        initCoachPortal();
+        currentUser = matchedCoach;
+        initCoachPortal(matchedCoach);
 
     } else if (currentRole === 'admin') {
-        // Check if user entered student or coach credentials under admin role
-        const isStudentCred = studentsState.some(s => s.email.toLowerCase() === emailLower || s.id.toLowerCase() === emailLower);
-        if (isStudentCred || emailLower === COACH_CREDENTIALS.email.toLowerCase()) {
+        if (isStudentAccount || isCoachAccount) {
             showLoginAlert("Selected login type does not match these credentials.");
             return;
         }
 
-        if (emailLower !== ADMIN_CREDENTIALS.email.toLowerCase() || passwordVal !== ADMIN_CREDENTIALS.password) {
+        const matchedAdmin = ADMIN_USERS.find(a =>
+            (a.email && a.email.toLowerCase() === emailLower) ||
+            (a.aliasEmail && a.aliasEmail.toLowerCase() === emailLower) ||
+            (a.username && a.username.toLowerCase() === emailLower) ||
+            (a.aliasUsername && a.aliasUsername.toLowerCase() === emailLower) ||
+            (a.id && a.id.toLowerCase() === emailLower)
+        );
+
+        if (!matchedAdmin || matchedAdmin.password !== passwordVal) {
             showLoginAlert("Invalid admin email/username or password.");
             return;
         }
 
         // Login Success
-        currentUser = ADMIN_CREDENTIALS;
-        initAdminPortal();
+        currentUser = matchedAdmin;
+        initAdminPortal(matchedAdmin);
     }
 }
 
@@ -448,23 +389,36 @@ function handleRegisterSubmit(e) {
     const msgSpan = document.getElementById('register-alert-msg');
     alertBox.classList.add('d-none');
 
-    const studentId = document.getElementById('reg_student_id').value.trim();
-    const firstName = document.getElementById('reg_first_name').value.trim();
-    const lastName = document.getElementById('reg_last_name').value.trim();
-    const email = document.getElementById('reg_email').value.trim();
-    const phone = document.getElementById('reg_phone').value.trim();
-    const dob = document.getElementById('reg_dob').value;
-    const gender = document.getElementById('reg_gender').value;
-    const course = document.getElementById('reg_course').value.trim();
-    const yearSem = document.getElementById('reg_year_sem').value.trim();
-    const bowCategory = document.getElementById('reg_bow_category').value;
-    const bowType = document.getElementById('reg_bow_type').value;
-    const password = document.getElementById('reg_password').value;
-    const confirmPassword = document.getElementById('reg_confirm_password').value;
+    const name = document.getElementById('reg_name') ? document.getElementById('reg_name').value.trim() : '';
+    const gender = document.getElementById('reg_gender') ? document.getElementById('reg_gender').value : '';
+    const ageVal = document.getElementById('reg_age') ? document.getElementById('reg_age').value.trim() : '';
+    const ageCategory = document.getElementById('reg_age_category') ? document.getElementById('reg_age_category').value : '';
+    const phone = document.getElementById('reg_phone') ? document.getElementById('reg_phone').value.trim() : '';
+    const currentStatus = document.getElementById('reg_current_status') ? document.getElementById('reg_current_status').value : '';
+    const bowCategory = document.getElementById('reg_bow_category') ? document.getElementById('reg_bow_category').value : '';
+    const bowType = document.getElementById('reg_bow_type') ? document.getElementById('reg_bow_type').value : '';
+    const experience = document.getElementById('reg_experience') ? document.getElementById('reg_experience').value : '';
+    const email = document.getElementById('reg_email') ? document.getElementById('reg_email').value.trim() : '';
+    const username = document.getElementById('reg_username') ? document.getElementById('reg_username').value.trim() : '';
+    const password = document.getElementById('reg_password') ? document.getElementById('reg_password').value : '';
+    const confirmPassword = document.getElementById('reg_confirm_password') ? document.getElementById('reg_confirm_password').value : '';
 
     // Validation checks
-    if (!studentId || !firstName || !lastName || !email || !phone || !dob || !gender || !course || !yearSem || !bowCategory || !bowType || !password || !confirmPassword) {
-        msgSpan.textContent = "Please fill in all required fields.";
+    if (!name || !gender || !ageVal || !ageCategory || !phone || !currentStatus || !bowCategory || !bowType || !experience || !email || !username || !password || !confirmPassword) {
+        msgSpan.textContent = "Please fill in all 13 required fields.";
+        alertBox.classList.remove('d-none');
+        return;
+    }
+
+    const age = parseInt(ageVal, 10);
+    if (isNaN(age) || age < 5 || age > 99) {
+        msgSpan.textContent = "Please enter a valid age between 5 and 99 years.";
+        alertBox.classList.remove('d-none');
+        return;
+    }
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+        msgSpan.textContent = "Please enter a valid 10-digit mobile number.";
         alertBox.classList.remove('d-none');
         return;
     }
@@ -477,6 +431,18 @@ function handleRegisterSubmit(e) {
         return;
     }
 
+    if (username.length < 3) {
+        msgSpan.textContent = "User name must be at least 3 characters long.";
+        alertBox.classList.remove('d-none');
+        return;
+    }
+
+    if (password.length < 6) {
+        msgSpan.textContent = "Password must be at least 6 characters long.";
+        alertBox.classList.remove('d-none');
+        return;
+    }
+
     // Check password match
     if (password !== confirmPassword) {
         msgSpan.textContent = "Password and Confirm Password do not match.";
@@ -484,30 +450,39 @@ function handleRegisterSubmit(e) {
         return;
     }
 
-    // Check duplicate student ID or email
-    const exists = studentsState.some(s => s.id.toLowerCase() === studentId.toLowerCase() || s.email.toLowerCase() === email.toLowerCase());
+    // Check duplicate student ID or email or username
+    const exists = studentsState.some(s => (s.email && s.email.toLowerCase() === email.toLowerCase()) || (s.username && s.username.toLowerCase() === username.toLowerCase()) || (s.id && s.id.toLowerCase() === username.toLowerCase()));
     if (exists) {
-        msgSpan.textContent = "A student with this Student ID or Email already exists.";
+        msgSpan.textContent = "A student with this Email or User Name already exists.";
         alertBox.classList.remove('d-none');
         return;
     }
 
+    const nextNum = studentsState.length + 1;
+    const studentId = `STU${String(nextNum).padStart(3, '0')}`;
+    const nameParts = name.split(/\s+/);
+    const firstName = nameParts[0] || name;
+    const lastName = nameParts.slice(1).join(' ') || '';
+
     // Create new student object
     const newStudent = {
         id: studentId,
+        username: username,
         firstName: firstName,
         lastName: lastName,
-        name: `${firstName} ${lastName}`,
+        name: name,
+        age: age,
+        ageCategory: ageCategory,
+        gender: gender,
+        currentStatus: currentStatus,
         email: email,
         password: password,
         phone: phone,
-        dob: dob,
-        gender: gender,
-        course: course,
-        yearSem: yearSem,
+        course: "Academy Training",
+        yearSem: ageCategory,
         bowCategory: bowCategory,
         bowType: bowType,
-        experience: "Beginner",
+        experience: experience,
         place: "Academy Main",
         address: "Registered Campus Address",
         attendanceRate: 100,
@@ -517,7 +492,7 @@ function handleRegisterSubmit(e) {
         practiceAvg: "8.5 / 10",
         examScore: "300 / 360",
         rank: studentsState.length + 1,
-        progressSummary: "Newly registered student archer. Default evaluation metrics initialized.",
+        progressSummary: `Newly registered archer (${bowCategory}, ${ageCategory}). Status: ${currentStatus}.`,
         skills: {
             "Form & Posture": 85,
             "Aim & Anchor": 82,
@@ -560,6 +535,8 @@ function showNavbar(role, displayName) {
     const navLinks = document.getElementById('nav-links');
 
     if (navbar) navbar.classList.remove('d-none');
+    const footer = document.getElementById('main-footer');
+    if (footer) footer.classList.remove('d-none');
     if (roleText) roleText.textContent = role.toUpperCase();
     if (userDisplay) userDisplay.textContent = displayName;
 
@@ -595,7 +572,10 @@ function showNavbar(role, displayName) {
 function handleLogout() {
     currentUser = null;
     hideAllViews();
-    document.getElementById('main-navbar').classList.add('d-none');
+    const navbar = document.getElementById('main-navbar');
+    if (navbar) navbar.classList.add('d-none');
+    const footer = document.getElementById('main-footer');
+    if (footer) footer.classList.add('d-none');
     selectRole('student');
     showLoginView();
     showGlobalAlert("You have been signed out successfully.", "info");

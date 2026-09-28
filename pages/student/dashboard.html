@@ -8,7 +8,12 @@
             <i class="bi bi-info-circle-fill me-2"></i>
             <strong>Student Portal:</strong> Personal performance, subject-wise analytics, attendance, and academy events.
         </div>
-        <span class="badge bg-primary">Student Portal</span>
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1" id="stu-db-status">
+                <i class="bi bi-database-check me-1"></i> SQLite Database Connected
+            </span>
+            <span class="badge bg-primary">Student Portal</span>
+        </div>
     </div>
 
     <!-- Student Header -->
@@ -200,6 +205,156 @@
                         <!-- Populated by JS -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- STUDENT TRAINING SCHEDULE SECTION -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-schedule-section">
+        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-calendar-week-fill text-primary fs-5"></i>
+                <h5 class="mb-0 fw-bold text-dark">Weekly Training Schedule & Practice Slots</h5>
+            </div>
+            <span id="student-schedule-badge" class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1">0 Sessions</span>
+        </div>
+        <div class="card-body p-4 bg-light bg-opacity-50">
+            <p class="text-muted small mb-4">
+                <i class="bi bi-info-circle text-primary me-1"></i>
+                Review your training schedule, target distances (18m / 50m / 70m), allocated shooting lanes, and reserve or manage your practice slot bookings.
+            </p>
+            <div class="row g-3" id="student-schedule-grid"></div>
+        </div>
+    </div>
+
+    <!-- STUDENT EQUIPMENT & SERVICE SECTION -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-equipment-section">
+        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-tools text-warning fs-5"></i>
+                <h5 class="mb-0 fw-bold text-dark">My Allocated Equipment & Service Desk</h5>
+            </div>
+            <span id="student-assigned-equip-badge" class="badge bg-warning-subtle text-dark border rounded-pill px-3 py-1">0 Items</span>
+        </div>
+        <div class="card-body p-4 bg-light bg-opacity-50">
+            <h6 class="fw-bold text-dark mb-3"><i class="bi bi-shield-check text-success me-2"></i>Academy Gear Checked Out to You</h6>
+            <div class="row g-3 mb-4" id="student-assigned-equip-grid"></div>
+
+            <!-- Equipment Maintenance & Checkout Request Card -->
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4" id="student-equipment-request-card">
+                <div class="card-header bg-white py-3 border-bottom">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-wrench-adjustable text-primary me-2"></i>Submit Gear Service, Tuning, or Checkout Request</h6>
+                </div>
+                <div class="card-body p-4 bg-white">
+                    <form id="studentEquipmentRequestForm" onsubmit="handleStudentEquipmentRequestSubmit(event)">
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <label for="stu_req_equipment_name" class="form-label small fw-bold text-secondary text-uppercase">Equipment / Item Name</label>
+                                <input type="text" class="form-control" id="stu_req_equipment_name" placeholder="e.g. Recurve String, Sight Pin, Arrows" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="stu_req_type" class="form-label small fw-bold text-secondary text-uppercase">Request Category</label>
+                                <select class="form-select" id="stu_req_type" required>
+                                    <option value="Maintenance & Tuning" selected>🔧 Maintenance & Tuning</option>
+                                    <option value="Checkout Request">🏹 Equipment Checkout</option>
+                                    <option value="String / Nock Replacement">🎯 String / Arrow Repair</option>
+                                    <option value="Inspection">🔍 Safety Inspection</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary-custom w-100 py-2 fw-semibold">
+                                    <i class="bi bi-send-fill me-1"></i> Submit Request
+                                </button>
+                            </div>
+                            <div class="col-12">
+                                <label for="stu_req_description" class="form-label small fw-bold text-secondary text-uppercase">Issue Details / Specifications</label>
+                                <textarea class="form-control" id="stu_req_description" rows="2" placeholder="Describe the issue, required draw weight, arrow spine, or repair details..." required></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Student Requests History -->
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white py-3 border-bottom">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-clock-history text-secondary me-2"></i>Your Recent Gear Requests</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-3">Req ID</th>
+                                    <th>Equipment Item</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th class="text-end pe-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-requests-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STUDENT FEES & INVOICES SECTION -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-fees-section">
+        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-credit-card-2-front-fill text-info fs-5"></i>
+                <h5 class="mb-0 fw-bold text-dark">Fee Management & Payment Receipts</h5>
+            </div>
+            <span id="student-fees-badge" class="badge bg-info-subtle text-dark border rounded-pill px-3 py-1">0 Records</span>
+        </div>
+        <div class="card-body p-4 bg-light bg-opacity-50">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card border-start border-4 border-success">
+                        <div class="stat-label">Total Paid Fees</div>
+                        <div class="stat-value text-success" id="stu-fee-paid">₹0</div>
+                        <i class="bi bi-check-circle-fill stat-icon"></i>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card border-start border-4 border-warning">
+                        <div class="stat-label">Pending Dues</div>
+                        <div class="stat-value text-warning" id="stu-fee-due">₹0</div>
+                        <i class="bi bi-hourglass-split stat-icon"></i>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card border-start border-4 border-danger">
+                        <div class="stat-label">Overdue Dues</div>
+                        <div class="stat-value text-danger" id="stu-fee-overdue">₹0</div>
+                        <i class="bi bi-exclamation-octagon stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-receipt-cutoff text-primary me-2"></i>My Academy Invoices & Payment Ledger</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-3">Invoice ID</th>
+                                    <th>Fee Description</th>
+                                    <th>Amount</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                    <th class="text-end pe-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-fees-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

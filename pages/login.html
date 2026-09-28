@@ -7,13 +7,13 @@
         <!-- LEFT SIDE: Branding & Role Selection -->
         <div class="auth-left-pane">
             <div class="brand-section">
-                <div class="brand-logo-glow">
-                    <i class="bi bi-bullseye"></i>
+                <div class="brand-logo-box mb-2">
+                    <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="hero-brand-logo">
                 </div>
-                <h1 class="brand-title">ARCHERY ACADEMY</h1>
+                <h1 class="brand-title">PHOENIX ELITE SPORTS ACADEMY</h1>
                 <p class="brand-tagline">Intelligent Training, Performance & Event Portal</p>
                 <div class="brand-badge">
-                    <i class="bi bi-shield-check"></i> Official Academy Management
+                    <i class="bi bi-shield-check"></i> Official Sports Academy Portal
                 </div>
             </div>
 
@@ -69,8 +69,9 @@
                 </div>
             </div>
 
-            <div class="left-pane-footer">
-                <span>&copy; 2026 Archery Academy System</span>
+            <div class="left-pane-footer d-flex align-items-center gap-2">
+                <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="footer-mini-logo">
+                <span>&copy; 2026 Phoenix Elite Sports Academy</span>
             </div>
         </div>
 
@@ -120,17 +121,20 @@
 
                 <!-- Demo Quick Login Shortcuts -->
                 <div class="quick-demo-box">
-                    <div class="demo-title"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Demo Fill:</div>
+                    <div class="demo-title"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Quick Admin Demo Logins:</div>
                     <div class="demo-buttons-grid">
-                        <button type="button" class="demo-pill-btn student" onclick="selectRole('student')">
-                            <i class="bi bi-person-fill"></i> Student
+                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(1)">
+                            <i class="bi bi-shield-shaded"></i> Admin 1 (Director)
                         </button>
-                        <button type="button" class="demo-pill-btn coach" onclick="selectRole('coach')">
-                            <i class="bi bi-whistle-fill"></i> Coach
+                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(2)">
+                            <i class="bi bi-shield-shaded"></i> Admin 2 (Operations)
                         </button>
-                        <button type="button" class="demo-pill-btn admin" onclick="selectRole('admin')">
-                            <i class="bi bi-shield-lock-fill"></i> Admin
+                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(3)">
+                            <i class="bi bi-shield-shaded"></i> Admin 3 (Finance)
                         </button>
+                    </div>
+                    <div class="text-center mt-2">
+                        <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Students & Coaches: Register your account using the link below.</small>
                     </div>
                 </div>
 

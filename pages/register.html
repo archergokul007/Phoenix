@@ -2,16 +2,35 @@
 <!-- STUDENT REGISTRATION PAGE MODULE (pages/register.html)               -->
 <!-- =================================================================== -->
 <div class="auth-wrapper">
-    <div class="auth-card mx-auto" style="max-width: 720px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-        
+    <div class="auth-card mx-auto"
+        style="max-width: 760px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+
         <div class="auth-header text-white p-4" style="background: linear-gradient(135deg, #064e3b, #0f766e);">
-            <div class="d-flex align-items-center gap-3">
-                <div class="fs-1 text-warning"><i class="bi bi-person-plus-fill"></i></div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="fs-1 text-warning"><i class="bi bi-person-plus-fill"></i></div>
+                    <div>
+                        <h2 class="h4 fw-bold mb-1">STUDENT REGISTRATION</h2>
+                        <p class="mb-0 small text-light opacity-75">Join Phoenix Elite Sports Academy (Student Portal)</p>
+                    </div>
+                </div>
                 <div>
-                    <h2 class="h4 fw-bold mb-1">STUDENT REGISTRATION</h2>
-                    <p class="mb-0 small text-light opacity-75">Join the Archery Academy System (Student Portal)</p>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="showCoachRegisterView(event)">
+                        <i class="bi bi-whistle-fill me-1"></i> Register as Coach
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <!-- Role Switcher Tabs -->
+        <div class="bg-light px-4 py-2 border-bottom d-flex align-items-center gap-2">
+            <span class="text-muted small fw-medium me-2">Registration Type:</span>
+            <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-bold active shadow-sm" style="background-color: #0f766e; border-color: #0f766e;">
+                <i class="bi bi-person-badge me-1"></i> Student Registration
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="showCoachRegisterView(event)">
+                <i class="bi bi-whistle-fill me-1"></i> Coach Registration
+            </button>
         </div>
 
         <div class="auth-body p-4">
@@ -20,56 +39,20 @@
             </div>
 
             <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="needs-validation" novalidate>
-                
-                <!-- Personal & Academic Details Section -->
+
+                <!-- 1. Personal & Contact Details Section -->
                 <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2">
-                    <i class="bi bi-person-lines-fill me-2"></i>1. Personal & Academic Details
+                    <i class="bi bi-person-lines-fill me-2"></i>1. Personal & Contact Details
                 </h6>
                 <div class="row g-3 mb-3">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="reg_student_id" placeholder="Student ID" required>
-                            <label for="reg_student_id">Student ID (e.g. STU004)</label>
-                            <div class="invalid-feedback">Required field.</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="reg_first_name" placeholder="First Name" required>
-                            <label for="reg_first_name">First Name</label>
-                            <div class="invalid-feedback">Required field.</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="reg_last_name" placeholder="Last Name" required>
-                            <label for="reg_last_name">Last Name</label>
-                            <div class="invalid-feedback">Required field.</div>
+                            <input type="text" class="form-control" id="reg_name" placeholder="Full Name" required>
+                            <label for="reg_name">Full Name</label>
+                            <div class="invalid-feedback">Please enter your full name.</div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-floating">
-                            <input type="email" class="form-control" id="reg_email" placeholder="Email Address" required>
-                            <label for="reg_email">Email Address</label>
-                            <div class="invalid-feedback">Enter a valid email.</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-floating">
-                            <input type="tel" class="form-control" id="reg_phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
-                            <label for="reg_phone">Phone Number (10 digits)</label>
-                            <div class="invalid-feedback">Enter 10 digit phone.</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" id="reg_dob" placeholder="Date of Birth" required>
-                            <label for="reg_dob">Date of Birth</label>
-                            <div class="invalid-feedback">Required field.</div>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-floating">
                             <select class="form-select" id="reg_gender" required>
@@ -79,71 +62,142 @@
                                 <option value="Other">Other</option>
                             </select>
                             <label for="reg_gender">Gender</label>
-                            <div class="invalid-feedback">Required field.</div>
+                            <div class="invalid-feedback">Please select your gender.</div>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="reg_course" placeholder="Course / Department" required>
-                            <label for="reg_course">Course / Department</label>
-                            <div class="invalid-feedback">Required field.</div>
+                            <input type="number" class="form-control" id="reg_age" placeholder="Age" min="5" max="99"
+                                oninput="handleAgeCategoryAutoSelect(this.value)" required>
+                            <label for="reg_age">Age (Years)</label>
+                            <div class="invalid-feedback">Please enter a valid age (5 - 99).</div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="reg_year_sem" placeholder="Year / Semester" required>
-                            <label for="reg_year_sem">Year / Semester (e.g. Year 2 / Sem 4)</label>
-                            <div class="invalid-feedback">Required field.</div>
+                            <select class="form-select" id="reg_age_category" required>
+                                <option value="" selected disabled>Select Age Category</option>
+                                <option value="Under-10 (Mini Sub-Junior)">Under-10 (Mini Sub-Junior)</option>
+                                <option value="Under-14 (Sub-Junior)">Under-14 (Sub-Junior)</option>
+                                <option value="Under-17 (Cadet / Youth)">Under-17 (Cadet / Youth)</option>
+                                <option value="Under-21 (Junior)">Under-21 (Junior)</option>
+                                <option value="Senior (21+ Years)">Senior (21+ Years)</option>
+                                <option value="Masters (50+ Years)">Masters (50+ Years)</option>
+                            </select>
+                            <label for="reg_age_category">Age Category</label>
+                            <div class="invalid-feedback">Please select an age category.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="tel" class="form-control" id="reg_phone" placeholder="Mobile Number"
+                                pattern="[0-9]{10}" required>
+                            <label for="reg_phone">Mobile No. (10 digits)</label>
+                            <div class="invalid-feedback">Please enter 10 digit phone number.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="reg_current_status" required>
+                                <option value="" selected disabled>Select Current Status</option>
+                                <option value="Active Archer">Active Archer</option>
+                                <option value="New Trainee">New Trainee</option>
+                                <option value="Competitive Archer">Competitive Archer</option>
+                                <option value="Trial / Guest">Trial / Guest</option>
+                                <option value="Recreational Archer">Recreational Archer</option>
+                            </select>
+                            <label for="reg_current_status">Current Status</label>
+                            <div class="invalid-feedback">Please select current status.</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Archery Details Section -->
+                <!-- 2. Archery Specialization & Experience Section -->
                 <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4">
-                    <i class="bi bi-bullseye me-2"></i>2. Archery Category & Experience
+                    <i class="bi bi-bullseye me-2"></i>2. Archery Specialization & Experience
                 </h6>
                 <div class="row g-3 mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <select class="form-select" id="reg_bow_category" required>
                                 <option value="" selected disabled>Select Category</option>
                                 <option value="Indian Bow">Indian Bow</option>
                                 <option value="Recurve Bow">Recurve Bow</option>
                                 <option value="Compound Bow">Compound Bow</option>
+                                <option value="Barebow">Barebow</option>
                             </select>
                             <label for="reg_bow_category">Bow Category</label>
-                            <div class="invalid-feedback">Select bow category.</div>
+                            <div class="invalid-feedback">Please select bow category.</div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <select class="form-select" id="reg_bow_type" required>
                                 <option value="" selected disabled>Select Ownership</option>
                                 <option value="Own Bow">Own Bow</option>
                                 <option value="Academy Bow">Academy Bow</option>
+                                <option value="Rented / Club Bow">Rented / Club Bow</option>
                             </select>
                             <label for="reg_bow_type">Bow Ownership</label>
-                            <div class="invalid-feedback">Select ownership.</div>
+                            <div class="invalid-feedback">Please select bow ownership.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select class="form-select" id="reg_experience" required>
+                                <option value="" selected disabled>Select Experience</option>
+                                <option value="Beginner (< 1 Year)">Beginner (&lt; 1 Year)</option>
+                                <option value="Intermediate (1 - 3 Years)">Intermediate (1 - 3 Years)</option>
+                                <option value="Advanced (3 - 5 Years)">Advanced (3 - 5 Years)</option>
+                                <option value="Elite / Professional (5+ Years)">Elite / Professional (5+ Years)</option>
+                            </select>
+                            <label for="reg_experience">Experience</label>
+                            <div class="invalid-feedback">Please select experience level.</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Account Password Setup -->
+                <!-- 3. Account Credentials & Security Section -->
                 <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4">
-                    <i class="bi bi-shield-lock me-2"></i>3. Account Password Setup
+                    <i class="bi bi-shield-lock me-2"></i>3. Account Credentials & Security
                 </h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="reg_password" placeholder="Password" minlength="6" required>
-                            <label for="reg_password">Password (min 6 chars)</label>
-                            <div class="invalid-feedback">Min 6 characters.</div>
+                            <input type="email" class="form-control" id="reg_email" placeholder="Email ID" required>
+                            <label for="reg_email">Email ID</label>
+                            <div class="invalid-feedback">Please enter a valid email.</div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="reg_confirm_password" placeholder="Confirm Password" minlength="6" required>
+                            <input type="text" class="form-control" id="reg_username" placeholder="User Name"
+                                minlength="3" required>
+                            <label for="reg_username">User Name</label>
+                            <div class="invalid-feedback">User name must be at least 3 characters.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="reg_password" placeholder="Password"
+                                minlength="6" required>
+                            <label for="reg_password">Password (min 6 chars)</label>
+                            <div class="invalid-feedback">Min 6 characters required.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="reg_confirm_password"
+                                placeholder="Confirm Password" minlength="6" required>
                             <label for="reg_confirm_password">Confirm Password</label>
                             <div class="invalid-feedback">Confirm password required.</div>
                         </div>

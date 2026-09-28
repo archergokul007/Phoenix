@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intelligent Archery Management System</title>
+    <title>Phoenix Elite Sports Academy</title>
+    <link rel="icon" type="image/jpeg" href="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,8 +28,8 @@
     <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top d-none">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#" onclick="navigateToRoleHome(event)">
-                <i class="bi bi-bullseye text-warning fs-4"></i>
-                <span class="fw-bold">ARCHERY ACADEMY</span>
+                <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="navbar-brand-logo">
+                <span class="fw-bold brand-navbar-text">PHOENIX ELITE SPORTS ACADEMY</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -71,10 +72,12 @@
                 <div class="split-auth-card">
                     <div class="auth-left-pane">
                         <div class="brand-section">
-                            <div class="brand-logo-glow"><i class="bi bi-bullseye"></i></div>
-                            <h1 class="brand-title">ARCHERY ACADEMY</h1>
+                            <div class="brand-logo-box mb-2">
+                                <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="hero-brand-logo">
+                            </div>
+                            <h1 class="brand-title">PHOENIX ELITE SPORTS ACADEMY</h1>
                             <p class="brand-tagline">Intelligent Training, Performance & Event Portal</p>
-                            <div class="brand-badge"><i class="bi bi-shield-check"></i> Official Academy Management</div>
+                            <div class="brand-badge"><i class="bi bi-shield-check"></i> Official Sports Academy Portal</div>
                         </div>
                         <div class="archery-visual-feature">
                             <div class="visual-pill"><i class="bi bi-award-fill text-warning"></i><span>Precision Tracking & Analytics</span></div>
@@ -99,7 +102,10 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="left-pane-footer"><span>&copy; 2026 Archery Academy System</span></div>
+                        <div class="left-pane-footer d-flex align-items-center gap-2">
+                            <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="footer-mini-logo">
+                            <span>&copy; 2026 Phoenix Elite Sports Academy</span>
+                        </div>
                     </div>
 
                     <div class="auth-right-pane">
@@ -134,11 +140,14 @@
                                 <span>Sign In</span><i class="bi bi-arrow-right-short ms-1 fs-5"></i>
                             </button>
                             <div class="quick-demo-box">
-                                <div class="demo-title"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Demo Fill:</div>
+                                <div class="demo-title"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Quick Admin Demo Logins:</div>
                                 <div class="demo-buttons-grid">
-                                    <button type="button" class="demo-pill-btn student" onclick="selectRole('student')"><i class="bi bi-person-fill"></i> Student</button>
-                                    <button type="button" class="demo-pill-btn coach" onclick="selectRole('coach')"><i class="bi bi-whistle-fill"></i> Coach</button>
-                                    <button type="button" class="demo-pill-btn admin" onclick="selectRole('admin')"><i class="bi bi-shield-lock-fill"></i> Admin</button>
+                                    <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(1)"><i class="bi bi-shield-shaded"></i> Admin 1 (Director)</button>
+                                    <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(2)"><i class="bi bi-shield-shaded"></i> Admin 2 (Operations)</button>
+                                    <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(3)"><i class="bi bi-shield-shaded"></i> Admin 3 (Finance)</button>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Students & Coaches: Register your account using the link below.</small>
                                 </div>
                             </div>
                             <div id="register-link-container" class="register-footer-link">
@@ -154,38 +163,43 @@
         <!-- 2. STUDENT REGISTRATION VIEW -->
         <section id="register-view" class="view-section d-none bg-dark py-5 min-vh-100">
             <div class="auth-wrapper">
-                <div class="auth-card mx-auto" style="max-width: 720px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                <div class="auth-card mx-auto" style="max-width: 760px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
                     <div class="auth-header text-white p-4" style="background: linear-gradient(135deg, #064e3b, #0f766e);">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="fs-1 text-warning"><i class="bi bi-person-plus-fill"></i></div>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="fs-1 text-warning"><i class="bi bi-person-plus-fill"></i></div>
+                                <div>
+                                    <h2 class="h4 fw-bold mb-1">STUDENT REGISTRATION</h2>
+                                    <p class="mb-0 small text-light opacity-75">Join Phoenix Elite Sports Academy (Student Portal)</p>
+                                </div>
+                            </div>
                             <div>
-                                <h2 class="h4 fw-bold mb-1">STUDENT REGISTRATION</h2>
-                                <p class="mb-0 small text-light opacity-75">Join the Archery Academy System (Student Portal)</p>
+                                <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="showCoachRegisterView(event)">
+                                    <i class="bi bi-whistle-fill me-1"></i> Register as Coach
+                                </button>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Role Switcher Tabs -->
+                    <div class="bg-light px-4 py-2 border-bottom d-flex align-items-center gap-2">
+                        <span class="text-muted small fw-medium me-2">Registration Type:</span>
+                        <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-bold active shadow-sm" style="background-color: #0f766e; border-color: #0f766e;">
+                            <i class="bi bi-person-badge me-1"></i> Student Registration
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="showCoachRegisterView(event)">
+                            <i class="bi bi-whistle-fill me-1"></i> Coach Registration
+                        </button>
                     </div>
                     <div class="auth-body p-4">
                         <div id="register-alert" class="alert alert-danger d-none" role="alert"><i class="bi bi-exclamation-triangle-fill me-2"></i><span id="register-alert-msg"></span></div>
                         <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="needs-validation" novalidate>
-                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2"><i class="bi bi-person-lines-fill me-2"></i>1. Personal & Academic Details</h6>
+                            
+                            <!-- 1. Personal & Contact Details Section -->
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2"><i class="bi bi-person-lines-fill me-2"></i>1. Personal & Contact Details</h6>
                             <div class="row g-3 mb-3">
-                                <div class="col-md-4">
-                                    <div class="form-floating"><input type="text" class="form-control" id="reg_student_id" placeholder="Student ID" required><label for="reg_student_id">Student ID (e.g. STU004)</label><div class="invalid-feedback">Required field.</div></div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-floating"><input type="text" class="form-control" id="reg_first_name" placeholder="First Name" required><label for="reg_first_name">First Name</label><div class="invalid-feedback">Required field.</div></div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-floating"><input type="text" class="form-control" id="reg_last_name" placeholder="Last Name" required><label for="reg_last_name">Last Name</label><div class="invalid-feedback">Required field.</div></div>
-                                </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating"><input type="email" class="form-control" id="reg_email" placeholder="Email Address" required><label for="reg_email">Email Address</label><div class="invalid-feedback">Enter a valid email.</div></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating"><input type="tel" class="form-control" id="reg_phone" placeholder="Phone Number" pattern="[0-9]{10}" required><label for="reg_phone">Phone Number (10 digits)</label><div class="invalid-feedback">Enter 10 digit phone.</div></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating"><input type="date" class="form-control" id="reg_dob" placeholder="Date of Birth" required><label for="reg_dob">Date of Birth</label><div class="invalid-feedback">Required field.</div></div>
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_name" placeholder="Full Name" required><label for="reg_name">Full Name</label><div class="invalid-feedback">Please enter your full name.</div></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -195,44 +209,95 @@
                                             <option value="Female">Female</option>
                                             <option value="Other">Other</option>
                                         </select>
-                                        <label for="reg_gender">Gender</label><div class="invalid-feedback">Required field.</div>
+                                        <label for="reg_gender">Gender</label><div class="invalid-feedback">Please select your gender.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating"><input type="text" class="form-control" id="reg_course" placeholder="Course / Department" required><label for="reg_course">Course / Department</label><div class="invalid-feedback">Required field.</div></div>
+                                    <div class="form-floating"><input type="number" class="form-control" id="reg_age" placeholder="Age" min="5" max="99" oninput="handleAgeCategoryAutoSelect(this.value)" required><label for="reg_age">Age (Years)</label><div class="invalid-feedback">Please enter a valid age (5 - 99).</div></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating"><input type="text" class="form-control" id="reg_year_sem" placeholder="Year / Semester" required><label for="reg_year_sem">Year / Semester (e.g. Year 2 / Sem 4)</label><div class="invalid-feedback">Required field.</div></div>
+                                    <div class="form-floating">
+                                        <select class="form-select" id="reg_age_category" required>
+                                            <option value="" selected disabled>Select Age Category</option>
+                                            <option value="Under-10 (Mini Sub-Junior)">Under-10 (Mini Sub-Junior)</option>
+                                            <option value="Under-14 (Sub-Junior)">Under-14 (Sub-Junior)</option>
+                                            <option value="Under-17 (Cadet / Youth)">Under-17 (Cadet / Youth)</option>
+                                            <option value="Under-21 (Junior)">Under-21 (Junior)</option>
+                                            <option value="Senior (21+ Years)">Senior (21+ Years)</option>
+                                            <option value="Masters (50+ Years)">Masters (50+ Years)</option>
+                                        </select>
+                                        <label for="reg_age_category">Age Category</label><div class="invalid-feedback">Please select an age category.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating"><input type="tel" class="form-control" id="reg_phone" placeholder="Mobile Number" pattern="[0-9]{10}" required><label for="reg_phone">Mobile No. (10 digits)</label><div class="invalid-feedback">Please enter 10 digit phone number.</div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="reg_current_status" required>
+                                            <option value="" selected disabled>Select Current Status</option>
+                                            <option value="Active Archer">Active Archer</option>
+                                            <option value="New Trainee">New Trainee</option>
+                                            <option value="Competitive Archer">Competitive Archer</option>
+                                            <option value="Trial / Guest">Trial / Guest</option>
+                                            <option value="Recreational Archer">Recreational Archer</option>
+                                        </select>
+                                        <label for="reg_current_status">Current Status</label><div class="invalid-feedback">Please select current status.</div>
+                                    </div>
                                 </div>
                             </div>
-                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4"><i class="bi bi-bullseye me-2"></i>2. Archery Category & Experience</h6>
+
+                            <!-- 2. Archery Specialization & Experience Section -->
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4"><i class="bi bi-bullseye me-2"></i>2. Archery Specialization & Experience</h6>
                             <div class="row g-3 mb-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-floating">
                                         <select class="form-select" id="reg_bow_category" required>
                                             <option value="" selected disabled>Select Category</option>
                                             <option value="Indian Bow">Indian Bow</option>
                                             <option value="Recurve Bow">Recurve Bow</option>
                                             <option value="Compound Bow">Compound Bow</option>
+                                            <option value="Barebow">Barebow</option>
                                         </select>
-                                        <label for="reg_bow_category">Bow Category</label><div class="invalid-feedback">Select bow category.</div>
+                                        <label for="reg_bow_category">Bow Category</label><div class="invalid-feedback">Please select bow category.</div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-floating">
                                         <select class="form-select" id="reg_bow_type" required>
                                             <option value="" selected disabled>Select Ownership</option>
                                             <option value="Own Bow">Own Bow</option>
                                             <option value="Academy Bow">Academy Bow</option>
+                                            <option value="Rented / Club Bow">Rented / Club Bow</option>
                                         </select>
-                                        <label for="reg_bow_type">Bow Ownership</label><div class="invalid-feedback">Select ownership.</div>
+                                        <label for="reg_bow_type">Bow Ownership</label><div class="invalid-feedback">Please select bow ownership.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="reg_experience" required>
+                                            <option value="" selected disabled>Select Experience</option>
+                                            <option value="Beginner (< 1 Year)">Beginner (&lt; 1 Year)</option>
+                                            <option value="Intermediate (1 - 3 Years)">Intermediate (1 - 3 Years)</option>
+                                            <option value="Advanced (3 - 5 Years)">Advanced (3 - 5 Years)</option>
+                                            <option value="Elite / Professional (5+ Years)">Elite / Professional (5+ Years)</option>
+                                        </select>
+                                        <label for="reg_experience">Experience</label><div class="invalid-feedback">Please select experience level.</div>
                                     </div>
                                 </div>
                             </div>
-                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4"><i class="bi bi-shield-lock me-2"></i>3. Account Password Setup</h6>
+
+                            <!-- 3. Account Credentials & Security Section -->
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4"><i class="bi bi-shield-lock me-2"></i>3. Account Credentials & Security</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <div class="form-floating"><input type="password" class="form-control" id="reg_password" placeholder="Password" minlength="6" required><label for="reg_password">Password (min 6 chars)</label><div class="invalid-feedback">Min 6 characters.</div></div>
+                                    <div class="form-floating"><input type="email" class="form-control" id="reg_email" placeholder="Email ID" required><label for="reg_email">Email ID</label><div class="invalid-feedback">Please enter a valid email.</div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating"><input type="text" class="form-control" id="reg_username" placeholder="User Name" minlength="3" required><label for="reg_username">User Name</label><div class="invalid-feedback">User name must be at least 3 characters.</div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating"><input type="password" class="form-control" id="reg_password" placeholder="Password" minlength="6" required><label for="reg_password">Password (min 6 chars)</label><div class="invalid-feedback">Min 6 characters required.</div></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating"><input type="password" class="form-control" id="reg_confirm_password" placeholder="Confirm Password" minlength="6" required><label for="reg_confirm_password">Confirm Password</label><div class="invalid-feedback">Confirm password required.</div></div>
@@ -240,6 +305,206 @@
                             </div>
                             <button type="submit" class="btn btn-primary-custom w-100 py-3 fs-6 fw-bold shadow-sm"><i class="bi bi-check-circle-fill me-2"></i> REGISTER STUDENT ACCOUNT</button>
                             <div class="text-center mt-3"><span class="text-muted small">Already registered?</span> <a href="#" class="fw-bold text-decoration-none ms-1 text-primary" onclick="showLoginView(event)">Back to Login</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2B. COACH REGISTRATION VIEW -->
+        <section id="coach-register-view" class="view-section d-none bg-dark py-5 min-vh-100">
+            <div class="auth-wrapper">
+                <div class="auth-card mx-auto" style="max-width: 800px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.35);">
+                    <div class="auth-header text-white p-4" style="background: linear-gradient(135deg, #064e3b, #0f766e);">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="fs-1 text-warning"><i class="bi bi-whistle-fill"></i></div>
+                                <div>
+                                    <h2 class="h4 fw-bold mb-1">COACH REGISTRATION</h2>
+                                    <p class="mb-0 small text-light opacity-75">Join Phoenix Elite Sports Academy (Coach & Instructor Portal)</p>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="showRegisterView(event)">
+                                    <i class="bi bi-person-badge me-1"></i> Register as Student
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role Switcher Tabs -->
+                    <div class="bg-light px-4 py-2 border-bottom d-flex align-items-center gap-2">
+                        <span class="text-muted small fw-medium me-2">Registration Type:</span>
+                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="showRegisterView(event)">
+                            <i class="bi bi-person-badge me-1"></i> Student Registration
+                        </button>
+                        <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-bold active shadow-sm" style="background-color: #0f766e; border-color: #0f766e;">
+                            <i class="bi bi-whistle-fill me-1"></i> Coach Registration
+                        </button>
+                    </div>
+
+                    <div class="auth-body p-4">
+                        <div id="coach-register-alert" class="alert alert-danger d-none" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i><span id="coach-register-alert-msg"></span>
+                        </div>
+
+                        <form id="coachRegisterForm" onsubmit="handleCoachRegisterSubmit(event)" class="needs-validation" novalidate>
+                            
+                            <!-- 1. Personal & Contact Details Section -->
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2">
+                                <i class="bi bi-person-lines-fill me-2"></i>1. Personal & Contact Details
+                            </h6>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="coach_reg_name" placeholder="Full Name" required>
+                                        <label for="coach_reg_name">Full Name (e.g. Vikram Sharma)</label>
+                                        <div class="invalid-feedback">Please enter your full name.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="coach_reg_gender" required>
+                                            <option value="" selected disabled>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <label for="coach_reg_gender">Gender</label>
+                                        <div class="invalid-feedback">Please select your gender.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="coach_reg_age" placeholder="Age" min="18" max="80" required>
+                                        <label for="coach_reg_age">Age (18 - 80 Years)</label>
+                                        <div class="invalid-feedback">Please enter a valid age (18 - 80).</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="coach_reg_phone" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+                                        <label for="coach_reg_phone">Mobile No. (10 digits)</label>
+                                        <div class="invalid-feedback">Please enter 10-digit mobile number.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. Coaching Specialization & Credentials Section -->
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4">
+                                <i class="bi bi-award-fill me-2"></i>2. Coaching Specialization & Credentials
+                            </h6>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="coach_reg_specialization" required>
+                                            <option value="" selected disabled>Select Specialization</option>
+                                            <option value="Recurve Bow Specialist">Recurve Bow Specialist</option>
+                                            <option value="Compound Bow Specialist">Compound Bow Specialist</option>
+                                            <option value="Indian Traditional Bow Specialist">Indian Traditional Bow Specialist</option>
+                                            <option value="Barebow Specialist">Barebow Specialist</option>
+                                            <option value="Recurve & Compound Bow Master Coach">Recurve & Compound Bow Master Coach</option>
+                                            <option value="All Disciplines (Head Coach)">All Disciplines (Head Coach)</option>
+                                        </select>
+                                        <label for="coach_reg_specialization">Bow Specialization</label>
+                                        <div class="invalid-feedback">Please select your bow specialization.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="coach_reg_certification" required>
+                                            <option value="" selected disabled>Select Certification Level</option>
+                                            <option value="World Archery Level 1 Certified">World Archery Level 1 Certified</option>
+                                            <option value="World Archery Level 2 Certified">World Archery Level 2 Certified</option>
+                                            <option value="World Archery Level 3 (Master Coach)">World Archery Level 3 (Master Coach)</option>
+                                            <option value="National Institute of Sports (NIS) Diploma">National Institute of Sports (NIS) Diploma</option>
+                                            <option value="National Sports Federation Certified Coach">National Sports Federation Certified Coach</option>
+                                            <option value="State / Regional Senior Coach">State / Regional Senior Coach</option>
+                                        </select>
+                                        <label for="coach_reg_certification">Coaching Certification</label>
+                                        <div class="invalid-feedback">Please select your certification.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="coach_reg_experience" required>
+                                            <option value="" selected disabled>Select Experience</option>
+                                            <option value="1 - 3 Years (Junior Coach)">1 - 3 Years (Junior Coach)</option>
+                                            <option value="3 - 5 Years (Associate Coach)">3 - 5 Years (Associate Coach)</option>
+                                            <option value="5 - 10 Years (Senior Coach)">5 - 10 Years (Senior Coach)</option>
+                                            <option value="10+ Years (Master Coach / High Performance)">10+ Years (Master Coach / High Performance)</option>
+                                        </select>
+                                        <label for="coach_reg_experience">Coaching Experience</label>
+                                        <div class="invalid-feedback">Please select your experience level.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="coach_reg_campus" required>
+                                            <option value="" selected disabled>Select Primary Campus / Range</option>
+                                            <option value="North Campus (Olympic Range)">North Campus (Olympic Range)</option>
+                                            <option value="South Wing Range">South Wing Range</option>
+                                            <option value="Indoor 18m / 25m Precision Range">Indoor 18m / 25m Precision Range</option>
+                                            <option value="Field & 3D Archery Range">Field & 3D Archery Range</option>
+                                            <option value="Main Academy Central Range">Main Academy Central Range</option>
+                                        </select>
+                                        <label for="coach_reg_campus">Primary Training Range</label>
+                                        <div class="invalid-feedback">Please select assigned range/campus.</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="coach_reg_bio" placeholder="Professional Bio & Achievements" style="height: 80px;"></textarea>
+                                        <label for="coach_reg_bio">Professional Bio / Achievements / Coaching Philosophy (Optional)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Account Credentials & Security Section -->
+                            <h6 class="fw-bold text-primary text-uppercase mb-3 border-bottom pb-2 mt-4">
+                                <i class="bi bi-shield-lock me-2"></i>3. Account Credentials & Security
+                            </h6>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="coach_reg_email" placeholder="Email ID" required>
+                                        <label for="coach_reg_email">Official Email ID</label>
+                                        <div class="invalid-feedback">Please enter a valid email.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="coach_reg_username" placeholder="User Name" minlength="3" required>
+                                        <label for="coach_reg_username">User Name (min 3 chars)</label>
+                                        <div class="invalid-feedback">User name must be at least 3 characters.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="coach_reg_password" placeholder="Password" minlength="6" required>
+                                        <label for="coach_reg_password">Password (min 6 chars)</label>
+                                        <div class="invalid-feedback">Min 6 characters required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="coach_reg_confirm_password" placeholder="Confirm Password" minlength="6" required>
+                                        <label for="coach_reg_confirm_password">Confirm Password</label>
+                                        <div class="invalid-feedback">Confirm password required.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary-custom w-100 py-3 fs-6 fw-bold shadow-sm" style="background: linear-gradient(135deg, #064e3b, #0f766e); border: none;">
+                                <i class="bi bi-check-circle-fill me-2"></i> REGISTER COACH ACCOUNT
+                            </button>
+
+                            <div class="text-center mt-3">
+                                <span class="text-muted small">Already registered?</span>
+                                <a href="#" class="fw-bold text-decoration-none ms-1 text-primary" onclick="showLoginView(event)">
+                                    Back to Login
+                                </a>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -336,6 +601,156 @@
                     </div>
                 </div>
 
+                <!-- STUDENT TRAINING SCHEDULE SECTION -->
+                <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-schedule-section">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-calendar-week-fill text-primary fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Weekly Training Schedule & Practice Slots</h5>
+                        </div>
+                        <span id="student-schedule-badge" class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1">0 Sessions</span>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <p class="text-muted small mb-4">
+                            <i class="bi bi-info-circle text-primary me-1"></i>
+                            Review your training schedule, target distances (18m / 50m / 70m), allocated shooting lanes, and reserve or manage your practice slot bookings.
+                        </p>
+                        <div class="row g-3" id="student-schedule-grid"></div>
+                    </div>
+                </div>
+
+                <!-- STUDENT EQUIPMENT & SERVICE SECTION -->
+                <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-equipment-section">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-tools text-warning fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">My Allocated Equipment & Service Desk</h5>
+                        </div>
+                        <span id="student-assigned-equip-badge" class="badge bg-warning-subtle text-dark border rounded-pill px-3 py-1">0 Items</span>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <h6 class="fw-bold text-dark mb-3"><i class="bi bi-shield-check text-success me-2"></i>Academy Gear Checked Out to You</h6>
+                        <div class="row g-3 mb-4" id="student-assigned-equip-grid"></div>
+
+                        <!-- Equipment Maintenance & Checkout Request Card -->
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4" id="student-equipment-request-card">
+                            <div class="card-header bg-white py-3 border-bottom">
+                                <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-wrench-adjustable text-primary me-2"></i>Submit Gear Service, Tuning, or Checkout Request</h6>
+                            </div>
+                            <div class="card-body p-4 bg-white">
+                                <form id="studentEquipmentRequestForm" onsubmit="handleStudentEquipmentRequestSubmit(event)">
+                                    <div class="row g-3">
+                                        <div class="col-md-5">
+                                            <label for="stu_req_equipment_name" class="form-label small fw-bold text-secondary text-uppercase">Equipment / Item Name</label>
+                                            <input type="text" class="form-control" id="stu_req_equipment_name" placeholder="e.g. Recurve String, Sight Pin, Arrows" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="stu_req_type" class="form-label small fw-bold text-secondary text-uppercase">Request Category</label>
+                                            <select class="form-select" id="stu_req_type" required>
+                                                <option value="Maintenance & Tuning" selected>🔧 Maintenance & Tuning</option>
+                                                <option value="Checkout Request">🏹 Equipment Checkout</option>
+                                                <option value="String / Nock Replacement">🎯 String / Arrow Repair</option>
+                                                <option value="Inspection">🔍 Safety Inspection</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 d-flex align-items-end">
+                                            <button type="submit" class="btn btn-primary-custom w-100 py-2 fw-semibold">
+                                                <i class="bi bi-send-fill me-1"></i> Submit Request
+                                            </button>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="stu_req_description" class="form-label small fw-bold text-secondary text-uppercase">Issue Details / Specifications</label>
+                                            <textarea class="form-control" id="stu_req_description" rows="2" placeholder="Describe the issue, required draw weight, arrow spine, or repair details..." required></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Student Requests History -->
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="card-header bg-white py-3 border-bottom">
+                                <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-clock-history text-secondary me-2"></i>Your Recent Gear Requests</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="ps-3">Req ID</th>
+                                                <th>Equipment Item</th>
+                                                <th>Category</th>
+                                                <th>Description</th>
+                                                <th class="text-end pe-3">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="student-requests-tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STUDENT FEES & INVOICES SECTION -->
+                <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-fees-section">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-credit-card-2-front-fill text-info fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Fee Management & Payment Receipts</h5>
+                        </div>
+                        <span id="student-fees-badge" class="badge bg-info-subtle text-dark border rounded-pill px-3 py-1">0 Records</span>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="stat-card border-start border-4 border-success">
+                                    <div class="stat-label">Total Paid Fees</div>
+                                    <div class="stat-value text-success" id="stu-fee-paid">₹0</div>
+                                    <i class="bi bi-check-circle-fill stat-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card border-start border-4 border-warning">
+                                    <div class="stat-label">Pending Dues</div>
+                                    <div class="stat-value text-warning" id="stu-fee-due">₹0</div>
+                                    <i class="bi bi-hourglass-split stat-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card border-start border-4 border-danger">
+                                    <div class="stat-label">Overdue Dues</div>
+                                    <div class="stat-value text-danger" id="stu-fee-overdue">₹0</div>
+                                    <i class="bi bi-exclamation-octagon stat-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-receipt-cutoff text-primary me-2"></i>My Academy Invoices & Payment Ledger</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="ps-3">Invoice ID</th>
+                                                <th>Fee Description</th>
+                                                <th>Amount</th>
+                                                <th>Due Date</th>
+                                                <th>Status</th>
+                                                <th class="text-end pe-3">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="student-fees-tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="student-events-section">
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-2"><i class="bi bi-megaphone-fill text-primary fs-5"></i><h5 class="mb-0 fw-bold text-dark">Published Academy Events</h5></div>
@@ -357,8 +772,8 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
-                        <h1 class="h3 fw-bold mb-1 text-dark">Welcome, Head Coach!</h1>
-                        <p class="text-muted mb-0">Academy Training & Student Performance Monitoring Portal</p>
+                        <h1 class="h3 fw-bold mb-1 text-dark" id="coach-welcome-heading">Welcome, Head Coach!</h1>
+                        <p class="text-muted mb-0" id="coach-welcome-sub">Academy Training & Student Performance Monitoring Portal</p>
                     </div>
                     <div>
                         <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="handleLogout()"><i class="bi bi-box-arrow-right me-1"></i> Sign Out</button>
@@ -368,7 +783,7 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Enrolled Students</div><div class="stat-value text-primary" id="coach-total-students-count">3</div><i class="bi bi-people-fill stat-icon"></i></div></div>
                     <div class="col-md-4"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Active Academy Events</div><div class="stat-value text-success" id="coach-events-count">3</div><i class="bi bi-calendar-event stat-icon"></i></div></div>
-                    <div class="col-md-4"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Coach Specialization</div><div class="stat-value fs-5 mt-2 text-dark">Recurve & Compound</div><i class="bi bi-whistle stat-icon"></i></div></div>
+                    <div class="col-md-4"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Coach Specialization</div><div class="stat-value fs-5 mt-2 text-dark" id="coach-spec-display">Recurve & Compound</div><i class="bi bi-whistle stat-icon"></i></div></div>
                 </div>
 
                 <div class="card shadow-sm border-0 rounded-4 mb-4 overflow-hidden" id="coach-search-section">
@@ -414,6 +829,49 @@
                     </div>
                 </div>
 
+                <!-- COACH TRAINING SCHEDULE SECTION -->
+                <div class="card shadow-sm border-0 rounded-4 mb-4 overflow-hidden" id="coach-schedule-section">
+                    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-calendar-week-fill text-warning fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Academy Training Batches & Enrolled Archers Roster</h5>
+                        </div>
+                        <span id="coach-schedule-badge" class="badge bg-warning-subtle text-dark border px-3 py-1 rounded-pill">0 Batches</span>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <div class="row g-3" id="coach-schedule-grid"></div>
+                    </div>
+                </div>
+
+                <!-- COACH EQUIPMENT SECTION -->
+                <div class="card shadow-sm border-0 rounded-4 mb-4 overflow-hidden" id="coach-equipment-section">
+                    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-tools text-warning fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Academy Gear Condition & Maintenance Tagger</h5>
+                        </div>
+                        <span id="coach-equipment-badge" class="badge bg-warning-subtle text-dark border px-3 py-1 rounded-pill">0 Items</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-3">Item ID</th>
+                                        <th>Equipment Name</th>
+                                        <th>Avail / Total</th>
+                                        <th>Condition</th>
+                                        <th>Armory Location</th>
+                                        <th>Allocated Archers</th>
+                                        <th class="text-end pe-3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="coach-equipment-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="coach-events-section">
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-2"><i class="bi bi-megaphone-fill text-warning fs-5"></i><h5 class="mb-0 fw-bold text-dark">Published Academy Events</h5></div>
@@ -444,9 +902,233 @@
                 </div>
 
                 <div class="row g-3 mb-4">
-                    <div class="col-md-4"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Total Published Events</div><div class="stat-value text-primary" id="admin-stat-events-count">3</div><i class="bi bi-calendar-check stat-icon"></i></div></div>
-                    <div class="col-md-4"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Registered Students</div><div class="stat-value text-success" id="admin-stat-students-count">3</div><i class="bi bi-people-fill stat-icon"></i></div></div>
-                    <div class="col-md-4"><div class="stat-card border-start border-4 border-danger"><div class="stat-label">Admin Control Mode</div><div class="stat-value fs-5 mt-2 text-danger">Event Publishing Only</div><i class="bi bi-shield-lock stat-icon"></i></div></div>
+                    <div class="col-xl-3 col-sm-6"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Total Published Events</div><div class="stat-value text-primary" id="admin-stat-events-count">3</div><i class="bi bi-calendar-check stat-icon"></i></div></div>
+                    <div class="col-xl-3 col-sm-6"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Registered Students</div><div class="stat-value text-success" id="admin-stat-students-count">3</div><i class="bi bi-people-fill stat-icon"></i></div></div>
+                    <div class="col-xl-3 col-sm-6"><div class="stat-card border-start border-4 border-info"><div class="stat-label">Equipment Inventory</div><div class="stat-value text-info" id="admin-equip-total">0</div><i class="bi bi-tools stat-icon"></i></div></div>
+                    <div class="col-xl-3 col-sm-6"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Fee Revenue Collected</div><div class="stat-value text-warning" id="admin-fee-collected">₹0</div><i class="bi bi-cash-stack stat-icon"></i></div></div>
+                </div>
+
+                <!-- 1. ADMIN EQUIPMENT MANAGEMENT SECTION -->
+                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-equipment-section">
+                    <div class="card-header bg-white py-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-tools text-primary fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Academy Equipment & Armory Inventory</h5>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="openAllocateEquipmentModal()">
+                                <i class="bi bi-person-check me-1"></i> Allocate Gear
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addEquipmentModal">
+                                <i class="bi bi-plus-circle me-1"></i> Register Equipment
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Available in Armory</span><span class="fw-bold text-success fs-5" id="admin-equip-avail">0</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Active Allocations</span><span class="fw-bold text-primary fs-5" id="admin-equip-alloc">0</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Needs Maintenance</span><span class="fw-bold text-warning fs-5" id="admin-equip-maint">0</span></div></div>
+                            <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Total Inventory Filtered</span><span class="fw-bold text-dark fs-5" id="admin-equipment-badge">0 Items</span></div></div>
+                        </div>
+
+                        <!-- Filter & Search Controls -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-3 col-6">
+                                <select class="form-select form-select-sm" id="admin-equip-filter-cat" onchange="handleAdminEquipmentSearchFilter()">
+                                    <option value="">All Categories</option>
+                                    <option value="Recurve Bow">Recurve Bow</option>
+                                    <option value="Compound Bow">Compound Bow</option>
+                                    <option value="Indian Bow">Indian Bow</option>
+                                    <option value="Arrows">Arrows</option>
+                                    <option value="Targets & Butts">Targets & Butts</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Protective Gear">Protective Gear</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <select class="form-select form-select-sm" id="admin-equip-filter-cond" onchange="handleAdminEquipmentSearchFilter()">
+                                    <option value="">All Conditions</option>
+                                    <option value="Excellent">Excellent</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Needs Maintenance">Needs Maintenance</option>
+                                    <option value="Under Repair">Under Repair</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                                    <input type="text" class="form-control" id="admin-equip-search" placeholder="Search equipment by name, ID, or serial number..." onkeyup="handleAdminEquipmentSearchFilter()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive bg-white rounded-3 shadow-sm border mb-4">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-3">ID</th>
+                                        <th>Item Name & Serial</th>
+                                        <th>Category</th>
+                                        <th>Avail / Total</th>
+                                        <th>Condition</th>
+                                        <th>Storage</th>
+                                        <th>Allocated Students</th>
+                                        <th class="text-end pe-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-equipment-tbody"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Maintenance Requests Table -->
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-inbox text-danger me-2"></i>Student Equipment Service & Checkout Requests</h6>
+                                <span id="admin-equip-requests-badge" class="badge bg-danger rounded-pill px-3 py-1">0 Requests</span>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="ps-3">Req ID</th>
+                                                <th>Archer Name</th>
+                                                <th>Gear & Request Details</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th class="text-end pe-3">Resolve</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-equip-requests-tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. ADMIN FEE MANAGEMENT SECTION -->
+                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-fees-section">
+                    <div class="card-header bg-white py-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-cash-stack text-success fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Academy Fee Ledger & Financial Management</h5>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-success btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#createInvoiceModal">
+                                <i class="bi bi-plus-circle me-1"></i> Issue Fee Invoice
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-3 col-6"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Pending Dues</div><div class="stat-value text-warning" id="admin-fee-pending">₹0</div><i class="bi bi-hourglass-split stat-icon"></i></div></div>
+                            <div class="col-md-3 col-6"><div class="stat-card border-start border-4 border-danger"><div class="stat-label">Overdue Invoices</div><div class="stat-value text-danger" id="admin-fee-overdue">₹0</div><i class="bi bi-exclamation-triangle stat-icon"></i></div></div>
+                            <div class="col-md-3 col-6"><div class="stat-card border-start border-4 border-primary"><div class="stat-label">Total Invoices</div><div class="stat-value text-primary" id="admin-fee-total-inv">0</div><i class="bi bi-file-earmark-text stat-icon"></i></div></div>
+                            <div class="col-md-3 col-6"><div class="stat-card border-start border-4 border-info"><div class="stat-label">Ledger Records</div><div class="stat-value text-info" id="admin-fees-badge">0 Invoices</div><i class="bi bi-receipt stat-icon"></i></div></div>
+                        </div>
+
+                        <!-- Fee Search & Filters -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-4 col-6">
+                                <select class="form-select form-select-sm" id="admin-fee-filter-status" onchange="handleAdminFeesFilter()">
+                                    <option value="">All Payment Statuses</option>
+                                    <option value="Paid">Paid</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Overdue">Overdue</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                                    <input type="text" class="form-control" id="admin-fee-search" placeholder="Search by student name, ID, invoice number, or fee type..." onkeyup="handleAdminFeesFilter()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive bg-white rounded-3 shadow-sm border">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-3">Invoice ID</th>
+                                        <th>Student</th>
+                                        <th>Fee Item & Remarks</th>
+                                        <th>Amount</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th class="text-end pe-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-fees-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. ADMIN TRAINING SCHEDULE SECTION -->
+                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-schedule-section">
+                    <div class="card-header bg-white py-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-calendar-week text-primary fs-5"></i>
+                            <h5 class="mb-0 fw-bold text-dark">Training Schedule & Shooting Range Lanes Master</h5>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addScheduleModal">
+                                <i class="bi bi-plus-circle me-1"></i> Add Training Session
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-4 bg-light bg-opacity-50">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4 col-sm-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Training Batches</span><span class="fw-bold text-primary fs-5" id="admin-sched-total-batches">0</span></div></div>
+                            <div class="col-md-4 col-sm-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Active Archers Scheduled</span><span class="fw-bold text-success fs-5" id="admin-sched-total-archers">0</span></div></div>
+                            <div class="col-md-4 col-sm-6"><div class="p-3 bg-white rounded-3 shadow-sm"><span class="text-muted small d-block">Active Range Facilities</span><span class="fw-bold text-warning fs-5" id="admin-sched-total-lanes">0</span></div></div>
+                        </div>
+
+                        <!-- Schedule Filter -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <select class="form-select form-select-sm" id="admin-sched-filter-cat" onchange="handleAdminScheduleFilter()">
+                                    <option value="">All Bow Categories</option>
+                                    <option value="Recurve Bow">Recurve Bow</option>
+                                    <option value="Compound Bow">Compound Bow</option>
+                                    <option value="Indian Bow">Indian Bow</option>
+                                    <option value="All Categories">All Categories</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select form-select-sm" id="admin-sched-filter-day" onchange="handleAdminScheduleFilter()">
+                                    <option value="">All Days of Week</option>
+                                    <option value="Mon">Monday</option>
+                                    <option value="Tue">Tuesday</option>
+                                    <option value="Wed">Wednesday</option>
+                                    <option value="Thu">Thursday</option>
+                                    <option value="Fri">Friday</option>
+                                    <option value="Sat">Saturday</option>
+                                    <option value="Sun">Sunday</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive bg-white rounded-3 shadow-sm border">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-3">ID</th>
+                                        <th>Session Title & Focus</th>
+                                        <th>Category</th>
+                                        <th>Days</th>
+                                        <th>Time Slot</th>
+                                        <th>Location & Target</th>
+                                        <th>Enrolled / Capacity</th>
+                                        <th class="text-end pe-3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-schedule-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="admin-publish-section">
@@ -519,6 +1201,19 @@
 
     </main>
 
+    <!-- Main Application Footer -->
+    <footer id="main-footer" class="main-app-footer py-3 border-top d-none">
+        <div class="container d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3 text-center text-sm-start">
+            <div class="d-flex align-items-center gap-2">
+                <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="footer-app-logo">
+                <span class="fw-bold text-dark small">PHOENIX ELITE SPORTS ACADEMY</span>
+            </div>
+            <div class="text-muted small">
+                &copy; 2026 Phoenix Elite Sports Academy. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
     <!-- Global Event Detail Modal -->
     <div class="modal fade" id="eventDetailModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -545,6 +1240,428 @@
                 </div>
                 <div class="modal-footer bg-light py-2">
                     <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. Add Equipment Modal -->
+    <div class="modal fade" id="addEquipmentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-tools me-2"></i>Register New Academy Equipment</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="addEquipmentForm" onsubmit="handleAddEquipment(event)">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="new_equip_name" class="form-label small fw-bold text-secondary text-uppercase">Equipment / Item Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="new_equip_name" placeholder="e.g. Hoyt Formula Recurve Riser" required>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <label for="new_equip_category" class="form-label small fw-bold text-secondary text-uppercase">Category <span class="text-danger">*</span></label>
+                                <select class="form-select" id="new_equip_category" required>
+                                    <option value="" selected disabled>Select Category</option>
+                                    <option value="Recurve Bow">Recurve Bow</option>
+                                    <option value="Compound Bow">Compound Bow</option>
+                                    <option value="Indian Bow">Indian Bow</option>
+                                    <option value="Arrows">Arrows</option>
+                                    <option value="Targets & Butts">Targets & Butts</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Protective Gear">Protective Gear</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="new_equip_serial" class="form-label small fw-bold text-secondary text-uppercase">Serial / Asset Tag</label>
+                                <input type="text" class="form-control" id="new_equip_serial" placeholder="e.g. HYT-2026-09">
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <label for="new_equip_qty" class="form-label small fw-bold text-secondary text-uppercase">Quantity <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="new_equip_qty" value="1" min="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="new_equip_condition" class="form-label small fw-bold text-secondary text-uppercase">Initial Condition</label>
+                                <select class="form-select" id="new_equip_condition">
+                                    <option value="Excellent" selected>Excellent</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Needs Maintenance">Needs Maintenance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="new_equip_location" class="form-label small fw-bold text-secondary text-uppercase">Armory Storage Location</label>
+                            <input type="text" class="form-control" id="new_equip_location" placeholder="e.g. Armory Locker A, Lane 4 Rack" value="Armory Locker A">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light py-2">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold">Save Equipment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Allocate Equipment Modal -->
+    <div class="modal fade" id="allocateEquipmentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-person-check me-2"></i>Allocate Equipment to Student</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="allocateEquipmentForm" onsubmit="handleAllocateEquipmentSubmit(event)">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="alloc_equip_id" class="form-label small fw-bold text-secondary text-uppercase">Select Equipment <span class="text-danger">*</span></label>
+                            <select class="form-select" id="alloc_equip_id" required></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alloc_student_id" class="form-label small fw-bold text-secondary text-uppercase">Select Student <span class="text-danger">*</span></label>
+                            <select class="form-select" id="alloc_student_id" required></select>
+                        </div>
+                        <div class="mb-2">
+                            <label for="alloc_notes" class="form-label small fw-bold text-secondary text-uppercase">Checkout Notes / Serial Details</label>
+                            <input type="text" class="form-control" id="alloc_notes" placeholder="e.g. Draw weight tuned to 34#, arrow count 12">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light py-2">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold">Confirm Allocation</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Create Invoice Modal -->
+    <div class="modal fade" id="createInvoiceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-receipt me-2"></i>Issue Student Fee Invoice</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="createInvoiceForm" onsubmit="handleCreateInvoice(event)">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="inv_student_id" class="form-label small fw-bold text-secondary text-uppercase">Student <span class="text-danger">*</span></label>
+                            <select class="form-select" id="inv_student_id" required></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inv_fee_type" class="form-label small fw-bold text-secondary text-uppercase">Fee Type / Category <span class="text-danger">*</span></label>
+                            <select class="form-select" id="inv_fee_type" required>
+                                <option value="" selected disabled>Select Fee Type</option>
+                                <option value="Monthly Academy Training Fee">Monthly Academy Training Fee</option>
+                                <option value="Academy Equipment Rental Fee">Academy Equipment Rental Fee</option>
+                                <option value="Tournament Entry Fee">Tournament Entry Fee</option>
+                                <option value="Annual Academy Affiliation & Insurance">Annual Academy Affiliation & Insurance</option>
+                                <option value="Special Bow Tuning & Workshop Fee">Special Bow Tuning & Workshop Fee</option>
+                            </select>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <label for="inv_amount" class="form-label small fw-bold text-secondary text-uppercase">Amount (₹) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="inv_amount" placeholder="e.g. 3500" min="100" step="50" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inv_due_date" class="form-label small fw-bold text-secondary text-uppercase">Due Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="inv_due_date" required>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="inv_remarks" class="form-label small fw-bold text-secondary text-uppercase">Remarks / Billing Notes</label>
+                            <input type="text" class="form-control" id="inv_remarks" placeholder="e.g. Regular 5-day week elite training pass">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light py-2">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-4 fw-bold">Generate Invoice</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Record Payment Modal (Admin) -->
+    <div class="modal fade" id="recordPaymentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-cash-coin me-2"></i>Record Student Fee Payment</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="recordPaymentForm" onsubmit="handleRecordPaymentSubmit(event)">
+                    <input type="hidden" id="rec_inv_id">
+                    <div class="modal-body p-4">
+                        <div class="p-3 bg-light rounded-3 mb-3">
+                            <span class="text-muted small d-block">Invoice Target:</span>
+                            <strong class="text-dark fs-6" id="rec_inv_display">INV-XXXX</strong>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rec_amount" class="form-label small fw-bold text-secondary text-uppercase">Paid Amount (₹)</label>
+                            <input type="number" class="form-control" id="rec_amount" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rec_payment_method" class="form-label small fw-bold text-secondary text-uppercase">Payment Method</label>
+                            <select class="form-select" id="rec_payment_method" required>
+                                <option value="UPI (GPay/PhonePe)">UPI (GPay/PhonePe)</option>
+                                <option value="Cash">Cash at Range Desk</option>
+                                <option value="Credit/Debit Card">Credit/Debit Card POS</option>
+                                <option value="Net Banking / NEFT">Net Banking / NEFT</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label for="rec_txn_id" class="form-label small fw-bold text-secondary text-uppercase">Reference / Transaction ID</label>
+                            <input type="text" class="form-control" id="rec_txn_id" placeholder="e.g. UPI-998822001">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light py-2">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-4 fw-bold">Confirm & Generate Receipt</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Student Online Payment Modal -->
+    <div class="modal fade" id="payFeeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-shield-lock-fill me-2"></i>Secure Fee Payment Gateway</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="payFeeForm" onsubmit="handleStudentPaymentSubmit(event)">
+                    <input type="hidden" id="pay_inv_id">
+                    <div class="modal-body p-4">
+                        <div class="text-center mb-4">
+                            <span class="text-muted small text-uppercase fw-bold">Amount Due</span>
+                            <div class="display-6 fw-bold text-primary" id="pay_modal_amount">₹0</div>
+                            <div class="fw-semibold text-dark mt-1" id="pay_modal_title">Fee Title</div>
+                            <small class="text-muted">Due by <span id="pay_modal_due">-</span></small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary text-uppercase mb-2">Select Payment Method</label>
+                            <div class="d-flex flex-column gap-2">
+                                <label class="p-3 border rounded-3 d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="radio" name="payment_gateway_method" value="UPI (Instant)" checked>
+                                        <span class="fw-bold text-dark"><i class="bi bi-phone text-primary me-2"></i>UPI / QR (Google Pay, PhonePe, Paytm)</span>
+                                    </div>
+                                    <span class="badge bg-success-subtle text-success border">Instant</span>
+                                </label>
+                                <label class="p-3 border rounded-3 d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="radio" name="payment_gateway_method" value="Credit/Debit Card">
+                                        <span class="fw-bold text-dark"><i class="bi bi-credit-card text-info me-2"></i>Credit / Debit Card (Visa/Mastercard)</span>
+                                    </div>
+                                </label>
+                                <label class="p-3 border rounded-3 d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="radio" name="payment_gateway_method" value="Net Banking">
+                                        <span class="fw-bold text-dark"><i class="bi bi-bank text-secondary me-2"></i>Net Banking (All Indian Banks)</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="p-2 bg-light rounded-2 text-center small text-muted">
+                            <i class="bi bi-shield-check text-success me-1"></i>256-Bit Encrypted Academy Payment Gateway (Demo Mode)
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light py-2">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-4 fw-bold">
+                            <i class="bi bi-lock-fill me-1"></i> Pay Securely Now
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Add Training Schedule Modal -->
+    <div class="modal fade" id="addScheduleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-calendar-plus me-2"></i>Create New Training Session / Batch</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="addScheduleForm" onsubmit="handleAddSchedule(event)">
+                    <div class="modal-body p-4">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-8">
+                                <label for="new_sched_title" class="form-label small fw-bold text-secondary text-uppercase">Session Title <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="new_sched_title" placeholder="e.g. Morning Recurve Elite Drill" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="new_sched_category" class="form-label small fw-bold text-secondary text-uppercase">Bow Category <span class="text-danger">*</span></label>
+                                <select class="form-select" id="new_sched_category" required>
+                                    <option value="" selected disabled>Select Category</option>
+                                    <option value="Recurve Bow">Recurve Bow</option>
+                                    <option value="Compound Bow">Compound Bow</option>
+                                    <option value="Indian Bow">Indian Bow</option>
+                                    <option value="All Categories">All Categories</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="new_sched_days" class="form-label small fw-bold text-secondary text-uppercase">Days of Week <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="new_sched_days" placeholder="e.g. Mon, Wed, Fri" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="new_sched_time" class="form-label small fw-bold text-secondary text-uppercase">Time Slot <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="new_sched_time" placeholder="e.g. 06:00 AM - 08:00 AM" required>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="new_sched_distance" class="form-label small fw-bold text-secondary text-uppercase">Target Distance <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="new_sched_distance" placeholder="e.g. 70m Olympic Distance" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="new_sched_lane" class="form-label small fw-bold text-secondary text-uppercase">Range Facility / Lanes <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="new_sched_lane" placeholder="e.g. Outdoor Main Range (Lanes 1-4)" required>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="new_sched_coach" class="form-label small fw-bold text-secondary text-uppercase">Coach In Charge</label>
+                                <input type="text" class="form-control" id="new_sched_coach" value="Head Coach">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="new_sched_capacity" class="form-label small fw-bold text-secondary text-uppercase">Lane Capacity (Max Archers)</label>
+                                <input type="number" class="form-control" id="new_sched_capacity" value="8" min="1" max="30" required>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="new_sched_focus" class="form-label small fw-bold text-secondary text-uppercase">Training Objectives & Focus</label>
+                            <input type="text" class="form-control" id="new_sched_focus" placeholder="e.g. Clicker timing, anchor expansion, wind compensation">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light py-2">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold">Publish Session</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. Branded Official Fee Receipt Modal -->
+    <div class="modal fade" id="feeReceiptModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-gradient-teal text-white py-3">
+                    <h6 class="modal-title fw-bold"><i class="bi bi-receipt-cutoff me-2"></i>Official Academy Fee Receipt</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 p-md-5" id="fee-receipt-printable">
+                    <!-- Receipt Header -->
+                    <div class="d-flex justify-content-between align-items-start border-bottom pb-4 mb-4 flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Logo" style="width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid #0f766e;">
+                            <div>
+                                <h4 class="fw-bold text-dark mb-0">PHOENIX ELITE SPORTS ACADEMY</h4>
+                                <small class="text-muted d-block">Center for Archery & Precision Sports Excellence</small>
+                                <small class="text-secondary">Affiliated with State Archery Association | Reg #TN/ARC/2024</small>
+                            </div>
+                        </div>
+                        <div class="text-sm-end">
+                            <span class="badge bg-success fs-6 rounded-pill px-3 py-1 mb-1">OFFICIAL RECEIPT</span>
+                            <div class="text-muted small">Receipt No: <strong class="text-dark" id="receipt-no">REC-00000</strong></div>
+                            <div class="text-muted small">Date: <strong class="text-dark" id="receipt-date">2026-09-02</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Archer & Transaction Details -->
+                    <div class="p-3 bg-light rounded-3 mb-4">
+                        <div class="row g-3 small">
+                            <div class="col-sm-6">
+                                <span class="text-muted d-block">Archer / Student Name:</span>
+                                <strong class="text-dark fs-6" id="receipt-student-name">Student Name</strong>
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="text-muted d-block">Student ID & Dept:</span>
+                                <strong class="text-dark"><span id="receipt-student-id">STU001</span> | <span id="receipt-student-course">Course</span></strong>
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="text-muted d-block">Archery Bow Cadre:</span>
+                                <strong class="text-primary" id="receipt-student-bow">Recurve Bow</strong>
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="text-muted d-block">Payment Method & Ref:</span>
+                                <strong class="text-dark"><span id="receipt-payment-method">UPI</span> (<span id="receipt-txn-id">TXN-000</span>)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Itemized Breakdown -->
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fee Description & Academy Service</th>
+                                    <th class="text-end">Amount (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="fw-bold text-dark" id="receipt-item-desc">Monthly Training Fee</div>
+                                        <small class="text-muted" id="receipt-item-remarks">5-Day Week Elite Training & Range Pass</small>
+                                    </td>
+                                    <td class="text-end fw-bold" id="receipt-item-amt">₹3,500</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="text-end fw-semibold">Subtotal:</td>
+                                    <td class="text-end fw-semibold" id="receipt-subtotal">₹3,500</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-end text-muted small">Sports Education Tax (Exempted):</td>
+                                    <td class="text-end text-muted small">₹0</td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td colspan="2" class="text-end fw-bold fs-6">Grand Total Paid:</td>
+                                    <td class="text-end fw-bold fs-5 text-success" id="receipt-total">₹3,500</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- Footer & Authorized Signatory -->
+                    <div class="d-flex justify-content-between align-items-end mt-4 pt-3 border-top flex-wrap gap-3">
+                        <div>
+                            <span class="badge bg-success-subtle text-success border rounded-pill px-3 py-1 mb-1"><i class="bi bi-patch-check-fill me-1"></i>Computer-Generated Verified Voucher</span>
+                            <div class="small text-muted">Thank you for training with Phoenix Elite Sports Academy.</div>
+                        </div>
+                        <div class="text-end">
+                            <div class="text-center" style="min-width: 160px;">
+                                <div class="fw-bold text-dark font-monospace mb-1" style="transform: rotate(-3deg); color: #0f766e !important;">[ PHOENIX ACADEMY SEAL ]</div>
+                                <div style="border-bottom: 1px dashed #64748b; width: 140px; margin: 0 auto 4px;"></div>
+                                <small class="text-muted d-block">Authorized Signatory</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light py-2">
+                    <button type="button" class="btn btn-sm btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold" onclick="printFeeReceipt()">
+                        <i class="bi bi-printer-fill me-1"></i> Print / Save PDF
+                    </button>
                 </div>
             </div>
         </div>

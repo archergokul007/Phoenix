@@ -7,19 +7,42 @@ import { state } from '../shared/state.js';
 import { hideAllViews, showNavbar, showSection } from '../shared/navigation.js';
 import { renderPublishedEventsGrid } from '../shared/alerts.js';
 import { renderStudentSkillProgressBars } from '../student/dashboard.js';
+import { renderCoachSchedule } from '../schedule/schedule.js';
+import { renderCoachEquipment } from '../equipment/equipment.js';
 
 let coachBarChartInstance = null;
 let coachPieChartInstance = null;
 
-export function initCoachPortal() {
+export function initCoachPortal(coachObj) {
+    const coach = coachObj || state.currentUser || { name: 'Head Coach' };
     hideAllViews();
-    showNavbar('coach', 'Head Coach');
+    showNavbar('coach', coach.name || 'Head Coach');
     showSection('coach-view');
 
-    document.getElementById('coach-total-students-count').textContent = state.students.length;
-    document.getElementById('coach-events-count').textContent = state.events.length;
+    const welcomeHeading = document.getElementById('coach-welcome-heading');
+    if (welcomeHeading) {
+        welcomeHeading.textContent = `Welcome, ${coach.name}!`;
+    }
+
+    const welcomeSub = document.getElementById('coach-welcome-sub');
+    if (welcomeSub && coach.specialization) {
+        welcomeSub.textContent = `${coach.specialization} • ${coach.assignedCampus || 'Academy Training Grounds'}`;
+    }
+
+    const specDisplay = document.getElementById('coach-spec-display');
+    if (specDisplay && coach.specialization) {
+        specDisplay.textContent = coach.specialization;
+    }
+
+    const totalStu = document.getElementById('coach-total-students-count');
+    if (totalStu) totalStu.textContent = state.students.length;
+
+    const evCount = document.getElementById('coach-events-count');
+    if (evCount) evCount.textContent = state.events.length;
 
     renderCoachStudentResults(state.students);
+    renderCoachSchedule();
+    renderCoachEquipment();
     renderPublishedEventsGrid(state.events, 'coach-events-grid', 'coach-events-count-badge');
 }
 

@@ -6,15 +6,22 @@
 import { state, saveEventsState } from '../shared/state.js';
 import { hideAllViews, showNavbar, showSection } from '../shared/navigation.js';
 import { showGlobalAlert } from '../shared/alerts.js';
+import { renderAdminEquipment } from '../equipment/equipment.js';
+import { renderAdminFees } from '../fees/fees.js';
+import { renderAdminSchedule } from '../schedule/schedule.js';
 
-export function initAdminPortal() {
+export function initAdminPortal(adminUser) {
     hideAllViews();
-    showNavbar('admin', 'Administrator');
+    const admin = adminUser || state.currentUser || { name: 'Administrator' };
+    showNavbar('admin', admin.name || 'Administrator');
     showSection('admin-view');
 
     document.getElementById('admin-stat-events-count').textContent = state.events.length;
     document.getElementById('admin-stat-students-count').textContent = state.students.length;
 
+    renderAdminEquipment();
+    renderAdminFees();
+    renderAdminSchedule();
     renderAdminEventsTable();
 }
 

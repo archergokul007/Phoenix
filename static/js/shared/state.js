@@ -3,143 +3,7 @@
  * Manages demo student data, demo events, credentials, and localStorage synchronization.
  */
 
-export const INITIAL_STUDENTS = [
-    {
-        id: "STU001",
-        firstName: "Arjun",
-        lastName: "Singh",
-        name: "Arjun Singh",
-        email: "arjun@gmail.com",
-        password: "Arjun@4321",
-        phone: "9876543211",
-        dob: "2002-05-15",
-        gender: "Male",
-        course: "Computer Science & Engineering",
-        yearSem: "Year 3 / Sem 5",
-        bowCategory: "Recurve Bow",
-        bowType: "Own Bow",
-        experience: "Intermediate (2 Years)",
-        place: "North Campus",
-        address: "12 Park Street, North Wing",
-        attendanceRate: 94,
-        attendanceStats: { present: 47, absent: 3, late: 2 },
-        overallScore: 92,
-        grade: "A+",
-        practiceAvg: "9.2 / 10",
-        examScore: "338 / 360",
-        rank: 1,
-        progressSummary: "Exceptional form stability and high release accuracy over recent ends.",
-        skills: {
-            "Form & Posture": 95,
-            "Aim & Anchor": 90,
-            "Release Technique": 92,
-            "Mental Focus": 88,
-            "Physical Stamina": 94
-        },
-        scoresByEvaluation: [
-            { date: "Aug 10", score: 285, avg: 8.5 },
-            { date: "Aug 18", score: 312, avg: 8.7 },
-            { date: "Aug 25", score: 338, avg: 9.4 },
-            { date: "Sep 02", score: 330, avg: 9.2 }
-        ],
-        attendanceRecords: [
-            { date: "2026-09-05", status: "Present", remarks: "Full session - Recurve 50m practice" },
-            { date: "2026-09-03", status: "Present", remarks: "Indoor 18m scoring round" },
-            { date: "2026-09-01", status: "Late", remarks: "Arrived 10 mins late - Equipment setup" },
-            { date: "2026-08-28", status: "Present", remarks: "Mock tournament round" },
-            { date: "2026-08-25", status: "Absent", remarks: "Medical leave approved" }
-        ]
-    },
-    {
-        id: "STU002",
-        firstName: "Joseph",
-        lastName: "Thomas",
-        name: "Joseph Thomas",
-        email: "joseph@gmail.com",
-        password: "Joseph@4321",
-        phone: "9876543222",
-        dob: "2003-08-12",
-        gender: "Male",
-        course: "Physical Education",
-        yearSem: "Year 2 / Sem 3",
-        bowCategory: "Compound Bow",
-        bowType: "Academy Bow",
-        experience: "Beginner (1 Year)",
-        place: "South Wing",
-        address: "88 Lake View Road",
-        attendanceRate: 88,
-        attendanceStats: { present: 44, absent: 6, late: 3 },
-        overallScore: 85,
-        grade: "B+",
-        practiceAvg: "8.4 / 10",
-        examScore: "310 / 360",
-        rank: 3,
-        progressSummary: "Steady draw posture; working on anchor point consistency under pressure.",
-        skills: {
-            "Form & Posture": 86,
-            "Aim & Anchor": 84,
-            "Release Technique": 88,
-            "Mental Focus": 82,
-            "Physical Stamina": 86
-        },
-        scoresByEvaluation: [
-            { date: "Aug 12", score: 260, avg: 8.2 },
-            { date: "Aug 20", score: 295, avg: 8.4 },
-            { date: "Aug 28", score: 310, avg: 8.6 },
-            { date: "Sep 01", score: 305, avg: 8.5 }
-        ],
-        attendanceRecords: [
-            { date: "2026-09-05", status: "Present", remarks: "Compound bow alignment drill" },
-            { date: "2026-09-03", status: "Present", remarks: "Stance & breathing practice" },
-            { date: "2026-08-30", status: "Absent", remarks: "Unexcused absence" },
-            { date: "2026-08-27", status: "Present", remarks: "30m range target practice" }
-        ]
-    },
-    {
-        id: "STU003",
-        firstName: "Siva",
-        lastName: "Kumar",
-        name: "Siva Kumar",
-        email: "siva@gmail.com",
-        password: "Siva@4321",
-        phone: "9876543233",
-        dob: "2001-11-30",
-        gender: "Male",
-        course: "Mechanical Engineering",
-        yearSem: "Year 4 / Sem 7",
-        bowCategory: "Indian Bow",
-        bowType: "Own Bow",
-        experience: "Advanced (3 Years)",
-        place: "East Campus",
-        address: "54 High Street, East Zone",
-        attendanceRate: 91,
-        attendanceStats: { present: 45, absent: 4, late: 1 },
-        overallScore: 89,
-        grade: "A",
-        practiceAvg: "8.8 / 10",
-        examScore: "324 / 360",
-        rank: 2,
-        progressSummary: "High grouping accuracy in 50m outdoor rounds; strong bow grip control.",
-        skills: {
-            "Form & Posture": 90,
-            "Aim & Anchor": 92,
-            "Release Technique": 87,
-            "Mental Focus": 91,
-            "Physical Stamina": 85
-        },
-        scoresByEvaluation: [
-            { date: "Aug 15", score: 280, avg: 8.6 },
-            { date: "Aug 22", score: 315, avg: 8.8 },
-            { date: "Aug 30", score: 324, avg: 9.0 },
-            { date: "Sep 03", score: 320, avg: 8.9 }
-        ],
-        attendanceRecords: [
-            { date: "2026-09-05", status: "Present", remarks: "50m distance round practice" },
-            { date: "2026-09-02", status: "Present", remarks: "Wind compensation techniques" },
-            { date: "2026-08-29", status: "Present", remarks: "Equipment tuning & maintenance" }
-        ]
-    }
-];
+export const INITIAL_STUDENTS = [];
 
 export const INITIAL_EVENTS = [
     {
@@ -174,54 +38,263 @@ export const INITIAL_EVENTS = [
     }
 ];
 
-export const COACH_CREDENTIALS = {
-    email: "coach@gmail.com",
-    password: "Coach@4321",
-    name: "Head Coach",
-    id: "COA001",
-    specialization: "Recurve & Compound Bow Master Coach"
-};
+export const INITIAL_COACHES = [];
 
-export const ADMIN_CREDENTIALS = {
-    email: "admin@gmail.com",
-    password: "Admin@4321",
-    name: "Academy Administrator",
-    id: "ADM001"
-};
+export const COACH_CREDENTIALS = null;
+
+// Three Hardcoded Administrator Logins
+export const ADMIN_USERS = [
+    {
+        id: "ADM001",
+        name: "Academy Director",
+        username: "admin1",
+        aliasUsername: "admin",
+        email: "admin1@gmail.com",
+        aliasEmail: "admin@gmail.com",
+        password: "Admin@4321",
+        role: "admin",
+        title: "Academy Director & Master Admin"
+    },
+    {
+        id: "ADM002",
+        name: "Operations Admin",
+        username: "admin2",
+        aliasUsername: "admin2",
+        email: "admin2@gmail.com",
+        aliasEmail: "admin2@phoenix.com",
+        password: "Admin@4321",
+        role: "admin",
+        title: "Range Operations & Equipment Manager"
+    },
+    {
+        id: "ADM003",
+        name: "Finance & Events Admin",
+        username: "admin3",
+        aliasUsername: "admin3",
+        email: "admin3@gmail.com",
+        aliasEmail: "admin3@phoenix.com",
+        password: "Admin@4321",
+        role: "admin",
+        title: "Tournament Coordinator & Accounts Head"
+    }
+];
+
+export const ADMIN_CREDENTIALS = ADMIN_USERS[0];
+
+// Global Initial Datasets for Equipment, Fees, and Training Schedules
+
+export const INITIAL_EQUIPMENT = [
+    {
+        id: "EQ-001",
+        name: "Hoyt Grand Prix Recurve Bow (68\" 36#)",
+        category: "Recurve Bow",
+        serialNumber: "HYT-2024-883",
+        totalQty: 6,
+        availableQty: 6,
+        condition: "Excellent",
+        location: "Armory Locker A",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-002",
+        name: "Mathews TRX 36 3D Compound Bow (60#)",
+        category: "Compound Bow",
+        serialNumber: "MTH-9021-01",
+        totalQty: 4,
+        availableQty: 4,
+        condition: "Good",
+        location: "Armory Locker B",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-003",
+        name: "Bamboo & Rosewood Indian Traditional Bow (32#)",
+        category: "Indian Bow",
+        serialNumber: "IND-TRD-441",
+        totalQty: 8,
+        availableQty: 8,
+        condition: "Good",
+        location: "Armory Rack 1",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-004",
+        name: "Easton X10 High-Precision Carbon Arrows (Set of 12)",
+        category: "Arrows",
+        serialNumber: "EAS-X10-12",
+        totalQty: 15,
+        availableQty: 15,
+        condition: "Excellent",
+        location: "Quiver Bay 2",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-005",
+        name: "Easton Superdrive Micro Target Arrows (Set of 12)",
+        category: "Arrows",
+        serialNumber: "EAS-SDM-08",
+        totalQty: 10,
+        availableQty: 10,
+        condition: "Good",
+        location: "Quiver Bay 3",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-006",
+        name: "Danage High-Density Foam Target Butt 132cm",
+        category: "Targets & Butts",
+        serialNumber: "DNG-132-04",
+        totalQty: 12,
+        availableQty: 12,
+        condition: "Needs Maintenance",
+        location: "Outdoor Range Lane 3",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-007",
+        name: "Shibuya Ultima RC Pro Carbon Sight Set",
+        category: "Accessories",
+        serialNumber: "SHB-ULT-99",
+        totalQty: 8,
+        availableQty: 8,
+        condition: "Excellent",
+        location: "Precision Tool Cabinet",
+        assignedStudents: []
+    },
+    {
+        id: "EQ-008",
+        name: "Bohning Leather Arm Guard & Finger Tab Bundle",
+        category: "Protective Gear",
+        serialNumber: "BHN-PRT-20",
+        totalQty: 25,
+        availableQty: 25,
+        condition: "Good",
+        location: "Safety Storage Bin",
+        assignedStudents: []
+    }
+];
+
+export const INITIAL_EQUIPMENT_REQUESTS = [];
+
+export const INITIAL_FEES = [];
+
+export const INITIAL_SCHEDULES = [
+    {
+        id: "SCH-001",
+        title: "Morning Recurve Elite Drill & Form Calibration",
+        category: "Recurve Bow",
+        days: "Mon, Wed, Fri",
+        time: "06:00 AM - 08:00 AM",
+        distance: "70m Olympic Distance",
+        rangeLocation: "Outdoor Main Range (Lanes 1-4)",
+        coach: "Assigned Coach",
+        capacity: 8,
+        enrolled: [],
+        focus: "Clicker timing, anchor expansion, and wind-drift scoring rounds"
+    },
+    {
+        id: "SCH-002",
+        title: "Evening Compound Bow Alignment & Sight Calibration",
+        category: "Compound Bow",
+        days: "Tue, Thu, Sat",
+        time: "04:30 PM - 06:30 PM",
+        distance: "50m Compound Target",
+        rangeLocation: "Outdoor South Range (Lanes 5-8)",
+        coach: "Assigned Coach",
+        capacity: 6,
+        enrolled: [],
+        focus: "Release aid tension control, back-tension timing, bubble level steadiness"
+    },
+    {
+        id: "SCH-003",
+        title: "Indian Traditional Bow Stance & Draw Stamina",
+        category: "Indian Bow",
+        days: "Mon, Wed, Fri",
+        time: "05:00 PM - 07:00 PM",
+        distance: "30m & 50m Traditional Range",
+        rangeLocation: "East Field Range",
+        coach: "Assigned Coach",
+        capacity: 10,
+        enrolled: [],
+        focus: "Instinctive aim point calibration, bow arm stability and breath synchronization"
+    },
+    {
+        id: "SCH-004",
+        title: "Indoor 18m Precision Tournament Simulation",
+        category: "All Categories",
+        days: "Saturday",
+        time: "08:00 AM - 11:00 AM",
+        distance: "18m WA Indoor Range",
+        rangeLocation: "Indoor Range Hall (Lanes 1-12)",
+        coach: "Assigned Coach",
+        capacity: 15,
+        enrolled: [],
+        focus: "Mock ranking ends, buzzer timer pressure practice, scorecard audit"
+    },
+    {
+        id: "SCH-005",
+        title: "Sunday Bow Tuning & High-Speed Video Analysis",
+        category: "All Categories",
+        days: "Sunday",
+        time: "09:00 AM - 11:30 AM",
+        distance: "Tuning Range & Lab",
+        rangeLocation: "Biomechanics & Tuning Lab",
+        coach: "Assigned Coach",
+        capacity: 8,
+        enrolled: [],
+        focus: "High-speed camera release review, tiller balancing, and paper tuning"
+    }
+];
 
 // Global Reactive Application State
 export const state = {
     students: [],
+    coaches: [],
     events: [],
+    equipment: [],
+    equipmentRequests: [],
+    fees: [],
+    schedules: [],
     currentUser: null,
     currentRole: "student"
 };
 
 export function loadState() {
-    // Load students
+    // Load students - only retain registered users, filter out old demo data
     const storedStudents = localStorage.getItem("archery_students");
     if (storedStudents) {
         try {
-            state.students = JSON.parse(storedStudents);
+            state.students = JSON.parse(storedStudents).filter(s =>
+                !['STU001', 'STU002', 'STU003'].includes(s.id) &&
+                !['arjun@gmail.com', 'joseph@gmail.com', 'siva@gmail.com'].includes((s.email || '').toLowerCase())
+            );
         } catch (e) {
-            state.students = [...INITIAL_STUDENTS];
+            state.students = [];
         }
     } else {
-        state.students = [...INITIAL_STUDENTS];
-        saveStudentsState();
+        state.students = [];
     }
-
-    // Ensure default demo students have matching passwords
-    INITIAL_STUDENTS.forEach(defStu => {
-        const index = state.students.findIndex(s => s.id === defStu.id || s.email.toLowerCase() === defStu.email.toLowerCase());
-        if (index !== -1) {
-            state.students[index].password = defStu.password;
-            state.students[index].email = defStu.email;
-        } else {
-            state.students.push(defStu);
-        }
-    });
     saveStudentsState();
+
+    // Asynchronously synchronize students directly from SQLite database
+    syncStudentsFromDB();
+
+    // Load coaches - only retain registered coaches, filter out old demo data
+    const storedCoaches = localStorage.getItem("archery_coaches");
+    if (storedCoaches) {
+        try {
+            state.coaches = JSON.parse(storedCoaches).filter(c =>
+                !['COA001'].includes(c.id) &&
+                !['coach@gmail.com'].includes((c.email || '').toLowerCase()) &&
+                !['headcoach'].includes((c.username || '').toLowerCase())
+            );
+        } catch (e) {
+            state.coaches = [];
+        }
+    } else {
+        state.coaches = [];
+    }
+    saveCoachesState();
 
     // Load events
     const storedEvents = localStorage.getItem("archery_events");
@@ -235,12 +308,106 @@ export function loadState() {
         state.events = [...INITIAL_EVENTS];
         saveEventsState();
     }
+
+    // Load equipment
+    const storedEquipment = localStorage.getItem("archery_equipment");
+    if (storedEquipment) {
+        try {
+            state.equipment = JSON.parse(storedEquipment);
+        } catch (e) {
+            state.equipment = [...INITIAL_EQUIPMENT];
+        }
+    } else {
+        state.equipment = [...INITIAL_EQUIPMENT];
+    }
+    // Clean any legacy assignments
+    state.equipment.forEach(eq => {
+        eq.assignedStudents = (eq.assignedStudents || []).filter(st => !['STU001', 'STU002', 'STU003'].includes(st.id));
+        eq.availableQty = Math.max(0, eq.totalQty - eq.assignedStudents.length);
+    });
+    saveEquipmentState();
+
+    // Load equipment requests
+    const storedRequests = localStorage.getItem("archery_equipment_requests");
+    if (storedRequests) {
+        try {
+            state.equipmentRequests = JSON.parse(storedRequests).filter(r => !['STU001', 'STU002', 'STU003'].includes(r.studentId));
+        } catch (e) {
+            state.equipmentRequests = [];
+        }
+    } else {
+        state.equipmentRequests = [];
+    }
+    saveEquipmentRequestsState();
+
+    // Load fees
+    const storedFees = localStorage.getItem("archery_fees");
+    if (storedFees) {
+        try {
+            state.fees = JSON.parse(storedFees).filter(f => !['STU001', 'STU002', 'STU003'].includes(f.studentId));
+        } catch (e) {
+            state.fees = [];
+        }
+    } else {
+        state.fees = [];
+    }
+    saveFeesState();
+
+    // Load schedules
+    const storedSchedules = localStorage.getItem("archery_schedules");
+    if (storedSchedules) {
+        try {
+            state.schedules = JSON.parse(storedSchedules);
+        } catch (e) {
+            state.schedules = [...INITIAL_SCHEDULES];
+        }
+    } else {
+        state.schedules = [...INITIAL_SCHEDULES];
+    }
+    state.schedules.forEach(sch => {
+        sch.enrolled = (sch.enrolled || []).filter(id => !['STU001', 'STU002', 'STU003'].includes(id));
+    });
+    saveSchedulesState();
 }
 
 export function saveStudentsState() {
     localStorage.setItem("archery_students", JSON.stringify(state.students));
 }
 
+export function saveCoachesState() {
+    localStorage.setItem("archery_coaches", JSON.stringify(state.coaches));
+}
+
 export function saveEventsState() {
     localStorage.setItem("archery_events", JSON.stringify(state.events));
 }
+
+export function saveEquipmentState() {
+    localStorage.setItem("archery_equipment", JSON.stringify(state.equipment));
+}
+
+export function saveEquipmentRequestsState() {
+    localStorage.setItem("archery_equipment_requests", JSON.stringify(state.equipmentRequests));
+}
+
+export function saveFeesState() {
+    localStorage.setItem("archery_fees", JSON.stringify(state.fees));
+}
+
+export function saveSchedulesState() {
+    localStorage.setItem("archery_schedules", JSON.stringify(state.schedules));
+}
+
+export async function syncStudentsFromDB() {
+    try {
+        const { api } = await import('./api.js');
+        const res = await api.getAllStudents();
+        if (res.ok && res.data && res.data.success && Array.isArray(res.data.students)) {
+            state.students = res.data.students;
+            saveStudentsState();
+        }
+    } catch (e) {
+        console.warn("[State] SQLite DB sync deferred:", e.message);
+    }
+}
+

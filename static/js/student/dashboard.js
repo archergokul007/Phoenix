@@ -6,15 +6,15 @@
 import { state } from '../shared/state.js';
 import { hideAllViews, showNavbar, showSection } from '../shared/navigation.js';
 import { renderPublishedEventsGrid } from '../shared/alerts.js';
+import { renderStudentSchedule } from '../schedule/schedule.js';
+import { renderStudentEquipment } from '../equipment/equipment.js';
+import { renderStudentFees } from '../fees/fees.js';
+import { api } from '../shared/api.js';
 
 let stuBarChartInstance = null;
 let stuPieChartInstance = null;
 
-export function initStudentPortal(student) {
-    hideAllViews();
-    showNavbar('student', student.name);
-    showSection('student-view');
-
+export function renderStudentViewData(student) {
     document.getElementById('stu-welcome-name').textContent = `Welcome, ${student.name}!`;
     document.getElementById('stu-header-id').textContent = student.id;
     document.getElementById('stu-header-dept').textContent = student.course;
@@ -40,14 +40,92 @@ export function initStudentPortal(student) {
     document.getElementById('stu-att-badge').textContent = `Rate: ${student.attendanceRate}%`;
     renderAttendanceTable(student.attendanceRecords, 'stu-att-tbody');
 
+    renderStudentSchedule(student);
+    renderStudentEquipment(student);
+    renderStudentFees(student);
+
     renderPublishedEventsGrid(state.events, 'stu-events-grid', 'stu-events-count');
 
     renderStudentCharts(student);
 }
 
+export async function initStudentPortal(student) {
+    hideAllViews();
+    showNavbar('student', student.name);
+    showSection('student-view');
+
+    renderStudentViewData(student);
+
+    // Asynchronously check DB connection and refresh with latest SQLite data
+    try {
+        const healthRes = await api.checkHealth();
+        const dbBadge = document.getElementById('stu-db-status');
+        if (dbBadge) {
+            if (healthRes.ok && healthRes.data && healthRes.data.status === 'online') {
+                dbBadge.className = 'badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1';
+                dbBadge.innerHTML = '<i class="bi bi-database-check me-1"></i> SQLite Database Connected';
+            } else {
+                dbBadge.className = 'badge bg-secondary-subtle text-secondary border rounded-pill px-3 py-1';
+                dbBadge.innerHTML = '<i class="bi bi-database-slash me-1"></i> Database Offline (Local)';
+            }
+        }
+
+        // Fetch fresh student profile and scores from SQLite DB
+        const freshStuRes = await api.getStudent(student.id);
+        if (freshStuRes.ok && freshStuRes.data && freshStuRes.data.student) {
+            const updated = freshStuRes.data.student;
+            state.currentUser = updated;
+            renderStudentViewData(updated);
+        }
+
+        // Fetch fresh student equipment requests from SQLite DB
+        const reqRes = await api.getStudentEquipmentRequests(student.id);
+        if (reqRes.ok && reqRes.data && Array.isArray(reqRes.data.requests)) {
+            const otherReqs = (state.equipmentRequests || []).filter(r => r.studentId !== student.id);
+            state.equipmentRequests = [...reqRes.data.requests, ...otherReqs];
+            renderStudentEquipment(state.currentUser || student);
+        }
+
+        // Fetch fresh fees from SQLite DB
+        const feesRes = await api.getStudentFees(student.id);
+        if (feesRes.ok && feesRes.data && Array.isArray(feesRes.data.fees)) {
+            const otherFees = (state.fees || []).filter(f => f.studentId !== student.id);
+            state.fees = [...feesRes.data.fees, ...otherFees];
+            renderStudentFees(state.currentUser || student);
+        }
+
+        // Fetch fresh slot bookings from SQLite DB
+        const bookingsRes = await api.getStudentSlotBookings(student.id);
+        if (bookingsRes.ok && bookingsRes.data && Array.isArray(bookingsRes.data.bookings)) {
+            const myBookings = bookingsRes.data.bookings;
+            (state.schedules || []).forEach(sch => {
+                if (!sch.enrolled) sch.enrolled = [];
+                const hasMe = sch.enrolled.includes(student.id);
+                const shouldHaveMe = myBookings.includes(sch.id);
+                if (shouldHaveMe && !hasMe) sch.enrolled.push(student.id);
+                if (!shouldHaveMe && hasMe) sch.enrolled = sch.enrolled.filter(id => id !== student.id);
+            });
+            renderStudentSchedule(state.currentUser || student);
+        }
+    } catch (e) {
+        console.warn("[Student Dashboard] SQLite background sync deferred:", e);
+    }
+}
+
 export function renderStudentSkillProgressBars(skillsObj, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    if (!skillsObj || Object.keys(skillsObj).length === 0) {
+        container.innerHTML = `
+            <div class="text-center text-muted py-4">
+                <i class="bi bi-award fs-3 text-secondary opacity-50 d-block mb-2"></i>
+                <p class="mb-1 fw-semibold small">No skills evaluated yet</p>
+                <small class="text-secondary">Skills assessment will appear once evaluated by your coach.</small>
+            </div>
+        `;
+        return;
+    }
 
     let html = '';
     for (const [skillName, score] of Object.entries(skillsObj)) {
@@ -76,7 +154,7 @@ export function renderAttendanceTable(records, tbodyId) {
     if (!tbody) return;
 
     if (!records || records.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="3" class="text-center text-muted py-3">No attendance records found.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" class="text-center text-muted py-4"><i class="bi bi-calendar-x fs-4 text-secondary opacity-50 d-block mb-1"></i>No attendance records found yet.</td></tr>`;
         return;
     }
 
@@ -98,13 +176,22 @@ export function renderAttendanceTable(records, tbodyId) {
 }
 
 export function renderStudentCharts(student) {
-    if (stuBarChartInstance) stuBarChartInstance.destroy();
-    if (stuPieChartInstance) stuPieChartInstance.destroy();
+    if (stuBarChartInstance) {
+        stuBarChartInstance.destroy();
+        stuBarChartInstance = null;
+    }
+    if (stuPieChartInstance) {
+        stuPieChartInstance.destroy();
+        stuPieChartInstance = null;
+    }
+
+    const evals = (student && Array.isArray(student.scoresByEvaluation)) ? student.scoresByEvaluation : [];
+    const skills = (student && student.skills && typeof student.skills === 'object') ? student.skills : {};
 
     const barCtx = document.getElementById('stuBarChart');
     if (barCtx) {
-        const labels = student.scoresByEvaluation.map(s => s.date);
-        const dataScores = student.scoresByEvaluation.map(s => s.score);
+        const labels = evals.length > 0 ? evals.map(s => s.date) : ['No Sessions Yet'];
+        const dataScores = evals.length > 0 ? evals.map(s => s.score) : [0];
 
         stuBarChartInstance = new Chart(barCtx, {
             type: 'bar',
@@ -113,8 +200,8 @@ export function renderStudentCharts(student) {
                 datasets: [{
                     label: 'Evaluation Score',
                     data: dataScores,
-                    backgroundColor: 'rgba(15, 118, 110, 0.75)',
-                    borderColor: '#0f766e',
+                    backgroundColor: evals.length > 0 ? 'rgba(15, 118, 110, 0.75)' : 'rgba(203, 213, 225, 0.4)',
+                    borderColor: evals.length > 0 ? '#0f766e' : '#cbd5e1',
                     borderWidth: 1.5,
                     borderRadius: 6
                 }]
@@ -131,8 +218,10 @@ export function renderStudentCharts(student) {
 
     const pieCtx = document.getElementById('stuPieChart');
     if (pieCtx) {
-        const pieLabels = Object.keys(student.skills);
-        const pieData = Object.values(student.skills);
+        const pieKeys = Object.keys(skills);
+        const pieLabels = pieKeys.length > 0 ? pieKeys : ['Pending Assessment'];
+        const pieData = pieKeys.length > 0 ? Object.values(skills) : [100];
+        const pieColors = pieKeys.length > 0 ? ['#0f766e', '#14b8a6', '#f59e0b', '#0284c7', '#7c3aed'] : ['#e2e8f0'];
 
         stuPieChartInstance = new Chart(pieCtx, {
             type: 'pie',
@@ -140,7 +229,7 @@ export function renderStudentCharts(student) {
                 labels: pieLabels,
                 datasets: [{
                     data: pieData,
-                    backgroundColor: ['#0f766e', '#14b8a6', '#f59e0b', '#0284c7', '#7c3aed']
+                    backgroundColor: pieColors
                 }]
             },
             options: {

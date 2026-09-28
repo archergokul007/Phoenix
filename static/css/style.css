@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Intelligent Archery Management System - Custom Styles
+   Phoenix Elite Sports Academy - Custom Styles
    ========================================================================== */
 
 :root {
@@ -106,6 +106,23 @@ body.auth-page {
 .brand-section {
     position: relative;
     z-index: 2;
+}
+
+.brand-logo-box {
+    display: inline-block;
+    line-height: 1;
+}
+
+.hero-brand-logo {
+    height: 56px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 3px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    display: inline-block;
 }
 
 .brand-logo-glow {
@@ -277,9 +294,22 @@ body.auth-page {
 
 .left-pane-footer {
     font-size: 0.68rem;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.55);
     text-align: center;
     margin-top: 0.25rem;
+    justify-content: center;
+}
+
+.footer-mini-logo {
+    height: 20px;
+    width: auto;
+    max-width: 40px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 1px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* --------------------------------------------------------------------------
@@ -497,6 +527,20 @@ body.auth-page {
         display: none;
     }
     
+    .navbar-brand-logo {
+        height: 30px;
+        max-width: 90px;
+    }
+    
+    .brand-navbar-text {
+        font-size: 0.88rem;
+    }
+
+    .hero-brand-logo {
+        height: 44px;
+        max-width: 120px;
+    }
+    
     .auth-right-pane {
         width: 100%;
         padding: 1.25rem;
@@ -570,6 +614,39 @@ body.auth-page {
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
     letter-spacing: 0.5px;
+}
+
+.navbar-brand-logo {
+    height: 38px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #ffffff;
+    padding: 2px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.brand-navbar-text {
+    letter-spacing: 0.5px;
+}
+
+.main-app-footer {
+    background: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.footer-app-logo {
+    height: 36px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #ffffff;
+    padding: 2px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .badge-role {
@@ -724,3 +801,93 @@ body.auth-page {
 canvas {
     max-width: 100%;
 }
+
+/* ==========================================================================
+   Equipment, Fee Management & Training Schedule Custom Styles
+   ========================================================================== */
+
+/* Schedule Slot Cards */
+.schedule-day-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    background: rgba(15, 118, 110, 0.1);
+    color: var(--primary);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.distance-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.distance-tag.olympic {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.distance-tag.compound {
+    background: #fffbeb;
+    color: #d97706;
+    border: 1px solid #fde68a;
+}
+
+.distance-tag.indoor {
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+}
+
+/* Equipment Inventory Item Cards */
+.equipment-item-card {
+    transition: var(--transition-fast);
+    border: 1px solid var(--border-color);
+}
+
+.equipment-item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Printable Official Fee Receipt Styles */
+#fee-receipt-printable {
+    background-color: #ffffff;
+    border-radius: 12px;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #feeReceiptModal,
+    #fee-receipt-printable,
+    #fee-receipt-printable * {
+        visibility: visible;
+    }
+    #feeReceiptModal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .modal-header,
+    .modal-footer {
+        display: none !important;
+    }
+    #fee-receipt-printable {
+        padding: 2cm !important;
+        box-shadow: none !important;
+    }
+}
+
