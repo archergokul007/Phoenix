@@ -1,133 +1,173 @@
 /**
- * API Service Client Module
- * Communicates with the SQLite Backend Server for all Student Operations.
+ * API Service Client — Phoenix Archery Academy
+ * All requests go to the Flask server (same origin).
+ * Flask handles session cookies automatically via credentials: 'include'.
  */
 
-// Dynamically determine the backend API base URL
-function getApiBaseUrl() {
-    const origin = window.location.origin;
-    // If running on standard Flask port or relative host
-    if (window.location.port === '5500' || window.location.port === '5000') {
-        return '';
-    }
-    // If user opened via http.server on port 8000, target the Flask server on 5500
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        return 'http://127.0.0.1:5500';
-    }
-    return '';
-}
+const API_BASE = '';  // Same origin — Flask serves both frontend and backend
 
-export const API_BASE = getApiBaseUrl();
-
-async function request(endpoint, options = {}) {
-    const url = `${API_BASE}${endpoint}`;
-    const defaultHeaders = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    };
-
+async function req(endpoint, options = {}) {
+    const url = `${window.location.origin}${endpoint}`;
     try {
         const response = await fetch(url, {
+            credentials: 'include',  // Send session cookies
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', ...( options.headers || {}) },
             ...options,
-            headers: {
-                ...defaultHeaders,
-                ...(options.headers || {})
-            }
         });
-
         const data = await response.json().catch(() => ({}));
-        return {
-            ok: response.ok,
-            status: response.status,
-            data: data
-        };
+        return { ok: response.ok, status: response.status, data };
     } catch (err) {
-        console.warn(`[API] Network error connecting to database API (${url}):`, err.message);
-        return {
-            ok: false,
-            status: 0,
-            error: err.message,
-            data: { success: false, message: `Database server unreachable (${err.message}). Ensure "python server.py" is running.` }
-        };
+        console.warn(`[API] Error on ${endpoint}:`, err.message);
+        return { ok: false, status: 0, data: { success: false, message: `Server unreachable: ${err.message}` } };
     }
+}
+
+function post(endpoint, body) {
+    return req(endpoint, { method: 'POST', body: JSON.stringify(body) });
 }
 
 export const api = {
-    // Health & DB status
-    async checkHealth() {
-        return await request('/api/health');
+
+    // ── Auth ────────────────────────────────────────────────────────────────
+    getSession() {
+        return req('/api/session');
+    },
+    login(identifier, password, role) {
+        return post('/api/auth/login', { identifier, password, role });
+    },
+    logout() {
+        return post('/api/auth/logout', {});
+    },
+    registerStudent(data) {
+        return post('/api/auth/register/student', data);
+    },
+    registerCoach(data) {
+        return post('/api/auth/register/coach', data);
     },
 
-    // Student Registration
-    async registerStudent(studentData) {
-        return await request('/api/students/register', {
-            method: 'POST',
-            body: JSON.stringify(studentData)
-        });
+    // ── Student ─────────────────────────────────────────────────────────────
+    getStudentProfile() {
+        return req('/api/student/profile');
+    },
+    getStudentPerformance() {
+        return req('/api/student/performance');
+    },
+    getStudentAttendance() {
+        return req('/api/student/attendance');
+    },
+    getStudentBowMaintenance() {
+        return req('/api/student/bow-maintenance');
+    },
+    getStudentFees() {
+        return req('/api/student/fees');
+    },
+    getStudentNotifications(unreadOnly = false) {
+        return req(`/api/student/notifications${unreadOnly ? '?unread_only=true' : ''}`);
+    },
+    markStudentNotificationRead(notifId) {
+        return post(`/api/student/notifications/${notifId}/read`, {});
+    },
+    markAllStudentNotificationsRead() {
+        return post('/api/student/notifications/read-all', {});
     },
 
-    // Student Login
-    async loginStudent(identifier, password) {
-        return await request('/api/students/login', {
-            method: 'POST',
-            body: JSON.stringify({ identifier, password })
-        });
+    // ── Coach ────────────────────────────────────────────────────────────────
+    getCoachDashboardStats() {
+        return req('/api/coach/dashboard-stats');
+    },
+    coachSearchStudent(studentId) {
+        return req(`/api/coach/search-student?student_id=${encodeURIComponent(studentId)}`);
+    },
+    getCoachStudentPerformance(studentId) {
+        return req(`/api/coach/student/${encodeURIComponent(studentId)}/performance`);
+    },
+    updatePerformance(data) {
+        return post('/api/coach/performance/update', data);
+    },
+    getCoachStudentAttendance(studentId) {
+        return req(`/api/coach/student/${encodeURIComponent(studentId)}/attendance`);
+    },
+    updateAttendance(data) {
+        return post('/api/coach/attendance/update', data);
+    },
+    getCoachStudentBowMaintenance(studentId) {
+        return req(`/api/coach/student/${encodeURIComponent(studentId)}/bow-maintenance`);
+    },
+    updateBowMaintenance(data) {
+        return post('/api/coach/bow-maintenance/update', data);
+    },
+    sendCoachReport(data) {
+        return post('/api/coach/send-report', data);
     },
 
-    // Get all students (for sync, directory, rosters)
-    async getAllStudents() {
-        return await request('/api/students');
+    // ── Admin ────────────────────────────────────────────────────────────────
+    getAdminDashboardStats() {
+        return req('/api/admin/dashboard-stats');
+    },
+    adminSearchStudent(studentId) {
+        return req(`/api/admin/search-student?student_id=${encodeURIComponent(studentId)}`);
+    },
+    getAllStudents() {
+        return req('/api/admin/students');
+    },
+    getAdminStudent(studentId) {
+        return req(`/api/admin/student/${encodeURIComponent(studentId)}`);
+    },
+    getAdminStudentPerformance(studentId) {
+        return req(`/api/admin/student/${encodeURIComponent(studentId)}/performance`);
+    },
+    getAdminStudentAttendance(studentId) {
+        return req(`/api/admin/student/${encodeURIComponent(studentId)}/attendance`);
+    },
+    getAdminStudentFees(studentId) {
+        return req(`/api/admin/student/${encodeURIComponent(studentId)}/fees`);
+    },
+    getAdminStudentBowMaintenance(studentId) {
+        return req(`/api/admin/student/${encodeURIComponent(studentId)}/bow-maintenance`);
+    },
+    addFee(studentId, data) {
+        return post(`/api/admin/student/${encodeURIComponent(studentId)}/fees`, data);
+    },
+    markFeePaid(feeId, data) {
+        return post(`/api/admin/fees/${feeId}/pay`, data);
+    },
+    getAllCoaches() {
+        return req('/api/admin/coaches');
+    },
+    getAllReports(studentId = null) {
+        const qs = studentId ? `?student_id=${encodeURIComponent(studentId)}` : '';
+        return req(`/api/admin/reports${qs}`);
+    },
+    getAdminNotifications(unreadOnly = false) {
+        return req(`/api/admin/notifications${unreadOnly ? '?unread_only=true' : ''}`);
+    },
+    markAdminNotificationRead(notifId) {
+        return post(`/api/admin/notifications/${notifId}/read`, {});
+    },
+    markAllAdminNotificationsRead() {
+        return post('/api/admin/notifications/read-all', {});
+    },
+    getActivityLogs(limit = 50) {
+        return req(`/api/admin/activity-logs?limit=${limit}`);
+    },
+    getAllAdminFees(status = '') {
+        const qs = status ? `?status=${encodeURIComponent(status)}` : '';
+        return req(`/api/admin/fees${qs}`);
+    },
+    getTournaments() {
+        return req('/api/admin/tournaments');
     },
 
-    // Get single student profile
-    async getStudent(studentId) {
-        return await request(`/api/students/${encodeURIComponent(studentId)}`);
+    // ── Schedule ─────────────────────────────────────────────────────────────
+    bookTrainingSlot(studentId, scheduleId) {
+        return post('/api/student/training/book', { student_id: studentId, schedule_id: scheduleId });
+    },
+    cancelTrainingSlot(studentId, scheduleId) {
+        return post('/api/student/training/cancel', { student_id: studentId, schedule_id: scheduleId });
     },
 
-    // Practice Slot Booking
-    async bookTrainingSlot(studentId, scheduleId) {
-        return await request(`/api/students/${encodeURIComponent(studentId)}/schedule/book`, {
-            method: 'POST',
-            body: JSON.stringify({ scheduleId })
-        });
+    // ── Health ───────────────────────────────────────────────────────────────
+    checkHealth() {
+        return req('/api/health');
     },
-
-    async cancelTrainingSlot(studentId, scheduleId) {
-        return await request(`/api/students/${encodeURIComponent(studentId)}/schedule/cancel`, {
-            method: 'POST',
-            body: JSON.stringify({ scheduleId })
-        });
-    },
-
-    async getStudentSlotBookings(studentId) {
-        return await request(`/api/students/${encodeURIComponent(studentId)}/schedule/bookings`);
-    },
-
-    async getAllSlotBookings() {
-        return await request('/api/schedules/bookings');
-    },
-
-    // Equipment Service Requests
-    async submitEquipmentRequest(reqData) {
-        return await request('/api/equipment-requests', {
-            method: 'POST',
-            body: JSON.stringify(reqData)
-        });
-    },
-
-    async getStudentEquipmentRequests(studentId) {
-        return await request(`/api/students/${encodeURIComponent(studentId)}/equipment-requests`);
-    },
-
-    // Fee Invoices and Payments
-    async getStudentFees(studentId) {
-        return await request(`/api/students/${encodeURIComponent(studentId)}/fees`);
-    },
-
-    async payFeeInvoice(invoiceId, paymentData) {
-        return await request(`/api/fees/${encodeURIComponent(invoiceId)}/pay`, {
-            method: 'POST',
-            body: JSON.stringify(paymentData)
-        });
-    }
 };

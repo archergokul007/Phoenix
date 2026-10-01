@@ -140,14 +140,28 @@
                                 <span>Sign In</span><i class="bi bi-arrow-right-short ms-1 fs-5"></i>
                             </button>
                             <div class="quick-demo-box">
-                                <div class="demo-title"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Quick Admin Demo Logins:</div>
-                                <div class="demo-buttons-grid">
-                                    <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(1)"><i class="bi bi-shield-shaded"></i> Admin 1 (Director)</button>
-                                    <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(2)"><i class="bi bi-shield-shaded"></i> Admin 2 (Operations)</button>
-                                    <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(3)"><i class="bi bi-shield-shaded"></i> Admin 3 (Finance)</button>
+                                <!-- Admin Demo -->
+                                <div id="demo-box-admin" class="demo-box-section d-none">
+                                    <div class="demo-title"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Quick Admin Demo Logins:</div>
+                                    <div class="demo-buttons-grid">
+                                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(1)"><i class="bi bi-shield-shaded"></i> Admin 1 (Director)</button>
+                                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(2)"><i class="bi bi-shield-shaded"></i> Admin 2 (Operations)</button>
+                                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(3)"><i class="bi bi-shield-shaded"></i> Admin 3 (Finance)</button>
+                                    </div>
                                 </div>
-                                <div class="text-center mt-2">
-                                    <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Students & Coaches: Register your account using the link below.</small>
+                                <!-- Coach Demo -->
+                                <div id="demo-box-coach" class="demo-box-section d-none">
+                                    <div class="demo-title"><i class="bi bi-whistle-fill text-info me-1"></i> Quick Coach Demo Logins:</div>
+                                    <div class="demo-buttons-grid">
+                                        <button type="button" class="demo-pill-btn coach" onclick="fillCoachCredentials()"><i class="bi bi-person-video3"></i> Coach 1</button>
+                                    </div>
+                                </div>
+                                <!-- Student Demo -->
+                                <div id="demo-box-student" class="demo-box-section">
+                                    <div class="demo-title"><i class="bi bi-person-badge-fill text-primary me-1"></i> Quick Student Demo Logins:</div>
+                                    <div class="demo-buttons-grid">
+                                        <button type="button" class="demo-pill-btn student" onclick="fillStudentCredentials()"><i class="bi bi-person-fill"></i> Student 1</button>
+                                    </div>
                                 </div>
                             </div>
                             <div id="register-link-container" class="register-footer-link">
@@ -161,28 +175,393 @@
         </section>
 
         <!-- 2. STUDENT REGISTRATION VIEW -->
-        <section id="register-view" class="view-section d-none bg-dark py-5 min-vh-100">
-            <div class="auth-wrapper">
-                <div class="auth-card mx-auto" style="max-width: 760px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                    <div class="auth-header text-white p-4" style="background: linear-gradient(135deg, #064e3b, #0f766e);">
-                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fs-1 text-warning"><i class="bi bi-person-plus-fill"></i></div>
-                                <div>
-                                    <h2 class="h4 fw-bold mb-1">STUDENT REGISTRATION</h2>
-                                    <p class="mb-0 small text-light opacity-75">Join Phoenix Elite Sports Academy (Student Portal)</p>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="showCoachRegisterView(event)">
-                                    <i class="bi bi-whistle-fill me-1"></i> Register as Coach
-                                </button>
-                            </div>
+        <section id="register-view" class="view-section d-none reg-page-bg min-vh-100">
+            <div class="reg-outer-wrap">
+
+                <!-- LEFT BRANDING PANE -->
+                <div class="reg-left-pane">
+                    <div class="reg-brand-logo-box">
+                        <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Logo" class="reg-brand-logo">
+                    </div>
+                    <h1 class="reg-brand-title">PHOENIX ELITE<br>SPORTS ACADEMY</h1>
+                    <p class="reg-brand-sub">Intelligent Training &amp; Performance Portal</p>
+                    <div class="reg-feature-list">
+                        <div class="reg-feature-item"><i class="bi bi-bullseye"></i><span>Precision Score Tracking</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-graph-up-arrow"></i><span>Performance Analytics</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-calendar2-check"></i><span>Attendance Management</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-trophy-fill"></i><span>Tournament Management</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-shield-check"></i><span>Secure Role-Based Access</span></div>
+                    </div>
+                    <div class="reg-left-footer">
+                        <i class="bi bi-arrow-left-circle me-2"></i>
+                        <a href="#" onclick="showLoginView(event)" class="text-white text-decoration-none fw-semibold">Back to Login</a>
+                    </div>
+                </div>
+
+                <!-- RIGHT FORM PANE -->
+                <div class="reg-right-pane">
+
+                    <!-- Tab Switcher -->
+                    <div class="reg-tab-switcher">
+                        <div class="reg-tab-pill active" id="reg-tab-student" onclick="showRegisterView(event)">
+                            <i class="bi bi-person-badge-fill me-2"></i>Student
+                        </div>
+                        <div class="reg-tab-pill" id="reg-tab-coach" onclick="showCoachRegisterView(event)">
+                            <i class="bi bi-whistle-fill me-2"></i>Coach
                         </div>
                     </div>
 
-                    <!-- Role Switcher Tabs -->
-                    <div class="bg-light px-4 py-2 border-bottom d-flex align-items-center gap-2">
+                    <!-- Form Header -->
+                    <div class="reg-form-header">
+                        <div class="reg-form-icon reg-icon-student"><i class="bi bi-person-plus-fill"></i></div>
+                        <div>
+                            <h2 class="reg-form-title">Student Registration</h2>
+                            <p class="reg-form-sub">Join Phoenix Elite Sports Academy — Student Portal</p>
+                        </div>
+                    </div>
+
+                    <!-- Alert -->
+                    <div id="register-alert" class="reg-alert d-none" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <span id="register-alert-msg"></span>
+                    </div>
+
+                    <form id="register-form" onsubmit="handleRegisterSubmit(event)" novalidate>
+
+                        <!-- Section 1: Personal Details -->
+                        <div class="reg-section-label"><i class="bi bi-person-lines-fill me-2"></i>1. Personal &amp; Contact Details</div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control reg-input" id="reg_name" placeholder="Full Name" required>
+                                    <label for="reg_name">Full Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="reg_gender" required>
+                                        <option value="" selected disabled>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label for="reg_gender">Gender</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control reg-input" id="reg_age" placeholder="Age" min="5" max="99" oninput="handleAgeCategoryAutoSelect(this.value)" required>
+                                    <label for="reg_age">Age (Years)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="reg_age_category" required>
+                                        <option value="" selected disabled>Age Category</option>
+                                        <option value="Under-10 (Mini Sub-Junior)">Under-10 (Mini Sub-Junior)</option>
+                                        <option value="Under-14 (Sub-Junior)">Under-14 (Sub-Junior)</option>
+                                        <option value="Under-17 (Cadet / Youth)">Under-17 (Cadet / Youth)</option>
+                                        <option value="Under-21 (Junior)">Under-21 (Junior)</option>
+                                        <option value="Senior (21+ Years)">Senior (21+ Years)</option>
+                                        <option value="Masters (50+ Years)">Masters (50+ Years)</option>
+                                    </select>
+                                    <label for="reg_age_category">Age Category</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control reg-input" id="reg_phone" placeholder="Mobile" pattern="[0-9]{10}" required>
+                                    <label for="reg_phone">Mobile No. (10 digits)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="reg_current_status" required>
+                                        <option value="" selected disabled>Current Status</option>
+                                        <option value="Active Archer">Active Archer</option>
+                                        <option value="New Trainee">New Trainee</option>
+                                        <option value="Competitive Archer">Competitive Archer</option>
+                                        <option value="Trial / Guest">Trial / Guest</option>
+                                        <option value="Recreational Archer">Recreational Archer</option>
+                                    </select>
+                                    <label for="reg_current_status">Current Status</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Archery Details -->
+                        <div class="reg-section-label mt-3"><i class="bi bi-bullseye me-2"></i>2. Archery Specialization &amp; Experience</div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="reg_bow_category" required>
+                                        <option value="" selected disabled>Bow Category</option>
+                                        <option value="Indian Bow">Indian Bow</option>
+                                        <option value="Recurve Bow">Recurve Bow</option>
+                                        <option value="Compound Bow">Compound Bow</option>
+                                        <option value="Barebow">Barebow</option>
+                                    </select>
+                                    <label for="reg_bow_category">Bow Category</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="reg_bow_type" required>
+                                        <option value="" selected disabled>Bow Ownership</option>
+                                        <option value="Own Bow">Own Bow</option>
+                                        <option value="Academy Bow">Academy Bow</option>
+                                        <option value="Rented / Club Bow">Rented / Club Bow</option>
+                                    </select>
+                                    <label for="reg_bow_type">Bow Ownership</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="reg_experience" required>
+                                        <option value="" selected disabled>Experience Level</option>
+                                        <option value="Beginner (< 1 Year)">Beginner (&lt; 1 Year)</option>
+                                        <option value="Intermediate (1 - 3 Years)">Intermediate (1–3 Years)</option>
+                                        <option value="Advanced (3 - 5 Years)">Advanced (3–5 Years)</option>
+                                        <option value="Elite / Professional (5+ Years)">Elite / Professional (5+)</option>
+                                    </select>
+                                    <label for="reg_experience">Experience</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Account Credentials -->
+                        <div class="reg-section-label mt-3"><i class="bi bi-shield-lock me-2"></i>3. Account Credentials</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control reg-input" id="reg_email" placeholder="Email" required>
+                                    <label for="reg_email">Email Address</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control reg-input" id="reg_username" placeholder="Username" minlength="3" required>
+                                    <label for="reg_username">Username (min 3 chars)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control reg-input" id="reg_password" placeholder="Password" minlength="6" required>
+                                    <label for="reg_password">Password (min 6 chars)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control reg-input" id="reg_confirm_password" placeholder="Confirm Password" minlength="6" required>
+                                    <label for="reg_confirm_password">Confirm Password</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn reg-submit-btn w-100" id="register-submit-btn">
+                            <i class="bi bi-check-circle-fill me-2"></i>Create Student Account
+                        </button>
+                        <p class="reg-login-link text-center mt-3 mb-0">
+                            Already have an account? <a href="#" onclick="showLoginView(event)" class="fw-bold">Sign In</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2B. COACH REGISTRATION VIEW -->
+        <section id="coach-register-view" class="view-section d-none reg-page-bg min-vh-100">
+            <div class="reg-outer-wrap">
+
+                <!-- LEFT BRANDING PANE -->
+                <div class="reg-left-pane reg-left-coach">
+                    <div class="reg-brand-logo-box">
+                        <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Logo" class="reg-brand-logo">
+                    </div>
+                    <h1 class="reg-brand-title">PHOENIX ELITE<br>SPORTS ACADEMY</h1>
+                    <p class="reg-brand-sub">Coach &amp; Instructor Portal</p>
+                    <div class="reg-feature-list">
+                        <div class="reg-feature-item"><i class="bi bi-people-fill"></i><span>Manage Student Athletes</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-clipboard2-pulse-fill"></i><span>Update Performance Records</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-calendar2-check"></i><span>Mark Attendance</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-tools"></i><span>Bow Maintenance Logs</span></div>
+                        <div class="reg-feature-item"><i class="bi bi-send-check-fill"></i><span>Send Reports to Admin</span></div>
+                    </div>
+                    <div class="reg-left-footer">
+                        <i class="bi bi-arrow-left-circle me-2"></i>
+                        <a href="#" onclick="showLoginView(event)" class="text-white text-decoration-none fw-semibold">Back to Login</a>
+                    </div>
+                </div>
+
+                <!-- RIGHT FORM PANE -->
+                <div class="reg-right-pane">
+
+                    <!-- Tab Switcher -->
+                    <div class="reg-tab-switcher">
+                        <div class="reg-tab-pill" id="coach-tab-student" onclick="showRegisterView(event)">
+                            <i class="bi bi-person-badge-fill me-2"></i>Student
+                        </div>
+                        <div class="reg-tab-pill active" id="coach-tab-coach" onclick="showCoachRegisterView(event)">
+                            <i class="bi bi-whistle-fill me-2"></i>Coach
+                        </div>
+                    </div>
+
+                    <!-- Form Header -->
+                    <div class="reg-form-header">
+                        <div class="reg-form-icon reg-icon-coach"><i class="bi bi-whistle-fill"></i></div>
+                        <div>
+                            <h2 class="reg-form-title">Coach Registration</h2>
+                            <p class="reg-form-sub">Join Phoenix Elite Sports Academy — Coach &amp; Instructor Portal</p>
+                        </div>
+                    </div>
+
+                    <!-- Alert -->
+                    <div id="coach-register-alert" class="reg-alert d-none" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <span id="coach-register-alert-msg"></span>
+                    </div>
+
+                    <form id="coach-register-form" onsubmit="handleCoachRegisterSubmit(event)" novalidate>
+
+                        <!-- Section 1: Personal Details -->
+                        <div class="reg-section-label"><i class="bi bi-person-lines-fill me-2"></i>1. Personal &amp; Contact Details</div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control reg-input" id="coach_reg_name" placeholder="Full Name" required>
+                                    <label for="coach_reg_name">Full Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="coach_reg_gender" required>
+                                        <option value="" selected disabled>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label for="coach_reg_gender">Gender</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control reg-input" id="coach_reg_age" placeholder="Age" min="18" max="80" required>
+                                    <label for="coach_reg_age">Age (18–80 Years)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control reg-input" id="coach_reg_phone" placeholder="Mobile" pattern="[0-9]{10}" required>
+                                    <label for="coach_reg_phone">Mobile No. (10 digits)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Coaching Credentials -->
+                        <div class="reg-section-label mt-3"><i class="bi bi-award-fill me-2"></i>2. Coaching Specialization &amp; Credentials</div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="coach_reg_specialization" required>
+                                        <option value="" selected disabled>Bow Specialization</option>
+                                        <option value="Recurve Bow Specialist">Recurve Bow Specialist</option>
+                                        <option value="Compound Bow Specialist">Compound Bow Specialist</option>
+                                        <option value="Indian Traditional Bow Specialist">Indian Traditional Bow Specialist</option>
+                                        <option value="Barebow Specialist">Barebow Specialist</option>
+                                        <option value="Recurve & Compound Bow Master Coach">Recurve &amp; Compound Master Coach</option>
+                                        <option value="All Disciplines (Head Coach)">All Disciplines (Head Coach)</option>
+                                    </select>
+                                    <label for="coach_reg_specialization">Bow Specialization</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="coach_reg_certification" required>
+                                        <option value="" selected disabled>Certification Level</option>
+                                        <option value="World Archery Level 1 Certified">World Archery Level 1</option>
+                                        <option value="World Archery Level 2 Certified">World Archery Level 2</option>
+                                        <option value="World Archery Level 3 (Master Coach)">World Archery Level 3 (Master)</option>
+                                        <option value="National Institute of Sports (NIS) Diploma">NIS Diploma</option>
+                                        <option value="National Sports Federation Certified Coach">NSF Certified Coach</option>
+                                        <option value="State / Regional Senior Coach">State / Regional Senior Coach</option>
+                                    </select>
+                                    <label for="coach_reg_certification">Coaching Certification</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="coach_reg_experience" required>
+                                        <option value="" selected disabled>Coaching Experience</option>
+                                        <option value="1 - 3 Years (Junior Coach)">1–3 Years (Junior Coach)</option>
+                                        <option value="3 - 5 Years (Associate Coach)">3–5 Years (Associate Coach)</option>
+                                        <option value="5 - 10 Years (Senior Coach)">5–10 Years (Senior Coach)</option>
+                                        <option value="10+ Years (Master Coach / High Performance)">10+ Years (Master Coach)</option>
+                                    </select>
+                                    <label for="coach_reg_experience">Coaching Experience</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select reg-input" id="coach_reg_campus" required>
+                                        <option value="" selected disabled>Primary Training Range</option>
+                                        <option value="North Campus (Olympic Range)">North Campus (Olympic Range)</option>
+                                        <option value="South Wing Range">South Wing Range</option>
+                                        <option value="Indoor 18m / 25m Precision Range">Indoor 18m/25m Precision Range</option>
+                                        <option value="Field & 3D Archery Range">Field &amp; 3D Archery Range</option>
+                                        <option value="Main Academy Central Range">Main Academy Central Range</option>
+                                    </select>
+                                    <label for="coach_reg_campus">Primary Training Range</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control reg-input" id="coach_reg_bio" placeholder="Bio" style="height:80px;"></textarea>
+                                    <label for="coach_reg_bio">Professional Bio / Achievements (Optional)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Account Credentials -->
+                        <div class="reg-section-label mt-3"><i class="bi bi-shield-lock me-2"></i>3. Account Credentials</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control reg-input" id="coach_reg_email" placeholder="Email" required>
+                                    <label for="coach_reg_email">Official Email Address</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control reg-input" id="coach_reg_username" placeholder="Username" minlength="3" required>
+                                    <label for="coach_reg_username">Username (min 3 chars)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control reg-input" id="coach_reg_password" placeholder="Password" minlength="6" required>
+                                    <label for="coach_reg_password">Password (min 6 chars)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control reg-input" id="coach_reg_confirm_password" placeholder="Confirm Password" minlength="6" required>
+                                    <label for="coach_reg_confirm_password">Confirm Password</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn reg-submit-btn reg-submit-coach w-100" id="coach-register-submit-btn">
+                            <i class="bi bi-check-circle-fill me-2"></i>Register Coach Account
+                        </button>
+                        <p class="reg-login-link text-center mt-3 mb-0">
+                            Already have an account? <a href="#" onclick="showLoginView(event)" class="fw-bold">Sign In</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- 3. STUDENT HOME PAGE & DASHBOARD VIEW -->
+
                         <span class="text-muted small fw-medium me-2">Registration Type:</span>
                         <button type="button" class="btn btn-sm btn-success rounded-pill px-3 fw-bold active shadow-sm" style="background-color: #0f766e; border-color: #0f766e;">
                             <i class="bi bi-person-badge me-1"></i> Student Registration

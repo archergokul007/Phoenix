@@ -1,241 +1,243 @@
 /**
- * Student Dashboard Module
- * Manages student profile display, progress bars, attendance history, and Chart.js performance charts.
+ * Student Dashboard — Phoenix Archery Academy
+ * Fetches all data from Flask API (SQL-backed).
+ * Student sees ONLY their own data. No search box, no edit controls.
  */
 
-import { state } from '../shared/state.js';
-import { hideAllViews, showNavbar, showSection } from '../shared/navigation.js';
-import { renderPublishedEventsGrid } from '../shared/alerts.js';
-import { renderStudentSchedule } from '../schedule/schedule.js';
-import { renderStudentEquipment } from '../equipment/equipment.js';
-import { renderStudentFees } from '../fees/fees.js';
 import { api } from '../shared/api.js';
+import { state, clearCurrentUser } from '../shared/state.js';
+import { hideAllViews } from '../shared/navigation.js';
+import { showLoginView } from '../auth/login.js';
 
-let stuBarChartInstance = null;
-let stuPieChartInstance = null;
+// ── Entry Point ───────────────────────────────────────────────────────────────
+export async function initStudentPortal(user) {
+    state.currentUser = user;
+    state.currentRole = 'student';
 
-export function renderStudentViewData(student) {
-    document.getElementById('stu-welcome-name').textContent = `Welcome, ${student.name}!`;
-    document.getElementById('stu-header-id').textContent = student.id;
-    document.getElementById('stu-header-dept').textContent = student.course;
-
-    document.getElementById('stu-card-id').textContent = student.id;
-    document.getElementById('stu-card-attendance').textContent = `${student.attendanceRate}%`;
-    document.getElementById('stu-card-overall').textContent = `${student.overallScore}% (${student.grade})`;
-    document.getElementById('stu-card-exam').textContent = `${student.examScore} (Rank ${student.rank})`;
-
-    document.getElementById('stu-prof-id').textContent = student.id;
-    document.getElementById('stu-prof-name').textContent = student.name;
-    document.getElementById('stu-prof-email').textContent = student.email;
-    document.getElementById('stu-prof-phone').textContent = student.phone || '-';
-    document.getElementById('stu-prof-course').textContent = student.course;
-    document.getElementById('stu-prof-yearsem').textContent = student.yearSem;
-    document.getElementById('stu-prof-bowcat').textContent = student.bowCategory;
-    document.getElementById('stu-prof-exp').textContent = student.experience;
-
-    renderStudentSkillProgressBars(student.skills, 'stu-skill-progress-bars');
-
-    document.getElementById('stu-progress-notes').textContent = student.progressSummary;
-
-    document.getElementById('stu-att-badge').textContent = `Rate: ${student.attendanceRate}%`;
-    renderAttendanceTable(student.attendanceRecords, 'stu-att-tbody');
-
-    renderStudentSchedule(student);
-    renderStudentEquipment(student);
-    renderStudentFees(student);
-
-    renderPublishedEventsGrid(state.events, 'stu-events-grid', 'stu-events-count');
-
-    renderStudentCharts(student);
-}
-
-export async function initStudentPortal(student) {
     hideAllViews();
-    showNavbar('student', student.name);
-    showSection('student-view');
+    const studentView = document.getElementById('student-view');
+    if (studentView) studentView.classList.remove('d-none');
 
-    renderStudentViewData(student);
+    // Load student HTML module if needed
+    await ensureStudentDashboardLoaded();
 
-    // Asynchronously check DB connection and refresh with latest SQLite data
-    try {
-        const healthRes = await api.checkHealth();
-        const dbBadge = document.getElementById('stu-db-status');
-        if (dbBadge) {
-            if (healthRes.ok && healthRes.data && healthRes.data.status === 'online') {
-                dbBadge.className = 'badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1';
-                dbBadge.innerHTML = '<i class="bi bi-database-check me-1"></i> SQLite Database Connected';
-            } else {
-                dbBadge.className = 'badge bg-secondary-subtle text-secondary border rounded-pill px-3 py-1';
-                dbBadge.innerHTML = '<i class="bi bi-database-slash me-1"></i> Database Offline (Local)';
-            }
-        }
+    // Set header info
+    setEl('stu-welcome-name', `Welcome, ${user.name || 'Student'}!`);
+    setEl('stu-header-id',    user.profile_id || '—');
+    setEl('stu-card-id',      user.profile_id || '—');
 
-        // Fetch fresh student profile and scores from SQLite DB
-        const freshStuRes = await api.getStudent(student.id);
-        if (freshStuRes.ok && freshStuRes.data && freshStuRes.data.student) {
-            const updated = freshStuRes.data.student;
-            state.currentUser = updated;
-            renderStudentViewData(updated);
-        }
+    // Update status badge to show DB mode
+    setEl('stu-db-status', '<i class="bi bi-database-check me-1"></i>MySQL Connected', true);
 
-        // Fetch fresh student equipment requests from SQLite DB
-        const reqRes = await api.getStudentEquipmentRequests(student.id);
-        if (reqRes.ok && reqRes.data && Array.isArray(reqRes.data.requests)) {
-            const otherReqs = (state.equipmentRequests || []).filter(r => r.studentId !== student.id);
-            state.equipmentRequests = [...reqRes.data.requests, ...otherReqs];
-            renderStudentEquipment(state.currentUser || student);
-        }
-
-        // Fetch fresh fees from SQLite DB
-        const feesRes = await api.getStudentFees(student.id);
-        if (feesRes.ok && feesRes.data && Array.isArray(feesRes.data.fees)) {
-            const otherFees = (state.fees || []).filter(f => f.studentId !== student.id);
-            state.fees = [...feesRes.data.fees, ...otherFees];
-            renderStudentFees(state.currentUser || student);
-        }
-
-        // Fetch fresh slot bookings from SQLite DB
-        const bookingsRes = await api.getStudentSlotBookings(student.id);
-        if (bookingsRes.ok && bookingsRes.data && Array.isArray(bookingsRes.data.bookings)) {
-            const myBookings = bookingsRes.data.bookings;
-            (state.schedules || []).forEach(sch => {
-                if (!sch.enrolled) sch.enrolled = [];
-                const hasMe = sch.enrolled.includes(student.id);
-                const shouldHaveMe = myBookings.includes(sch.id);
-                if (shouldHaveMe && !hasMe) sch.enrolled.push(student.id);
-                if (!shouldHaveMe && hasMe) sch.enrolled = sch.enrolled.filter(id => id !== student.id);
-            });
-            renderStudentSchedule(state.currentUser || student);
-        }
-    } catch (e) {
-        console.warn("[Student Dashboard] SQLite background sync deferred:", e);
-    }
+    // Load all data concurrently
+    await Promise.all([
+        loadStudentProfile(),
+        loadStudentPerformance(),
+        loadStudentAttendance(),
+        loadStudentBowMaintenance(),
+        loadStudentFees(),
+        loadStudentNotifications(),
+    ]);
 }
 
-export function renderStudentSkillProgressBars(skillsObj, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    if (!skillsObj || Object.keys(skillsObj).length === 0) {
-        container.innerHTML = `
-            <div class="text-center text-muted py-4">
-                <i class="bi bi-award fs-3 text-secondary opacity-50 d-block mb-2"></i>
-                <p class="mb-1 fw-semibold small">No skills evaluated yet</p>
-                <small class="text-secondary">Skills assessment will appear once evaluated by your coach.</small>
-            </div>
-        `;
-        return;
-    }
-
-    let html = '';
-    for (const [skillName, score] of Object.entries(skillsObj)) {
-        let colorClass = 'bg-primary';
-        if (score >= 90) colorClass = 'bg-success';
-        else if (score >= 80) colorClass = 'bg-info';
-        else if (score >= 70) colorClass = 'bg-warning';
-
-        html += `
-            <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="fw-semibold text-dark small">${skillName}</span>
-                    <span class="fw-bold small text-muted">${score}%</span>
-                </div>
-                <div class="progress" style="height: 10px; border-radius: 6px;">
-                    <div class="progress-bar ${colorClass}" role="progressbar" style="width: ${score}%;" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        `;
-    }
-    container.innerHTML = html;
+function setEl(id, val, html = false) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (html) el.innerHTML = val;
+    else el.textContent = val;
 }
 
-export function renderAttendanceTable(records, tbodyId) {
-    const tbody = document.getElementById(tbodyId);
+function card(icon, title, value, color = 'primary') {
+    return `<div class="col-md-3 col-sm-6"><div class="stat-card border-start border-4 border-${color}">
+        <div class="stat-label">${title}</div>
+        <div class="stat-value text-${color}">${value}</div>
+        <i class="bi ${icon} stat-icon"></i>
+    </div></div>`;
+}
+
+function emptyRow(colspan, msg = 'No records found.') {
+    return `<tr><td colspan="${colspan}" class="text-center text-muted py-4"><i class="bi bi-inbox me-2"></i>${msg}</td></tr>`;
+}
+
+// ── Profile ───────────────────────────────────────────────────────────────────
+async function loadStudentProfile() {
+    const res = await api.getStudentProfile();
+    if (!res.ok || !res.data?.success) return;
+    const s   = res.data.student;
+    const name = `${s.first_name || ''} ${s.last_name || ''}`.trim();
+
+    setEl('stu-welcome-name',  `Welcome, ${name}!`);
+    setEl('stu-header-dept',   s.bow_category || s.bow_type || '—');
+    setEl('stu-profile-name',  name);
+    setEl('stu-profile-email', s.email || '—');
+    setEl('stu-profile-phone', s.phone || '—');
+    setEl('stu-profile-gender', s.gender || '—');
+    setEl('stu-profile-bow',   `${s.bow_category || ''} / ${s.bow_type || ''}`);
+    setEl('stu-profile-exp',   s.experience || '—');
+    setEl('stu-profile-cat',   s.age_category || '—');
+    setEl('stu-profile-status', s.status || 'active');
+    setEl('stu-profile-join',  s.joining_date || '—');
+}
+
+// ── Performance ───────────────────────────────────────────────────────────────
+async function loadStudentPerformance() {
+    const res = await api.getStudentPerformance();
+    const tbody = document.getElementById('stu-performance-tbody');
     if (!tbody) return;
 
-    if (!records || records.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="3" class="text-center text-muted py-4"><i class="bi bi-calendar-x fs-4 text-secondary opacity-50 d-block mb-1"></i>No attendance records found yet.</td></tr>`;
+    if (!res.ok || !res.data?.success || !res.data.performance?.length) {
+        tbody.innerHTML = emptyRow(7, 'No performance records yet. Your coach will add them after your sessions.');
+        setEl('stu-card-overall', '—');
         return;
     }
 
-    let html = '';
-    records.forEach(rec => {
-        let badgeClass = 'bg-success';
-        if (rec.status === 'Absent') badgeClass = 'bg-danger';
-        else if (rec.status === 'Late') badgeClass = 'bg-warning text-dark';
+    const rows = res.data.performance;
+    // Compute latest accuracy for stat card
+    const latest = rows[0];
+    setEl('stu-card-overall', latest.accuracy ? `${latest.accuracy}%` : `${latest.score || '—'}`);
 
-        html += `
-            <tr>
-                <td class="ps-4 fw-semibold text-dark">${rec.date}</td>
-                <td><span class="badge ${badgeClass} px-3 py-1 rounded-pill">${rec.status}</span></td>
-                <td class="text-secondary small">${rec.remarks || '-'}</td>
-            </tr>
-        `;
-    });
-    tbody.innerHTML = html;
+    tbody.innerHTML = rows.map(r => `
+        <tr>
+            <td>${r.performance_date || '—'}</td>
+            <td><span class="badge bg-primary">${r.score ?? '—'}</span></td>
+            <td>${r.total_arrows ?? '—'}</td>
+            <td>${r.accuracy != null ? r.accuracy + '%' : '—'}</td>
+            <td>${r.distance || '—'}</td>
+            <td>${r.category || '—'}</td>
+            <td><span class="text-muted small">${r.remarks || '—'}</span></td>
+        </tr>
+    `).join('');
 }
 
-export function renderStudentCharts(student) {
-    if (stuBarChartInstance) {
-        stuBarChartInstance.destroy();
-        stuBarChartInstance = null;
-    }
-    if (stuPieChartInstance) {
-        stuPieChartInstance.destroy();
-        stuPieChartInstance = null;
-    }
+// ── Attendance ─────────────────────────────────────────────────────────────────
+async function loadStudentAttendance() {
+    const res = await api.getStudentAttendance();
+    const tbody = document.getElementById('stu-attendance-tbody');
+    if (!tbody) return;
 
-    const evals = (student && Array.isArray(student.scoresByEvaluation)) ? student.scoresByEvaluation : [];
-    const skills = (student && student.skills && typeof student.skills === 'object') ? student.skills : {};
-
-    const barCtx = document.getElementById('stuBarChart');
-    if (barCtx) {
-        const labels = evals.length > 0 ? evals.map(s => s.date) : ['No Sessions Yet'];
-        const dataScores = evals.length > 0 ? evals.map(s => s.score) : [0];
-
-        stuBarChartInstance = new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Evaluation Score',
-                    data: dataScores,
-                    backgroundColor: evals.length > 0 ? 'rgba(15, 118, 110, 0.75)' : 'rgba(203, 213, 225, 0.4)',
-                    borderColor: evals.length > 0 ? '#0f766e' : '#cbd5e1',
-                    borderWidth: 1.5,
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true, max: 360 }
-                }
-            }
-        });
+    if (!res.ok || !res.data?.success || !res.data.attendance?.length) {
+        tbody.innerHTML = emptyRow(4, 'No attendance records found.');
+        setEl('stu-card-attendance', '—');
+        return;
     }
 
-    const pieCtx = document.getElementById('stuPieChart');
-    if (pieCtx) {
-        const pieKeys = Object.keys(skills);
-        const pieLabels = pieKeys.length > 0 ? pieKeys : ['Pending Assessment'];
-        const pieData = pieKeys.length > 0 ? Object.values(skills) : [100];
-        const pieColors = pieKeys.length > 0 ? ['#0f766e', '#14b8a6', '#f59e0b', '#0284c7', '#7c3aed'] : ['#e2e8f0'];
+    const rows    = res.data.attendance;
+    const present = rows.filter(r => r.status === 'present').length;
+    const total   = rows.length;
+    const pct     = total > 0 ? Math.round((present / total) * 100) : 0;
+    setEl('stu-card-attendance', `${pct}%`);
 
-        stuPieChartInstance = new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: pieLabels,
-                datasets: [{
-                    data: pieData,
-                    backgroundColor: pieColors
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-    }
+    const statusBadge = { present: 'success', absent: 'danger', leave: 'warning', late: 'info' };
+    tbody.innerHTML = rows.map(r => `
+        <tr>
+            <td>${r.attendance_date || '—'}</td>
+            <td><span class="badge bg-${statusBadge[r.status] || 'secondary'}">${r.status}</span></td>
+            <td>${r.coach_name || '—'}</td>
+            <td><span class="text-muted small">${r.remarks || '—'}</span></td>
+        </tr>
+    `).join('');
 }
+
+// ── Bow Maintenance ────────────────────────────────────────────────────────────
+async function loadStudentBowMaintenance() {
+    const res = await api.getStudentBowMaintenance();
+    const tbody = document.getElementById('stu-bow-maintenance-tbody');
+    if (!tbody) return;
+
+    if (!res.ok || !res.data?.success || !res.data.bow_maintenance?.length) {
+        tbody.innerHTML = emptyRow(7, 'No maintenance records found.');
+        return;
+    }
+
+    const conditionBadge = { excellent: 'success', good: 'primary', fair: 'warning', poor: 'danger', needs_repair: 'danger' };
+    tbody.innerHTML = res.data.bow_maintenance.map(r => `
+        <tr>
+            <td>${r.equipment_name || '—'}</td>
+            <td>${r.equipment_number || '—'}</td>
+            <td>${r.maintenance_date || '—'}</td>
+            <td><span class="badge bg-${conditionBadge[r.condition] || 'secondary'}">${r.condition || '—'}</span></td>
+            <td>${r.maintenance_details || '—'}</td>
+            <td>${r.next_maintenance_date || '—'}</td>
+            <td><span class="text-muted small">${r.remarks || '—'}</span></td>
+        </tr>
+    `).join('');
+}
+
+// ── Fees ───────────────────────────────────────────────────────────────────────
+async function loadStudentFees() {
+    const res = await api.getStudentFees();
+    const tbody = document.getElementById('stu-fees-tbody');
+    if (!tbody) return;
+
+    if (!res.ok || !res.data?.success || !res.data.fees?.length) {
+        tbody.innerHTML = emptyRow(6, 'No fee records found.');
+        setEl('stu-card-fees', '—');
+        return;
+    }
+
+    const rows    = res.data.fees;
+    const pending = rows.filter(r => r.payment_status === 'pending' || r.payment_status === 'overdue');
+    setEl('stu-card-fees', pending.length > 0 ? `${pending.length} Pending` : 'All Clear');
+
+    const statusBadge = { paid: 'success', pending: 'warning', overdue: 'danger' };
+    tbody.innerHTML = rows.map(r => `
+        <tr>
+            <td>${r.fee_type || '—'}</td>
+            <td>₹${parseFloat(r.amount || 0).toFixed(2)}</td>
+            <td>${r.due_date || '—'}</td>
+            <td>${r.payment_date || '—'}</td>
+            <td><span class="badge bg-${statusBadge[r.payment_status] || 'secondary'}">${r.payment_status}</span></td>
+            <td><span class="text-muted small">${r.transaction_reference || '—'}</span></td>
+        </tr>
+    `).join('');
+}
+
+// ── Notifications ──────────────────────────────────────────────────────────────
+async function loadStudentNotifications() {
+    const res   = await api.getStudentNotifications();
+    const tbody = document.getElementById('stu-notifications-tbody');
+    if (!tbody) return;
+
+    if (!res.ok || !res.data?.success || !res.data.notifications?.length) {
+        tbody.innerHTML = emptyRow(3, 'No notifications.');
+        return;
+    }
+
+    const rows = res.data.notifications;
+    const unread = rows.filter(r => !r.is_read).length;
+    if (unread > 0) {
+        const badge = document.getElementById('stu-notif-badge');
+        if (badge) { badge.textContent = unread; badge.classList.remove('d-none'); }
+    }
+
+    tbody.innerHTML = rows.map(r => `
+        <tr class="${r.is_read ? '' : 'table-warning fw-semibold'}">
+            <td>${r.title || '—'}</td>
+            <td>${r.message || '—'}</td>
+            <td>${(r.created_at || '').substring(0, 16) || '—'}</td>
+        </tr>
+    `).join('');
+}
+
+// ── Ensure dashboard HTML is loaded ────────────────────────────────────────────
+async function ensureStudentDashboardLoaded() {
+    const container = document.getElementById('student-view');
+    if (!container) return;
+    // If content already loaded (static HTML), skip fetch
+    if (container.querySelector('#stu-performance-tbody')) return;
+    try {
+        const res = await fetch('/pages/student/dashboard.html');
+        if (res.ok) container.innerHTML = await res.text();
+    } catch (e) {}
+}
+
+// ── Logout ─────────────────────────────────────────────────────────────────────
+export async function handleLogout() {
+    await api.logout();
+    clearCurrentUser();
+    hideAllViews();
+    showLoginView();
+}
+
+// Expose globally for onclick handlers in HTML
+window.handleLogout = handleLogout;

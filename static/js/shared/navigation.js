@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Navigation & Page Routing Helper Module
  * Manages role badges, dynamic navbar items, page switching, and sign-out handlers.
  */
@@ -51,11 +51,11 @@ export function showNavbar(role, displayName) {
         if (role === 'student') {
             navLinks.innerHTML = `
                 <li class="nav-item"><a class="nav-link active" data-target="student-view" href="#" onclick="showSection('student-view')"><i class="bi bi-grid-fill me-1"></i> Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" data-target="student-profile-section" href="#student-profile-section"><i class="bi bi-person-badge me-1"></i> Profile</a></li>
-                <li class="nav-item"><a class="nav-link" data-target="student-performance-section" href="#student-performance-section"><i class="bi bi-graph-up-arrow me-1"></i> Performance</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="student-profile-section" href="#student-profile-section"><i class="bi bi-person-badge me-1"></i> My Profile</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="student-performance-section" href="#student-performance-section"><i class="bi bi-graph-up-arrow me-1"></i> My Performance</a></li>
                 <li class="nav-item"><a class="nav-link" data-target="student-schedule-section" href="#student-schedule-section"><i class="bi bi-calendar3 me-1"></i> Schedule</a></li>
                 <li class="nav-item"><a class="nav-link" data-target="student-equipment-section" href="#student-equipment-section"><i class="bi bi-tools me-1"></i> Equipment</a></li>
-                <li class="nav-item"><a class="nav-link" data-target="student-fees-section" href="#student-fees-section"><i class="bi bi-credit-card me-1"></i> Fees & Dues</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="student-fees-section" href="#student-fees-section"><i class="bi bi-credit-card me-1"></i> Fees</a></li>
                 <li class="nav-item"><a class="nav-link" data-target="student-events-section" href="#student-events-section"><i class="bi bi-megaphone me-1"></i> Events</a></li>
             `;
         } else if (role === 'coach') {
@@ -69,9 +69,11 @@ export function showNavbar(role, displayName) {
         } else if (role === 'admin') {
             navLinks.innerHTML = `
                 <li class="nav-item"><a class="nav-link active" data-target="admin-view" href="#" onclick="showSection('admin-view')"><i class="bi bi-shield-lock me-1"></i> Admin Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="admin-student-search-section" href="#admin-student-search-section"><i class="bi bi-person-badge me-1"></i> Student Search</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="admin-coach-reports-section" href="#admin-coach-reports-section"><i class="bi bi-activity me-1"></i> Coach Reports</a></li>
                 <li class="nav-item"><a class="nav-link" data-target="admin-equipment-section" href="#admin-equipment-section"><i class="bi bi-tools me-1"></i> Equipment</a></li>
-                <li class="nav-item"><a class="nav-link" data-target="admin-fees-section" href="#admin-fees-section"><i class="bi bi-cash-stack me-1"></i> Fees & Revenue</a></li>
-                <li class="nav-item"><a class="nav-link" data-target="admin-schedule-section" href="#admin-schedule-section"><i class="bi bi-calendar-week me-1"></i> Training Schedule</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="admin-fees-section" href="#admin-fees-section"><i class="bi bi-cash-stack me-1"></i> Fees</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="admin-schedule-section" href="#admin-schedule-section"><i class="bi bi-calendar-week me-1"></i> Schedule</a></li>
                 <li class="nav-item"><a class="nav-link" data-target="admin-publish-section" href="#admin-publish-section"><i class="bi bi-megaphone me-1"></i> Publish Event</a></li>
                 <li class="nav-item"><a class="nav-link" data-target="admin-events-list-section" href="#admin-events-list-section"><i class="bi bi-list-check me-1"></i> Events</a></li>
             `;

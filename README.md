@@ -1,105 +1,235 @@
-# 🎯 Phoenix Elite Sports Academy
+# 🏹 Intelligent Archery Academy Management and Performance Analysis System
 
-An intelligent, modern web portal for managing archery and sports training, performance tracking, events, and operations at **Phoenix Elite Sports Academy**.
-
----
-
-## ⚡ Quick Start: How to Run Locally
-
-The academy system includes a **Python Flask & SQLite Database Backend** (`academy.db`) providing real-time database persistence for student operations (Registration, Authentication, Profile, Practice Slot Booking, Equipment Requests, and Fee Payments).
-
-### Option 1: Double-Click Launcher (Easiest)
-
-1. Navigate to the project root: `d:\archeryacademymanagement`
-2. Double-click `run_server.bat`
-3. It launches `server.py`, connects to `academy.db`, and opens **`http://127.0.0.1:5500`** in your browser.
+A comprehensive, end-to-end web portal and analytics platform for archery academies, providing role-based portals for **Students**, **Coaches**, and **Administrators** backed by a **MySQL 8** relational database and a **Flask** REST backend.
 
 ---
 
-### Option 2: Using Terminal (Recommended)
+## 1. Project Description
 
-1. Open PowerShell or Command Prompt inside the project directory:
+The **Intelligent Archery Academy Management System** digitizes academy operations:
+- **Students (View-Only)**: Review individualized performance scores, archery metrics (grouping, accuracy, distance), attendance records, bow/equipment maintenance status, invoices & payment history, and tournament announcements.
+- **Coaches**: Search any student by Student ID (e.g. `STU001`), record archery scoring rounds with dynamic accuracy computation, log daily attendance, log equipment condition and maintenance cycles, and generate comprehensive progress reports for academy management.
+- **Administrators**: Central administrative control with real-time dashboard analytics, student & coach directories, fee management, coach report reviews, and audit trails.
+
+---
+
+## 2. Technologies
+
+- **Frontend**: Semantic HTML5, Vanilla CSS3 (custom responsive styling, glassmorphism, responsive data cards), Vanilla JavaScript (ES6+ modular state, asynchronous fetch API, Chart.js for scoring analytics).
+- **Backend**: Python 3.10+, Flask REST API, Werkzeug (PBKDF2/scrypt password hashing & session management).
+- **Database**: **MySQL 8** with InnoDB engine, parameterized queries, dynamic transactions, and audit logging.
+- **Driver**: `mysql-connector-python`.
+
+---
+
+## 3. MySQL Installation & Setup
+
+1. Install **MySQL Server 8.0+** (or MySQL Community Server) and MySQL Workbench if desired.
+2. Start the MySQL service:
    ```powershell
-   cd d:\archeryacademymanagement
+   # Windows service check/start
+   net start MySQL80
    ```
-
-2. Start the database & application server:
+3. Verify connection via MySQL CLI:
    ```powershell
-   python server.py
-   ```
-
-3. Open your browser and navigate to:
-   ```
-   http://127.0.0.1:5500
+   mysql -u root -p
    ```
 
 ---
 
-## 🗄️ Database Architecture (SQLite)
+## 4. Database Creation
 
-All **Student Operations** are connected directly to the local SQLite database (`academy.db`):
+Open your MySQL prompt and run:
 
-- **Database File**: `academy.db` (auto-created on start)
-- **Database Driver**: Python standard library `sqlite3` + `Flask` REST API
-- **Tables Connected**:
-  - `students`: Enrolled archer records, credentials, profile, skills, attendance statistics.
-  - `student_attendance`: Historical training presence/absence and session notes.
-  - `student_scores`: Historical scoring rounds and Chart.js trend evaluations.
-  - `training_slot_bookings`: Real-time range practice lane bookings and cancellations.
-  - `equipment_requests`: Bow repair, tuning, and checkout service tickets.
-  - `fees`: Invoices, online payment processing, and branded receipts.
+```sql
+CREATE DATABASE IF NOT EXISTS archery_academy
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+USE archery_academy;
+```
 
 ---
 
-## 🔑 Login Credentials
+## 5. Schema Execution
 
-### 🛡️ Administrator Logins (3 Built-in Hardcoded Accounts)
+Execute the full database DDL schema located in `database/schema.sql`:
 
-Select the **Admin** login card or use the **Quick Admin Demo Logins** shortcuts on the login screen:
+```powershell
+mysql -u root -p archery_academy < database/schema.sql
+```
 
-| Admin Account | Email / Username | Password | Access Level & Role |
+The schema establishes 13 relational tables with foreign keys and cascade integrity:
+1. `users`: Central authentication with password hashes and roles (`student`, `coach`, `admin`).
+2. `students`: Archer profiles linked to `users.id`.
+3. `coaches`: Coach profiles linked to `users.id`.
+4. `admins`: Administrator profiles linked to `users.id`.
+5. `tournaments`: Upcoming and completed archery events.
+6. `performance`: End-by-end arrow scores, accuracy, distance, and categories.
+7. `attendance`: Daily presence/absence/leave tracking.
+8. `bow_maintenance`: Bow inspection, string condition, nock calibration, and service dates.
+9. `fees`: Invoices, fee types, payment statuses, and transaction receipts.
+10. `training_schedules`: Range lane bookings and practice drill sessions.
+11. `coach_reports`: Progress reports submitted by coaches to administration.
+12. `notifications`: Real-time user notifications.
+13. `activity_logs`: Comprehensive audit logging for all mutations.
+
+---
+
+## 6. Seed / Admin Setup
+
+Execute `database/seed.sql` to populate initial accounts and sample records:
+
+```powershell
+mysql -u root -p archery_academy < database/seed.sql
+```
+
+Alternatively, running `python server.py` will automatically invoke `init_db()` which verifies schema tables and seeds initial administrative accounts.
+
+---
+
+## 7. Python Package Installation
+
+Install required dependencies from `requirements.txt`:
+
+```powershell
+pip install -r requirements.txt
+```
+
+Packages included:
+- `flask`
+- `mysql-connector-python`
+- `werkzeug`
+- `python-dotenv`
+
+---
+
+## 8. MySQL Configuration (`.env`)
+
+Configure your database credentials in `.env` (copy from `.env.example` if needed):
+
+```ini
+# Database Connection
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=root12
+DB_NAME=archery_academy
+
+# Server Settings
+SECRET_KEY=phoenix-archery-secure-secret-key-2026
+PORT=5500
+HOST=127.0.0.1
+```
+
+---
+
+## 9. How to Run the Application
+
+### Option A: Using the Launcher
+Double-click `run_server.bat` or run:
+```powershell
+.\start.ps1
+```
+
+### Option B: Terminal Command
+```powershell
+python server.py --port 5500
+```
+
+Access the application in your browser:
+```text
+http://127.0.0.1:5500
+```
+
+Health check endpoint:
+```text
+http://127.0.0.1:5500/api/health
+```
+
+Run test suite & database audit:
+```powershell
+python test_db.py
+```
+
+---
+
+## 10. Login Roles & Default Credentials
+
+| Role | Email / Identifier | Password | Access / Scope |
 | :--- | :--- | :--- | :--- |
-| **Admin 1 (Director)** | `admin1@gmail.com` / `admin@gmail.com` (or `admin` / `admin1`) | `Admin@4321` | Academy Director & Master Admin |
-| **Admin 2 (Operations)** | `admin2@gmail.com` (or `admin2`) | `Admin@4321` | Range Operations & Equipment Manager |
-| **Admin 3 (Finance & Events)** | `admin3@gmail.com` (or `admin3`) | `Admin@4321` | Tournament Coordinator & Accounts Head |
+| **Admin 1** (Director) | `admin1@gmail.com` | `Admin@4321` | Full academy oversight, reports, finances, audit logs |
+| **Admin 2** (Operations) | `admin2@gmail.com` | `Admin@4321` | Operations & range management |
+| **Admin 3** (Finance) | `admin3@gmail.com` | `Admin@4321` | Fee structures & accounting |
+| **Coach** | `coach@gmail.com` | `Coach@1234` | Search students, update performance, attendance & equipment, submit reports |
+| **Student** | `student@gmail.com` | `Student@1234` | View-only personal performance, attendance, gear, fees & notifications |
 
 ---
 
-### 🏹 Students & Coaches (Self-Registration)
-- **No hardcoded student or coach accounts**: All students and coaches register dynamically.
-- **Student Registration**: Click **"Register as Student"** on the login page to register a new archer account.
-- **Coach Registration**: Click **"Register as Coach"** on the login page or within the registration portal to join the academy coaching staff.
+## 11. Student Workflow
+
+1. **Sign-Up**: Navigate to `/pages/register.html`, submit archer information (Name, Username, Email, Phone, Age Category, Bow Type). Account is registered with `role='student'` and a unique `STUxxx` identifier is assigned.
+2. **Login**: Authenticate at `/pages/login.html` with Student credentials.
+3. **View-Only Access**:
+   - **Personal Dashboard**: View bow specifications, joined date, emergency contact.
+   - **Performance Log**: Review score progression, accuracy percentage, and coach feedback remarks.
+   - **Attendance**: Check presence history and attendance rate.
+   - **Equipment Status**: View maintenance history and scheduled tuning dates.
+   - **Fees**: Review fee payment status and payment history.
+   - **Notifications**: Receive instant alerts when coaches update performance or equipment records.
+4. **Security**: Students cannot access coach or admin dashboards, search other students, or modify any database record.
 
 ---
 
-## 🏹 Portals & Key Features
+## 12. Coach Workflow
 
-### 1. Student Portal
-- **Score Analytics**: View historical practice rounds, 10-ring accuracy, and Chart.js trend curves.
-- **Skills Evaluation**: Form & Posture, Aim & Anchor, Release Technique, Mental Focus, and Stamina.
-- **Training Schedule**: View category-recommended weekly training batches (70m/50m/18m), shooting lanes, and reserve practice slots with real-time capacity tracking.
-- **Equipment & Service Desk**: View academy-issued bows and gear; submit repair, tuning, and checkout service requests with live status updates.
-- **Fee Management & Receipts**: Track tuition, bow rental, and tournament dues; pay online via instant simulated gateway; generate and print official branded Academy Fee Receipts.
-- **Attendance Records**: Track present/absent/late counts and session notes.
-
-### 2. Coach Portal
-- **Trainee Directory**: Search and filter archers by name, category (Recurve, Compound, Indian Bow), or grade.
-- **Performance Inspection**: Inspect individual archer Chart.js progress curves, skill breakdown, and coach notes.
-- **Training Batches & Rosters**: View weekly sessions, lane assignments, and rosters of checked-in archers per training slot.
-- **Equipment Roster**: Inspect academy bow conditions, armory storage locations, and quickly flag items for maintenance.
-
-### 3. Admin Portal
-- **Academy Financial Ledger & Fee Management**: Real-time revenue KPI summary, issue student invoices (monthly training, gear rental, tournament entry), record offline payments, and audit printable receipts.
-- **Equipment & Armory Inventory**: Register new equipment, allocate gear to enrolled students, track condition lifecycles, and approve/reject archer service requests.
-- **Training Schedule Master**: Create and manage weekly batches across multiple shooting ranges and lanes with assigned coaches, target distances, and capacity limits.
-- **Event Management**: Publish tournaments, selection trials, and bow tuning workshops with instant broadcasting.
+1. **Login**: Authenticate with Coach credentials (`coach@gmail.com` / `Coach@1234`).
+2. **Search Student**: Enter Student ID (e.g. `STU001` or `STU002`) in the search bar. Real-time query fetches the student's live profile, recent scoring, attendance history, and equipment status.
+3. **Update Performance**:
+   - Enter Score, Total Arrows, Distance (e.g. `70m`), Category (`Recurve Bow`), and Coach Remarks.
+   - Submitting executes a MySQL transaction: updates the `performance` table, logs an `activity_log`, creates a notification for the student, and sends an alert to the administrator.
+4. **Update Attendance**: Mark student as Present, Absent, or Leave with session notes.
+5. **Update Bow Maintenance**: Log equipment condition (`excellent`, `good`, `fair`, `needs_repair`), service details, and next service date.
+6. **Submit Coach Report**: Submit structured evaluations (performance summary, attendance summary, bow maintenance summary) directly to the Administration.
 
 ---
 
-## 🛠️ Technology Stack
+## 13. Admin Workflow
 
-- **Frontend**: HTML5, Vanilla CSS3 (glassmorphism & responsive design), JavaScript ES6+ (Modular ES Modules)
-- **Styling & UI**: [Bootstrap 5.3.3](https://getbootstrap.com/), [Bootstrap Icons](https://icons.getbootstrap.com/)
-- **Charts & Visualizations**: [Chart.js](https://www.chartjs.org/)
-- **Persistence**: Browser `localStorage` with reactive multi-module state synchronization
+1. **Login**: Authenticate with Administrator credentials (`admin1@gmail.com` / `Admin@4321`).
+2. **Dashboard Overview**: Review total student count, active coaches, monthly fee collection, and academy performance averages.
+3. **Student Directory & Search**: Browse all enrolled students or search by Student ID.
+4. **Coach Oversight**: Review coach profiles and incoming progress reports from coaches.
+5. **Fee Management**: Review paid, pending, and overdue fees; log invoice payments.
+6. **Live Notifications**: View automated alerts generated whenever a coach updates a student's score, attendance, or bow maintenance.
+7. **Audit Trail**: Review system `activity_logs` tracking every mutation across the platform.
 
+---
+
+## 14. Architecture Flow
+
+```text
+               CLIENT BROWSER (HTML5 / Vanilla CSS / ES6 JS)
+                                     │
+                                     ▼
+                      FLASK REST BACKEND (server.py)
+                         ├── Role Guards & Auth
+                         ├── Parameterized Validations
+                         └── Dynamic Transactions
+                                     │
+                                     ▼
+                      MYSQL 8 RELATIONAL DATABASE
+                         ├── users
+                         ├── students
+                         ├── coaches
+                         ├── admins
+                         ├── performance
+                         ├── attendance
+                         ├── bow_maintenance
+                         ├── fees
+                         ├── tournaments
+                         ├── training_schedules
+                         ├── coach_reports
+                         ├── notifications
+                         └── activity_logs
+```

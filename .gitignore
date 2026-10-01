@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment variables (NEVER commit credentials)
+.env
+
+# SQLite database file
+*.db
+
+# Oracle Wallet / credentials
+wallet/
+tnsnames.ora
+sqlnet.ora
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,4 +1,4 @@
-<!-- =================================================================== -->
+﻿<!-- =================================================================== -->
 <!-- LOGIN PAGE MODULE (pages/login.html)                                -->
 <!-- =================================================================== -->
 <div class="split-auth-container">
@@ -11,7 +11,7 @@
                     <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="hero-brand-logo">
                 </div>
                 <h1 class="brand-title">PHOENIX ELITE SPORTS ACADEMY</h1>
-                <p class="brand-tagline">Intelligent Training, Performance & Event Portal</p>
+                <p class="brand-tagline">Intelligent Training, Performance &amp; Event Portal</p>
                 <div class="brand-badge">
                     <i class="bi bi-shield-check"></i> Official Sports Academy Portal
                 </div>
@@ -20,7 +20,7 @@
             <div class="archery-visual-feature">
                 <div class="visual-pill">
                     <i class="bi bi-award-fill text-warning"></i>
-                    <span>Precision Tracking & Analytics</span>
+                    <span>Precision Tracking &amp; Analytics</span>
                 </div>
             </div>
 
@@ -69,7 +69,15 @@
                 </div>
             </div>
 
-            <div class="left-pane-footer d-flex align-items-center gap-2">
+            <!-- Login Credentials Info -->
+            <div class="p-3 rounded-3 mt-3" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); font-size:0.78rem; color:rgba(255,255,255,0.75);">
+                <div class="fw-bold mb-1" style="color:rgba(255,255,255,0.9);"><i class="bi bi-info-circle me-1"></i>Login Credentials</div>
+                <div><strong>Student:</strong> siva@gmail.com / Siva@1234</div>
+                <div><strong>Coach:</strong> coach@gmail.com / Coach@1234</div>
+                <div><strong>Admin:</strong> admin@gmail.com / Admin/21234</div>
+            </div>
+
+            <div class="left-pane-footer d-flex align-items-center gap-2 mt-3">
                 <img src="https://ik.imagekit.io/f0akak1td/IMG-20260908-WA0029.jpg" alt="Phoenix Elite Sports Academy Logo" class="footer-mini-logo">
                 <span>&copy; 2026 Phoenix Elite Sports Academy</span>
             </div>
@@ -96,9 +104,9 @@
                         <i class="bi bi-envelope-fill me-1"></i> Email / Username
                     </label>
                     <div class="input-wrapper">
-                        <input type="text" class="form-control custom-input" id="email" placeholder="Enter your email or username" required autocomplete="email">
+                        <input type="text" class="form-control custom-input" id="email" placeholder="Enter your email" required autocomplete="email">
                     </div>
-                    <div class="invalid-feedback small">Please enter your email or username.</div>
+                    <div class="invalid-feedback small">Please enter your email.</div>
                 </div>
 
                 <div class="form-group-custom mb-3">
@@ -114,37 +122,21 @@
                     <div class="invalid-feedback small">Please enter your password.</div>
                 </div>
 
-                <button type="submit" class="btn btn-login-submit w-100 mb-3">
+                <button type="submit" class="btn btn-login-submit w-100 mb-3" id="login-submit-btn">
                     <span>Sign In</span>
                     <i class="bi bi-arrow-right-short ms-1 fs-5"></i>
                 </button>
 
-                <!-- Demo Quick Login Shortcuts -->
-                <div class="quick-demo-box">
-                    <div class="demo-title"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Quick Admin Demo Logins:</div>
-                    <div class="demo-buttons-grid">
-                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(1)">
-                            <i class="bi bi-shield-shaded"></i> Admin 1 (Director)
-                        </button>
-                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(2)">
-                            <i class="bi bi-shield-shaded"></i> Admin 2 (Operations)
-                        </button>
-                        <button type="button" class="demo-pill-btn admin" onclick="fillAdminCredentials(3)">
-                            <i class="bi bi-shield-shaded"></i> Admin 3 (Finance)
-                        </button>
-                    </div>
-                    <div class="text-center mt-2">
-                        <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Students & Coaches: Register your account using the link below.</small>
-                    </div>
+                <!-- Status note -->
+                <div class="text-center mt-2">
+                    <small class="text-muted">
+                        <i class="bi bi-database-slash me-1 text-warning"></i>
+                        Running in local mode &mdash; SQL database not connected
+                    </small>
                 </div>
 
-                <!-- Student Registration Link (VISIBLE ONLY FOR STUDENT ROLE) -->
-                <div id="register-link-container" class="register-footer-link">
-                    <span class="text-muted small">Don't have an account?</span>
-                    <a href="#" class="register-link-btn" onclick="showRegisterView(event)">
-                        Register Here <i class="bi bi-arrow-right-short"></i>
-                    </a>
-                </div>
+                <!-- Hidden register link container (no public registration in local mode) -->
+                <div id="register-link-container" class="d-none"></div>
             </form>
         </div>
 

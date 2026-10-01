@@ -1,16 +1,17 @@
-<!-- =================================================================== -->
+﻿<!-- =================================================================== -->
 <!-- STUDENT DASHBOARD PAGE MODULE (pages/student/dashboard.html)        -->
+<!-- View-only portal. Student sees OWN records only. No search box.     -->
 <!-- =================================================================== -->
 <div class="container py-4">
     <!-- Notice Banner -->
     <div class="prototype-notice d-flex align-items-center justify-content-between">
         <div>
             <i class="bi bi-info-circle-fill me-2"></i>
-            <strong>Student Portal:</strong> Personal performance, subject-wise analytics, attendance, and academy events.
+            <strong>Student Portal:</strong> View your personal performance, attendance, bow maintenance, and evaluations.
         </div>
         <div class="d-flex align-items-center gap-2">
-            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1" id="stu-db-status">
-                <i class="bi bi-database-check me-1"></i> SQLite Database Connected
+            <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3 py-1" id="stu-db-status">
+                <i class="bi bi-database-slash me-1"></i> Local Mode
             </span>
             <span class="badge bg-primary">Student Portal</span>
         </div>
@@ -21,14 +22,11 @@
         <div>
             <h1 class="h3 fw-bold mb-1 text-dark" id="stu-welcome-name">Welcome, Student!</h1>
             <p class="text-muted mb-0">
-                Student ID: <span class="badge bg-dark fs-6" id="stu-header-id">STU000</span> | 
-                Course/Dept: <span class="text-primary fw-semibold" id="stu-header-dept">Department</span>
+                Student ID: <span class="badge bg-dark fs-6" id="stu-header-id">STU001</span> |
+                Course: <span class="text-primary fw-semibold" id="stu-header-dept">Sports Science</span>
             </p>
         </div>
         <div class="d-flex gap-2">
-            <a href="#student-performance-section" class="btn btn-primary rounded-pill px-3 shadow-sm">
-                <i class="bi bi-graph-up-arrow me-1"></i> View Performance & Charts
-            </a>
             <button type="button" class="btn btn-outline-danger rounded-pill px-3" onclick="handleLogout()">
                 <i class="bi bi-box-arrow-right me-1"></i> Sign Out
             </button>
@@ -46,28 +44,28 @@
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="stat-card border-start border-4 border-success">
-                <div class="stat-label">Attendance Rate</div>
-                <div class="stat-value text-success" id="stu-card-attendance">94%</div>
+                <div class="stat-label">Attendance</div>
+                <div class="stat-value text-success" id="stu-card-attendance">Pending</div>
                 <i class="bi bi-calendar-check stat-icon"></i>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="stat-card border-start border-4 border-info">
-                <div class="stat-label">Overall Score</div>
-                <div class="stat-value text-info" id="stu-card-overall">92%</div>
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-value text-info" id="stu-card-overall">Pending</div>
                 <i class="bi bi-award stat-icon"></i>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="stat-card border-start border-4 border-warning">
-                <div class="stat-label">Exam Score / Rank</div>
-                <div class="stat-value text-warning" id="stu-card-exam">338 (Rank 1)</div>
+                <div class="stat-label">Training Score</div>
+                <div class="stat-value text-warning" id="stu-card-exam">Pending</div>
                 <i class="bi bi-trophy stat-icon"></i>
             </div>
         </div>
     </div>
 
-    <!-- Student Profile Info Card -->
+    <!-- MY PROFILE -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-profile-section">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
@@ -78,118 +76,126 @@
         </div>
         <div class="card-body p-4 bg-light bg-opacity-50">
             <div class="row g-3">
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Student ID</span>
-                        <span class="fw-bold text-dark fs-6" id="stu-prof-id">STU001</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Full Name</span>
-                        <span class="fw-bold text-dark fs-6" id="stu-prof-name">Arjun Singh</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Email Address</span>
-                        <span class="fw-semibold text-dark small" id="stu-prof-email">arjun@gmail.com</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Phone Number</span>
-                        <span class="fw-semibold text-dark small" id="stu-prof-phone">9876543211</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Course / Dept</span>
-                        <span class="fw-semibold text-dark small" id="stu-prof-course">Computer Science</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Year / Semester</span>
-                        <span class="fw-semibold text-dark small" id="stu-prof-yearsem">Year 3 / Sem 5</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Bow Category</span>
-                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6" id="stu-prof-bowcat">Recurve Bow</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="p-3 bg-white rounded-3 shadow-sm h-100">
-                        <span class="text-muted small d-block mb-1">Experience</span>
-                        <span class="badge bg-success-subtle text-success border border-success-subtle fs-6" id="stu-prof-exp">Intermediate</span>
-                    </div>
-                </div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Student ID</span><span class="fw-bold text-dark fs-6" id="stu-prof-id">STU001</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Full Name</span><span class="fw-bold text-dark fs-6" id="stu-prof-name">Siva</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Age</span><span class="fw-semibold text-dark small" id="stu-prof-age">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Category</span><span class="fw-semibold text-dark small" id="stu-prof-category">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Email Address</span><span class="fw-semibold text-dark small" id="stu-prof-email">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Phone Number</span><span class="fw-semibold text-dark small" id="stu-prof-phone">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Course / Dept</span><span class="fw-semibold text-dark small" id="stu-prof-course">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Year / Semester</span><span class="fw-semibold text-dark small" id="stu-prof-yearsem">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Bow Category</span><span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6" id="stu-prof-bowcat">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-white rounded-3 shadow-sm h-100"><span class="text-muted small d-block mb-1">Experience</span><span class="badge bg-success-subtle text-success border border-success-subtle fs-6" id="stu-prof-exp">-</span></div></div>
             </div>
         </div>
     </div>
 
-    <!-- STUDENT PERFORMANCE & CHARTS SECTION -->
+    <!-- MY PERFORMANCE (VIEW ONLY) -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-performance-section">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-graph-up-arrow text-warning fs-5"></i>
-                <h5 class="mb-0 fw-bold text-dark">Performance Analytics & Visual Charts</h5>
+                <h5 class="mb-0 fw-bold text-dark">My Performance</h5>
             </div>
-            <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-1">Fixed Student Demo Metrics</span>
+            <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-1">View Only</span>
         </div>
         <div class="card-body p-4">
-            
-            <!-- Progress Bars: Subject & Skill-wise Performance -->
-            <div class="mb-4">
-                <h6 class="fw-bold text-dark mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Subject / Archery Skill Performance Breakdown</h6>
-                <div id="stu-skill-progress-bars">
-                    <!-- Generated by JS -->
-                </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Training Score</span><span class="fw-bold text-dark fs-5" id="stu-training-score">Not evaluated yet</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Tournament Score</span><span class="fw-bold text-dark fs-5" id="stu-tournament-score">Not evaluated yet</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Accuracy</span><span class="fw-bold text-success fs-5" id="stu-accuracy">Not evaluated yet</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Progress</span><span class="fw-bold text-info" id="stu-progress">Not evaluated yet</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Ranking / Position</span><span class="fw-bold text-warning" id="stu-ranking">Not evaluated yet</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Last Evaluation Date</span><span class="fw-bold text-dark small" id="stu-eval-date">Not evaluated yet</span></div></div>
             </div>
-
-            <!-- Performance Visual Charts (Bar & Pie) -->
+            <div class="p-3 bg-light rounded-3 border-start border-4 border-primary mb-4">
+                <h6 class="fw-bold text-dark mb-1"><i class="bi bi-journal-text me-1 text-primary"></i>Coach Remarks:</h6>
+                <p id="stu-coach-remarks" class="text-secondary small mb-0">No remarks from coach yet.</p>
+            </div>
+            <!-- Skill Progress Bars -->
+            <div class="mb-4">
+                <h6 class="fw-bold text-dark mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Skill Performance Breakdown</h6>
+                <div id="stu-skill-progress-bars"></div>
+            </div>
+            <!-- Charts -->
             <div class="row g-4 mb-4">
                 <div class="col-lg-6">
                     <div class="card border-0 shadow-sm rounded-3 h-100">
-                        <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom">
-                            <i class="bi bi-bar-chart-fill text-primary me-2"></i>Scores by Evaluation (Bar Chart)
-                        </div>
-                        <div class="card-body p-3">
-                            <canvas id="stuBarChart" height="220"></canvas>
-                        </div>
+                        <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom"><i class="bi bi-bar-chart-fill text-primary me-2"></i>Training Scores (Bar Chart)</div>
+                        <div class="card-body p-3"><canvas id="stuBarChart" height="220"></canvas></div>
                     </div>
                 </div>
-
                 <div class="col-lg-6">
                     <div class="card border-0 shadow-sm rounded-3 h-100">
-                        <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom">
-                            <i class="bi bi-pie-chart-fill text-success me-2"></i>Skill Proficiency Breakdown (Pie Chart)
-                        </div>
-                        <div class="card-body p-3 d-flex justify-content-center align-items-center">
-                            <canvas id="stuPieChart" style="max-height: 220px; max-width: 320px;"></canvas>
-                        </div>
+                        <div class="card-header bg-white py-2 fw-bold text-dark small border-bottom"><i class="bi bi-pie-chart-fill text-success me-2"></i>Skill Proficiency (Pie Chart)</div>
+                        <div class="card-body p-3 d-flex justify-content-center align-items-center"><canvas id="stuPieChart" style="max-height: 220px; max-width: 320px;"></canvas></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Progress Summary -->
-            <div class="p-3 bg-light rounded-3 border-start border-4 border-primary">
-                <h6 class="fw-bold text-dark mb-1"><i class="bi bi-journal-text me-1 text-primary"></i>Coach Progress Summary & Notes:</h6>
-                <p id="stu-progress-notes" class="text-secondary small mb-0">Demonstrating consistent form stability and steady progress across all distance rounds.</p>
+            <div class="p-3 bg-light rounded-3 border-start border-4 border-success">
+                <h6 class="fw-bold text-dark mb-1"><i class="bi bi-activity me-1 text-success"></i>Progress Summary:</h6>
+                <p id="stu-progress-notes" class="text-secondary small mb-0">No evaluations recorded yet. Coach will update your performance after assessment.</p>
             </div>
         </div>
     </div>
 
-    <!-- STUDENT ATTENDANCE SECTION -->
+    <!-- MY ATTENDANCE (VIEW ONLY) -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-calendar-check-fill text-success fs-5"></i>
-                <h5 class="mb-0 fw-bold text-dark">Attendance Record</h5>
+                <h5 class="mb-0 fw-bold text-dark">My Attendance Record</h5>
             </div>
-            <span id="stu-att-badge" class="badge bg-success rounded-pill px-3 py-1">Rate: 94%</span>
+            <span id="stu-att-badge" class="badge bg-success rounded-pill px-3 py-1">Rate: Pending</span>
+        </div>
+        <div class="card-body p-4">
+            <div class="row g-3 mb-4">
+                <div class="col-md-3 col-6"><div class="p-3 bg-light rounded-3 border text-center"><span class="text-muted small d-block">Total Classes</span><span class="fw-bold text-dark fs-4" id="stu-att-total">30</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-success-subtle rounded-3 border border-success-subtle text-center"><span class="text-muted small d-block">Present</span><span class="fw-bold text-success fs-4" id="stu-att-present">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-danger-subtle rounded-3 border border-danger-subtle text-center"><span class="text-muted small d-block">Absent</span><span class="fw-bold text-danger fs-4" id="stu-att-absent">-</span></div></div>
+                <div class="col-md-3 col-6"><div class="p-3 bg-warning-subtle rounded-3 border border-warning-subtle text-center"><span class="text-muted small d-block">Leave</span><span class="fw-bold text-warning fs-4" id="stu-att-leave">-</span></div></div>
+            </div>
+            <div class="p-3 bg-light rounded-3 border mb-3">
+                <span class="text-muted small">Attendance Percentage: </span>
+                <span class="fw-bold text-success fs-5" id="stu-att-pct">Not Set</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light"><tr><th class="ps-4">Date</th><th>Status</th><th>Remarks</th></tr></thead>
+                    <tbody id="stu-att-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MY BOW MAINTENANCE (VIEW ONLY) -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-tools text-warning fs-5"></i>
+                <h5 class="mb-0 fw-bold text-dark">My Bow Maintenance</h5>
+            </div>
+            <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-1">View Only</span>
+        </div>
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Bow Condition</span><span class="fw-bold text-dark" id="stu-bow-condition">Not Set</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Maintenance Status</span><span class="fw-bold text-dark" id="stu-maint-status">Not Set</span></div></div>
+                <div class="col-md-4 col-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Maintenance Date</span><span class="fw-bold text-dark" id="stu-maint-date">Not Set</span></div></div>
+                <div class="col-md-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Equipment Issues</span><span class="fw-bold text-dark" id="stu-equip-issues">None</span></div></div>
+                <div class="col-md-6"><div class="p-3 bg-light rounded-3 border"><span class="text-muted small d-block">Maintenance Remarks</span><span class="fw-bold text-dark" id="stu-maint-remarks">None</span></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MY EVALUATION HISTORY (VIEW ONLY) -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-clipboard-data-fill text-primary fs-5"></i>
+                <h5 class="mb-0 fw-bold text-dark">My Evaluation History</h5>
+            </div>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1">View Only</span>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -197,169 +203,86 @@
                     <thead class="table-light">
                         <tr>
                             <th class="ps-4">Date</th>
-                            <th>Status</th>
-                            <th>Session Remarks</th>
+                            <th>Score</th>
+                            <th>Accuracy</th>
+                            <th>Remarks</th>
+                            <th>Evaluated By</th>
                         </tr>
                     </thead>
-                    <tbody id="stu-att-tbody">
-                        <!-- Populated by JS -->
+                    <tbody id="stu-eval-history-tbody">
+                        <tr><td colspan="5" class="text-center text-muted py-4"><i class="bi bi-clock-history me-1"></i>No evaluation history yet.</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- STUDENT TRAINING SCHEDULE SECTION -->
+    <!-- TRAINING SCHEDULE SECTION -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-schedule-section">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-calendar-week-fill text-primary fs-5"></i>
-                <h5 class="mb-0 fw-bold text-dark">Weekly Training Schedule & Practice Slots</h5>
+                <h5 class="mb-0 fw-bold text-dark">Weekly Training Schedule &amp; Practice Slots</h5>
             </div>
             <span id="student-schedule-badge" class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1">0 Sessions</span>
         </div>
         <div class="card-body p-4 bg-light bg-opacity-50">
-            <p class="text-muted small mb-4">
-                <i class="bi bi-info-circle text-primary me-1"></i>
-                Review your training schedule, target distances (18m / 50m / 70m), allocated shooting lanes, and reserve or manage your practice slot bookings.
-            </p>
             <div class="row g-3" id="student-schedule-grid"></div>
         </div>
     </div>
 
-    <!-- STUDENT EQUIPMENT & SERVICE SECTION -->
+    <!-- EQUIPMENT SECTION -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-equipment-section">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-tools text-warning fs-5"></i>
-                <h5 class="mb-0 fw-bold text-dark">My Allocated Equipment & Service Desk</h5>
+                <h5 class="mb-0 fw-bold text-dark">My Allocated Equipment &amp; Service Desk</h5>
             </div>
             <span id="student-assigned-equip-badge" class="badge bg-warning-subtle text-dark border rounded-pill px-3 py-1">0 Items</span>
         </div>
         <div class="card-body p-4 bg-light bg-opacity-50">
             <h6 class="fw-bold text-dark mb-3"><i class="bi bi-shield-check text-success me-2"></i>Academy Gear Checked Out to You</h6>
             <div class="row g-3 mb-4" id="student-assigned-equip-grid"></div>
-
-            <!-- Equipment Maintenance & Checkout Request Card -->
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4" id="student-equipment-request-card">
-                <div class="card-header bg-white py-3 border-bottom">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-wrench-adjustable text-primary me-2"></i>Submit Gear Service, Tuning, or Checkout Request</h6>
-                </div>
+                <div class="card-header bg-white py-3 border-bottom"><h6 class="mb-0 fw-bold text-dark"><i class="bi bi-wrench-adjustable text-primary me-2"></i>Submit Gear Service or Checkout Request</h6></div>
                 <div class="card-body p-4 bg-white">
                     <form id="studentEquipmentRequestForm" onsubmit="handleStudentEquipmentRequestSubmit(event)">
                         <div class="row g-3">
-                            <div class="col-md-5">
-                                <label for="stu_req_equipment_name" class="form-label small fw-bold text-secondary text-uppercase">Equipment / Item Name</label>
-                                <input type="text" class="form-control" id="stu_req_equipment_name" placeholder="e.g. Recurve String, Sight Pin, Arrows" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="stu_req_type" class="form-label small fw-bold text-secondary text-uppercase">Request Category</label>
-                                <select class="form-select" id="stu_req_type" required>
-                                    <option value="Maintenance & Tuning" selected>🔧 Maintenance & Tuning</option>
-                                    <option value="Checkout Request">🏹 Equipment Checkout</option>
-                                    <option value="String / Nock Replacement">🎯 String / Arrow Repair</option>
-                                    <option value="Inspection">🔍 Safety Inspection</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary-custom w-100 py-2 fw-semibold">
-                                    <i class="bi bi-send-fill me-1"></i> Submit Request
-                                </button>
-                            </div>
-                            <div class="col-12">
-                                <label for="stu_req_description" class="form-label small fw-bold text-secondary text-uppercase">Issue Details / Specifications</label>
-                                <textarea class="form-control" id="stu_req_description" rows="2" placeholder="Describe the issue, required draw weight, arrow spine, or repair details..." required></textarea>
-                            </div>
+                            <div class="col-md-5"><label for="stu_req_equipment_name" class="form-label small fw-bold text-secondary text-uppercase">Equipment / Item Name</label><input type="text" class="form-control" id="stu_req_equipment_name" placeholder="e.g. Recurve String, Sight Pin, Arrows" required></div>
+                            <div class="col-md-4"><label for="stu_req_type" class="form-label small fw-bold text-secondary text-uppercase">Request Category</label><select class="form-select" id="stu_req_type" required><option value="Maintenance &amp; Tuning" selected>Maintenance &amp; Tuning</option><option value="Checkout Request">Equipment Checkout</option><option value="String / Nock Replacement">String / Arrow Repair</option><option value="Inspection">Safety Inspection</option></select></div>
+                            <div class="col-md-3 d-flex align-items-end"><button type="submit" class="btn btn-primary-custom w-100 py-2 fw-semibold"><i class="bi bi-send-fill me-1"></i> Submit</button></div>
+                            <div class="col-12"><label for="stu_req_description" class="form-label small fw-bold text-secondary text-uppercase">Issue Details</label><textarea class="form-control" id="stu_req_description" rows="2" placeholder="Describe the issue or required repair details..." required></textarea></div>
                         </div>
                     </form>
                 </div>
             </div>
-
-            <!-- Student Requests History -->
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <div class="card-header bg-white py-3 border-bottom">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-clock-history text-secondary me-2"></i>Your Recent Gear Requests</h6>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="ps-3">Req ID</th>
-                                    <th>Equipment Item</th>
-                                    <th>Category</th>
-                                    <th>Description</th>
-                                    <th class="text-end pe-3">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="student-requests-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
+                <div class="card-header bg-white py-3 border-bottom"><h6 class="mb-0 fw-bold text-dark"><i class="bi bi-clock-history text-secondary me-2"></i>Your Recent Gear Requests</h6></div>
+                <div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="table-light"><tr><th class="ps-3">Req ID</th><th>Equipment Item</th><th>Category</th><th>Description</th><th class="text-end pe-3">Status</th></tr></thead><tbody id="student-requests-tbody"></tbody></table></div></div>
             </div>
         </div>
     </div>
 
-    <!-- STUDENT FEES & INVOICES SECTION -->
+    <!-- FEES SECTION -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="student-fees-section">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-credit-card-2-front-fill text-info fs-5"></i>
-                <h5 class="mb-0 fw-bold text-dark">Fee Management & Payment Receipts</h5>
+                <h5 class="mb-0 fw-bold text-dark">Fee Management &amp; Payment Receipts</h5>
             </div>
             <span id="student-fees-badge" class="badge bg-info-subtle text-dark border rounded-pill px-3 py-1">0 Records</span>
         </div>
         <div class="card-body p-4 bg-light bg-opacity-50">
             <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <div class="stat-card border-start border-4 border-success">
-                        <div class="stat-label">Total Paid Fees</div>
-                        <div class="stat-value text-success" id="stu-fee-paid">₹0</div>
-                        <i class="bi bi-check-circle-fill stat-icon"></i>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card border-start border-4 border-warning">
-                        <div class="stat-label">Pending Dues</div>
-                        <div class="stat-value text-warning" id="stu-fee-due">₹0</div>
-                        <i class="bi bi-hourglass-split stat-icon"></i>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card border-start border-4 border-danger">
-                        <div class="stat-label">Overdue Dues</div>
-                        <div class="stat-value text-danger" id="stu-fee-overdue">₹0</div>
-                        <i class="bi bi-exclamation-octagon stat-icon"></i>
-                    </div>
-                </div>
+                <div class="col-md-4"><div class="stat-card border-start border-4 border-success"><div class="stat-label">Total Paid Fees</div><div class="stat-value text-success" id="stu-fee-paid">Rs.0</div><i class="bi bi-check-circle-fill stat-icon"></i></div></div>
+                <div class="col-md-4"><div class="stat-card border-start border-4 border-warning"><div class="stat-label">Pending Dues</div><div class="stat-value text-warning" id="stu-fee-due">Rs.0</div><i class="bi bi-hourglass-split stat-icon"></i></div></div>
+                <div class="col-md-4"><div class="stat-card border-start border-4 border-danger"><div class="stat-label">Overdue Dues</div><div class="stat-value text-danger" id="stu-fee-overdue">Rs.0</div><i class="bi bi-exclamation-octagon stat-icon"></i></div></div>
             </div>
-
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-receipt-cutoff text-primary me-2"></i>My Academy Invoices & Payment Ledger</h6>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="ps-3">Invoice ID</th>
-                                    <th>Fee Description</th>
-                                    <th>Amount</th>
-                                    <th>Due Date</th>
-                                    <th>Status</th>
-                                    <th class="text-end pe-3">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="student-fees-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden"><div class="card-header bg-white py-3 border-bottom"><h6 class="mb-0 fw-bold text-dark"><i class="bi bi-receipt-cutoff text-primary me-2"></i>My Academy Invoices</h6></div><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="table-light"><tr><th class="ps-3">Invoice ID</th><th>Fee Description</th><th>Amount</th><th>Due Date</th><th>Status</th><th class="text-end pe-3">Action</th></tr></thead><tbody id="student-fees-tbody"></tbody></table></div></div></div>
         </div>
     </div>
 
-    <!-- PUBLISHED EVENTS VIEWING FOR STUDENT -->
+    <!-- PUBLISHED EVENTS -->
     <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4" id="student-events-section">
         <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2">
@@ -369,9 +292,7 @@
             <span id="stu-events-count" class="badge bg-primary-subtle text-primary border px-3 py-1 rounded-pill">0 Events</span>
         </div>
         <div class="card-body p-4 bg-light bg-opacity-50">
-            <div class="row g-3" id="stu-events-grid">
-                <!-- Populated dynamically -->
-            </div>
+            <div class="row g-3" id="stu-events-grid"></div>
         </div>
     </div>
 

@@ -46,44 +46,9 @@ const INITIAL_EVENTS = [
 const INITIAL_COACHES = [];
 const COACH_CREDENTIALS = null;
 
-// Three Hardcoded Administrator Logins
-const ADMIN_USERS = [
-    {
-        id: "ADM001",
-        name: "Academy Director",
-        username: "admin1",
-        aliasUsername: "admin",
-        email: "admin1@gmail.com",
-        aliasEmail: "admin@gmail.com",
-        password: "Admin@4321",
-        role: "admin",
-        title: "Academy Director & Master Admin"
-    },
-    {
-        id: "ADM002",
-        name: "Operations Admin",
-        username: "admin2",
-        aliasUsername: "admin2",
-        email: "admin2@gmail.com",
-        aliasEmail: "admin2@phoenix.com",
-        password: "Admin@4321",
-        role: "admin",
-        title: "Range Operations & Equipment Manager"
-    },
-    {
-        id: "ADM003",
-        name: "Finance & Events Admin",
-        username: "admin3",
-        aliasUsername: "admin3",
-        email: "admin3@gmail.com",
-        aliasEmail: "admin3@phoenix.com",
-        password: "Admin@4321",
-        role: "admin",
-        title: "Tournament Coordinator & Accounts Head"
-    }
-];
+// Admin accounts are stored in the database (admins table).
+// No credentials are hardcoded here — all authentication is server-side.
 
-const ADMIN_CREDENTIALS = ADMIN_USERS[0];
 
 // Global State
 let studentsState = [];
@@ -233,17 +198,14 @@ function fillDemoCredentials(role, email, password) {
 }
 
 function fillAdminCredentials(adminIndex) {
+    // Admin credentials are managed via .env / database — not hardcoded.
+    // This function only pre-fills the role selector; user must type credentials.
     selectRole('admin');
-    const idx = (adminIndex >= 1 && adminIndex <= ADMIN_USERS.length) ? adminIndex - 1 : 0;
-    const admin = ADMIN_USERS[idx];
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    if (emailInput) emailInput.value = admin.email;
-    if (passwordInput) passwordInput.value = admin.password;
     hideLoginAlert();
 }
 
-function handleLoginSubmit(e) {
+
+async function handleLoginSubmit(e) {
     e.preventDefault();
     hideLoginAlert();
 
@@ -252,103 +214,71 @@ function handleLoginSubmit(e) {
     const emailVal = (emailInput ? emailInput.value : "").trim();
     const passwordVal = (passwordInput ? passwordInput.value : "").trim();
 
-    // 1. Validation for empty fields
     if (!emailVal || !passwordVal) {
         showLoginAlert("Please enter both email/username and password.");
         return;
     }
 
-    const emailLower = emailVal.toLowerCase();
+    const API_BASE = 'http://127.0.0.1:5500';
 
-    // Cross-role verification
-    const isAdminAccount = ADMIN_USERS.some(a =>
-        (a.email && a.email.toLowerCase() === emailLower) ||
-        (a.aliasEmail && a.aliasEmail.toLowerCase() === emailLower) ||
-        (a.username && a.username.toLowerCase() === emailLower) ||
-        (a.aliasUsername && a.aliasUsername.toLowerCase() === emailLower) ||
-        (a.id && a.id.toLowerCase() === emailLower)
-    );
-
-    const isCoachAccount = coachesState.some(c =>
-        (c.email && c.email.toLowerCase() === emailLower) ||
-        (c.username && c.username.toLowerCase() === emailLower) ||
-        (c.id && c.id.toLowerCase() === emailLower)
-    );
-
-    const isStudentAccount = studentsState.some(s =>
-        (s.email && s.email.toLowerCase() === emailLower) ||
-        (s.username && s.username.toLowerCase() === emailLower) ||
-        (s.id && s.id.toLowerCase() === emailLower)
-    );
-
-    // 2. Validate Credentials against Selected Role
+    // ── Student Login — verified against DB ──
     if (currentRole === 'student') {
-        if (isAdminAccount || isCoachAccount) {
-            showLoginAlert("Selected login type does not match these credentials.");
-            return;
+        try {
+            const res = await fetch(`${API_BASE}/api/students/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identifier: emailVal, password: passwordVal })
+            });
+            const data = await res.json();
+            if (!data.success) {
+                showLoginAlert(data.message || "Invalid student credentials.");
+                return;
+            }
+            currentUser = data.student;
+            studentsState = studentsState.filter(s => s.id !== currentUser.id);
+            studentsState.unshift(currentUser);
+            saveStudentsState();
+            initStudentPortal(currentUser);
+        } catch (err) {
+            showLoginAlert("Cannot connect to server. Please ensure the server is running.");
         }
 
-        const matchedStu = studentsState.find(s => 
-            (s.email && s.email.toLowerCase() === emailLower) || 
-            (s.id && s.id.toLowerCase() === emailLower) || 
-            (s.username && s.username.toLowerCase() === emailLower) ||
-            (s.firstName && s.firstName.toLowerCase() === emailLower)
-        );
-
-        if (!matchedStu || matchedStu.password !== passwordVal) {
-            showLoginAlert("Invalid student credentials. Please register first if you do not have an account.");
-            return;
-        }
-
-        // Login Success
-        currentUser = matchedStu;
-        initStudentPortal(matchedStu);
-
+    // ── Coach Login — verified against localStorage ──
     } else if (currentRole === 'coach') {
-        if (isAdminAccount || isStudentAccount) {
-            showLoginAlert("Selected login type does not match these credentials.");
-            return;
-        }
-
+        const emailLower = emailVal.toLowerCase();
         const matchedCoach = coachesState.find(c =>
             (c.email && c.email.toLowerCase() === emailLower) ||
             (c.id && c.id.toLowerCase() === emailLower) ||
             (c.username && c.username.toLowerCase() === emailLower)
         );
-
         if (!matchedCoach || matchedCoach.password !== passwordVal) {
-            showLoginAlert("Invalid coach credentials. Please register first if you are a new coach.");
+            showLoginAlert("Invalid coach credentials. Please register first.");
             return;
         }
-
-        // Login Success
         currentUser = matchedCoach;
         initCoachPortal(matchedCoach);
 
+    // ── Admin Login — verified against DB (no hardcoded passwords) ──
     } else if (currentRole === 'admin') {
-        if (isStudentAccount || isCoachAccount) {
-            showLoginAlert("Selected login type does not match these credentials.");
-            return;
+        try {
+            const res = await fetch(`${API_BASE}/api/admins/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identifier: emailVal, password: passwordVal })
+            });
+            const data = await res.json();
+            if (!data.success) {
+                showLoginAlert(data.message || "Invalid admin credentials.");
+                return;
+            }
+            currentUser = { ...data.admin, role: 'admin' };
+            initAdminPortal(currentUser);
+        } catch (err) {
+            showLoginAlert("Cannot connect to server. Please ensure the server is running.");
         }
-
-        const matchedAdmin = ADMIN_USERS.find(a =>
-            (a.email && a.email.toLowerCase() === emailLower) ||
-            (a.aliasEmail && a.aliasEmail.toLowerCase() === emailLower) ||
-            (a.username && a.username.toLowerCase() === emailLower) ||
-            (a.aliasUsername && a.aliasUsername.toLowerCase() === emailLower) ||
-            (a.id && a.id.toLowerCase() === emailLower)
-        );
-
-        if (!matchedAdmin || matchedAdmin.password !== passwordVal) {
-            showLoginAlert("Invalid admin email/username or password.");
-            return;
-        }
-
-        // Login Success
-        currentUser = matchedAdmin;
-        initAdminPortal(matchedAdmin);
     }
 }
+
 
 function showLoginAlert(msg) {
     const alertBox = document.getElementById('login-alert');
